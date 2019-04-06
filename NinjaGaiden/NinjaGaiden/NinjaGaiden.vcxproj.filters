@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Background">
+      <UniqueIdentifier>{926e3d59-ca96-43a4-ad1a-1ece65431ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frameworks">
+      <UniqueIdentifier>{1d9918db-67d9-46d2-a963-c30428d0b797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{5840d9d5-255e-4b82-ba41-8605be1ee608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a1eb7eb6-7d6c-4453-b1da-5678a81583ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{5dcbbe46-8f08-4dbf-895f-df47d828ed09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ryu">
+      <UniqueIdentifier>{f88baf5f-7b5a-4ce9-ac95-1faf1c1710e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\StaticObject">
+      <UniqueIdentifier>{cc82b371-0b1d-42a3-b7f1-dbde38dc6e33}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Ryu.cpp">
+      <Filter>GameObject\Ryu</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CText.cpp">
+      <Filter>Frameworks</Filter>
+    </ClCompile>
+    <ClCompile Include="QGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>GameObject\StaticObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tile.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SweptAABB.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnum.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Ryu.h">
+      <Filter>GameObject\Ryu</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CText.h">
+      <Filter>Frameworks</Filter>
+    </ClInclude>
+    <ClInclude Include="QGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>GameObject\StaticObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
