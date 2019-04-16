@@ -44,11 +44,11 @@ void CCamera::UpdateCamera(int x)
 	//	viewport.x = _minSize;
 	if (x > viewport.x + G_ScreenWidth || x < viewport.x)
 	{
-		viewport.x = x - (G_ScreenWidth / 2 - 14);
+		viewport.x = x - G_ScreenWidth / 2;
 	}
 
 	if (x < _maxSize - G_ScreenWidth / 2)
-		viewport.x = x - (G_ScreenWidth / 2 - 14);
+		viewport.x = x - G_ScreenWidth / 2;
 	if (viewport.x < _minSize)
 		viewport.x = _minSize;
 	if (viewport.x + G_ScreenWidth > _maxSize)

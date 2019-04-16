@@ -88,19 +88,13 @@ void SceneGame::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 
 void SceneGame::OnKeyDown(int KeyCode)
 {
-	/*switch (KeyCode)
+	switch (KeyCode)
 	{
-	case DIK_X:
-		samus->Jump();
+	case DIK_J:
+		ryu->Jump();
 		break;
-	case DIK_DOWN:
-	case DIK_S:
-		samus->Roll();
-		break;
-	case DIK_Z:
-		samus->Shot();
-		break;
-	}*/
+
+	}
 }
 
 SceneGame::~SceneGame(void)

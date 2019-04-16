@@ -26,7 +26,7 @@ bool		G_HasEffectSound = true;
 int			G_MapWidth;
 int			G_MapHeight;
 
-int			G_MaxSize = 2042;
+int			G_MaxSize = 4096;
 int			G_MinSize = 0;
 
 RECT		G_WindowSize;

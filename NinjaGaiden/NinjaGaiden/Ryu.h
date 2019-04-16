@@ -9,6 +9,8 @@ class Ryu : public DynamicObject
 public:
 	CSprite* ryuIdle;
 	CSprite* ryuRun;
+	CSprite* ryuJump;
+	CSprite* ryuClimb;
 
 	float _vLast;
 	Action _action;
@@ -18,6 +20,8 @@ public:
 	//dem so object va cham
 	int _demVaCham;
 	bool onLand;
+	bool _hasJump;
+	float _heightJump;
 
 	Ryu(void);
 	Ryu(int, int);
@@ -26,6 +30,8 @@ public:
 	void Update(int dt);
 	void TurnLeft();
 	void TurnRight();
+	void Jump();
+	void Climb();
 	void Stop();
 	void Draw(CCamera*);
 	ECollisionDirect GetCollisionDirect(GameObject* other);

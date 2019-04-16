@@ -11,6 +11,7 @@ enum Action
 	Fight,
 	Sit,
 	Fall,
+	Climb,
 };
 
 static enum ESceneState
@@ -48,6 +49,7 @@ enum EnumID
 	RyuDeath_ID,
 	RyuJump1_ID,
 	RyuJump2_ID,
+	RyuClimb_ID,
 	//Ground
 	Ground1_ID,
 	//Enemy
