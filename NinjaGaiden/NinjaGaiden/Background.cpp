@@ -3,6 +3,8 @@
 #define FRAME_WIDTH 32
 #define FRAME_HEIGHT 32
 
+int mapWidth = 0;
+
 Background::Background(void)
 {
 	listTile = NULL;
@@ -12,7 +14,19 @@ Background::Background(int level)
 {
 	string fileName;
 	string _fileName;
-	fileName = "Resources\\Maps\\Stage3.1-Map.txt";
+	switch (level)
+	{
+	case 1:
+		fileName = "Resources\\Maps\\Stage3.1-Map.txt";
+		break;
+	case 2:
+		fileName = "Resources\\Maps\\Stage3.2-Map.txt";
+		break;
+	case 3:
+		fileName = "Resources\\Maps\\Stage3.3-Map.txt";
+		break;
+	}
+	
 
 	ifstream map(fileName);
 
@@ -26,9 +40,22 @@ Background::Background(int level)
 		map >> countTileWidth >> countTileHeight;
 
 		//Load file tile
-		bgSprite = new CSprite(new CTexture("Resources\\Maps\\Stage3.1-Tile.png", countTileWidth, countTileHeight, countTileWidth*countTileHeight), 1);
+		switch (level)
+		{
+		case 1:
+			bgSprite = new CSprite(new CTexture("Resources\\Maps\\Stage3.1-Tile.png", countTileWidth, countTileHeight, countTileWidth*countTileHeight), 1);
+			break;
+		case 2:
+			bgSprite = new CSprite(new CTexture("Resources\\Maps\\Stage3.2-Tile.png", countTileWidth, countTileHeight, countTileWidth*countTileHeight), 1);
+			break;
+		case 3:
+			bgSprite = new CSprite(new CTexture("Resources\\Maps\\Stage3.3-Tile.png", countTileWidth, countTileHeight, countTileWidth*countTileHeight), 1);
+			break;
+		}
 
 		map >> countHeight >> countWidth;
+
+		mapWidth = countWidth * 32;
 		int id = 0;
 		listTile = new std::map<int, Tile*>();
 
@@ -59,6 +86,11 @@ void Background::Draw(CCamera *camera)
 		D3DXVECTOR2 t = camera->Transform(obj->posX, obj->posY);
 		bgSprite->DrawIndex(obj->idTile, t.x, t.y); //Vẽ từng ô tile
 	}
+}
+
+int Background::getWidth()
+{
+	return mapWidth;
 }
 
 Background::~Background(void)

@@ -11,6 +11,7 @@ public:
 	CSprite* ryuRun;
 	CSprite* ryuJump;
 	CSprite* ryuClimb;
+	CSprite* ryuAttack;
 
 	float _vLast;
 	Action _action;
@@ -22,6 +23,7 @@ public:
 	bool onLand;
 	bool _hasJump;
 	float _heightJump;
+	bool _hasAttack;
 
 	Ryu(void);
 	Ryu(int, int);
@@ -32,6 +34,7 @@ public:
 	void TurnRight();
 	void Jump();
 	void Climb();
+	void Attack();
 	void Stop();
 	void Draw(CCamera*);
 	ECollisionDirect GetCollisionDirect(GameObject* other);

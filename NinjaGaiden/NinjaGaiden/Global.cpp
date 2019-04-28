@@ -26,8 +26,8 @@ bool		G_HasEffectSound = true;
 int			G_MapWidth;
 int			G_MapHeight;
 
-int			G_MaxSize = 4096;
-int			G_MinSize = 0;
+int			G_MaxSize;
+int			G_MinSize;
 
 RECT		G_WindowSize;
 int			G_ScreenWidth = 512; //640;	//640	//1024	//1366

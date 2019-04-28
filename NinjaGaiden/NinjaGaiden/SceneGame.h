@@ -29,11 +29,12 @@ protected:
 	CText* arial;
 
 	void LoadLevel(int level);
-	void LoadStage();
+	void LoadStage(int level);
 	void RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int t);
 	void ProcessInput(int keyCode);
 	void LoadResources(LPDIRECT3DDEVICE9 d3ddv);
 	void OnKeyDown(int KeyCode);
+	void ResetLevel();
 };
 #endif
 

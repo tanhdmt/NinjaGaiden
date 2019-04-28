@@ -13,6 +13,7 @@ private:
 	CTexture* ryuJump1;
 	CTexture* ryuJump2;
 	CTexture* ryuClimb;
+	CTexture* ryuAttack;
 
 	static Singleton *single;
 	Singleton();

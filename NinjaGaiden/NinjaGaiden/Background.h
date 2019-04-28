@@ -23,6 +23,7 @@ public:
 	Background(void);
 	Background(int);
 	void Draw(CCamera *camera);
+	int getWidth();
 	~Background(void);
 };
 
