@@ -10,6 +10,7 @@ enum Action
 	Jump2,
 	Fight,
 	Sit,
+	SitAttack,
 	Fall,
 	Climb,
 	Attack,
@@ -52,8 +53,12 @@ enum EnumID
 	RyuJump2_ID,
 	RyuClimb_ID,
 	RyuAttack_ID,
+	RyuSit_ID,
+	RyuSitAttack_ID,
 	//Ground
 	Ground1_ID,
+	Stair_ID,
+	Ground2_ID,
 	//Enemy
 
 };

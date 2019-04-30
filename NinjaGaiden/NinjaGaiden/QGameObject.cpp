@@ -29,6 +29,12 @@ QGameObject::QGameObject(string fileName)
 			case 700:
 				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Ground1_ID));
 				break;
+			case 702:
+				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Ground2_ID));
+				break;
+			case 612:
+				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Stair_ID));
+				break;
 			case 26:
 				G_MinSize = posX;
 				break;

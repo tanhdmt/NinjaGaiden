@@ -23,6 +23,8 @@ Singleton::Singleton()
 	ryuJump1 = new CTexture("Resources/ryuJump.png", 4, 1, 4);
 	ryuClimb = new CTexture("Resources/ryuClimb.png", 2, 1, 2);
 	ryuAttack = new CTexture("Resources/ryuAttack.png", 3, 1, 3);
+	ryuSit = new CTexture("Resources/ryuSit.png", 1, 1, 1);
+	ryuSitAttack = new CTexture("Resources/ryuSitAttack.png", 3, 1, 3);
 }
 
 CTexture* Singleton::getTexture(EnumID id)
@@ -39,5 +41,9 @@ CTexture* Singleton::getTexture(EnumID id)
 			return ryuClimb;
 		case EnumID::RyuAttack_ID:
 			return ryuAttack;
+		case EnumID::RyuSit_ID:
+			return ryuSit;
+		case EnumID::RyuSitAttack_ID:
+			return ryuSitAttack;
 	}
 }

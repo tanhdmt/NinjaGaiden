@@ -42,6 +42,8 @@ void GameObject::CreateSprite()
 	switch (id)
 	{
 	case EnumID::Ground1_ID:
+	case EnumID::Ground2_ID:
+	case EnumID::Stair_ID:
 		sprite = NULL;
 		break;
 	default:
