@@ -61,6 +61,9 @@ enum EnumID
 	Ground2_ID,
 	//Enemy
 
+	//Items
+	Hp_ID,
+	GameScore_ID,
 };
 
 

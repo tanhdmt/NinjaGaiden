@@ -134,6 +134,7 @@
     <ClCompile Include="DynamicObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScore.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="QGameObject.h" />

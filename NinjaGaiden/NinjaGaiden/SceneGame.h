@@ -7,6 +7,7 @@
 #include "Ryu.h"
 #include "CText.h"
 #include "QGameObject.h"
+#include "GameScore.h"
 using namespace std;
 
 class SceneGame : public Scene
@@ -14,6 +15,9 @@ class SceneGame : public Scene
 public:
 	int _levelNow;
 	int _stageNow;
+
+	int _score;
+	int _lifes;
 
 	bool _loadLevel;
 
@@ -24,6 +28,7 @@ protected:
 	Background *bg;
 	Ryu* ryu;
 	QGameObject* qGameObject;
+	GameScore* _gameScore;
 
 	CCamera *camera;
 	CText* arial;

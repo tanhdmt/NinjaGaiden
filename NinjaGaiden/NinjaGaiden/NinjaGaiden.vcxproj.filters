@@ -90,6 +90,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>GameObject\StaticObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameScore.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>GameObject\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScore.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

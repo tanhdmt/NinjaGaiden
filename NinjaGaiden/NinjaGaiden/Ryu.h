@@ -28,6 +28,7 @@ public:
 	bool _hasAttack;
 	bool _hasClimb;
 	bool _hasSit;
+	bool _isFall;
 
 	Ryu(void);
 	Ryu(int, int);

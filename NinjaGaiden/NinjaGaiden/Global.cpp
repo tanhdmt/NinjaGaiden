@@ -31,7 +31,7 @@ int			G_MinSize;
 
 RECT		G_WindowSize;
 int			G_ScreenWidth = 512; //640;	//640	//1024	//1366
-int			G_ScreenHeight = 416; //480;	//480	//768	//768
+int			G_ScreenHeight = 420; //480;	//480	//768	//768
 
 								  //
 								  //GLOBAL VARIANT

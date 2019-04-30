@@ -19,6 +19,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	_hasAttack = false;
 	_hasClimb = false;
 	_hasSit = false;
+	_isFall = false;
 	_heightJump = 0.0f;
 	onLand = false;
 	ryuRun = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuRun_ID), 0, 2, 18);
@@ -55,7 +56,12 @@ void Ryu::Update(int dt) {
 	if (_hasJump) {
 		ryuJump->Update(dt);
 		_heightJump += vY * dt;
-		if (_heightJump >= MAX_HEIGHT)
+		int maxHeight;
+		if (_isFall)
+			maxHeight = 300.0f;
+		else
+			maxHeight = MAX_HEIGHT;
+		if (_heightJump >= maxHeight)
 		{
 			vY = -SPEED_Y;
 		}
@@ -107,9 +113,10 @@ void Ryu::Update(int dt) {
 	//nhay len sau khi rot dat
 	if (posY < -80)
 	{
+		_isFall = true;
 		_hasJump = true;
 		posY = 100;
-		vY = SPEED_Y * 1.2;
+		//vY = SPEED_Y;
 		vX = _vLast;
 	}
 	
@@ -161,20 +168,24 @@ void Ryu::Collision(list<GameObject*> &obj, float dt)
 				//va cham tren
 				else if (dir == ECollisionDirect::Colls_Top)
 				{
-					if (!_hasClimb)
+					if (!_isFall)
 					{
-						vY = -(SPEED_Y);
-						onLand = false;
+						if (!_hasClimb)
+						{
+							vY = -(SPEED_Y);
+							onLand = false;
+						}
+						else
+						{
+							vY = -(SPEED_Y) * 0.1;
+							//if (_action != Action::Climb)
+							//{
+							//	vX = SPEED_X;
+							//}
+							onLand = false;
+						}
 					}
-					else
-					{
-						vY = -(SPEED_Y) * 0.1;
-						//if (_action != Action::Climb)
-						//{
-						//	vX = SPEED_X;
-						//}
-						onLand = false;
-					}
+					
 				}
 				//xet cham dat
 				if (vY < 0 && !onLand && dir == ECollisionDirect::Colls_Bot)
@@ -182,6 +193,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt)
 					//posY += moveY;
 					onLand = true;
 					_hasJump = false;
+					_isFall = false;
 				}
 				/*if (vX != 0 && moveX != 0)
 				{

@@ -4,8 +4,11 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 {
 	camera = new CCamera();
 	bg = NULL;
-	_levelNow = 2;
+	_gameScore = NULL;
+	_levelNow = 1;
 	_loadLevel = false;
+	_score = 0;
+	_lifes = 3;
 }
 
 void SceneGame::LoadLevel(int level)
@@ -15,28 +18,31 @@ void SceneGame::LoadLevel(int level)
 	{
 	case 1:
 	{
-		camera->viewport.y = 416;
+		camera->viewport.y = 420;
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		ryu = new Ryu(50, 400);
+		_gameScore->initTimer(150);
 	}
 	break;
 	case 2:
 	{
-		camera->viewport.y = 416;
+		camera->viewport.y = 420;
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(2085, 300);
+		_gameScore->initTimer(150);
 	}
 	break;
 	case 3:
 	{
-		camera->viewport.y = 416;
+		camera->viewport.y = 420;
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(100, 300);
+		_gameScore->initTimer(150);
 	}
 	break;
 	default:
@@ -79,6 +85,12 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			ryu->_action = Action::Idle;
 			_loadLevel = true;
 		}
+		//Xu ly scene
+		//--------------Over time-------------------
+		//if (_gameScore->getTimer() <= 0)
+			//sceneState = ESceneState::Menu_Scene;
+		_gameScore->updateScore(_levelNow, _score, deltaTime, 16, _lifes, EnumID::None_ID, 0, 16);
+
 		qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
 		ryu->Collision(*(qGameObject->_staticObject), deltaTime);
@@ -93,17 +105,17 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 		bg->Draw(camera);
 		qGameObject->Draw(camera);
 		ryu->Draw(camera);
-
+		_gameScore->drawTable();
 		G_SpriteHandler->End();
-
+		_gameScore->drawScore();
 		//render info
-		arial->onLost();
-		//arial->render("viewport x - y: ", 10, 10);
+		/*arial->onLost();
+		arial->render((char*)"viewport x - y: ", 10, 10);
 		arial->render(camera->viewport.x, 10, 10);
 		arial->render(camera->viewport.y, 70, 10);
 		arial->render(ryu->posX, 130, 10);
 		arial->render(ryu->posY, 190, 10);
-		arial->render(1000 / deltaTime, 490, 10);
+		arial->render(1000 / deltaTime, 490, 10);*/
 	}
 }
 
@@ -143,6 +155,7 @@ void SceneGame::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 
 	HRESULT res = D3DXCreateSprite(d3ddv, &G_SpriteHandler);
 	arial = new CText(d3ddv, 22, G_ScreenWidth, G_ScreenHeight);
+	_gameScore = new GameScore(G_Device, 24, G_ScreenWidth, G_ScreenHeight);
 
 	if (_levelNow != 0)
 	{

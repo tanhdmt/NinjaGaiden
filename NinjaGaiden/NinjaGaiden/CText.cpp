@@ -23,7 +23,7 @@ CText::CText(LPDIRECT3DDEVICE9 d3ddev_, int size_, int screenWidth_, int screenH
 		DEFAULT_CHARSET,
 		OUT_TT_PRECIS,
 		CLIP_DEFAULT_PRECIS,
-		DEFAULT_PITCH, "Arial" };
+		DEFAULT_PITCH, "Terminal" };
 
 	//create font
 	D3DXCreateFontIndirect(d3ddev_, &FontDesc, &_font);

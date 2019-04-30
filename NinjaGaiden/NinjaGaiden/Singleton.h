@@ -17,6 +17,9 @@ private:
 	CTexture* ryuSit;
 	CTexture* ryuSitAttack;
 
+	CTexture* hp;
+	CTexture* gameScore;
+
 	static Singleton *single;
 	Singleton();
 
