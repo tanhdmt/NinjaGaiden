@@ -123,6 +123,20 @@ Box GameObject::GetBox()
 	return result;
 }
 
+int GameObject::getWidth()
+{
+	if (sprite == NULL)
+		return 32;
+	return sprite->_texture->FrameWidth;
+}
+
+int GameObject::getHeight()
+{
+	if (sprite == NULL)
+		return 32;
+	return sprite->_texture->FrameHeight;
+}
+
 void GameObject::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int t) {}
 void GameObject::OnKeyDown(int KeyCode) {}
 GameObject::~GameObject(void) {}

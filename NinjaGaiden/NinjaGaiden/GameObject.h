@@ -34,6 +34,8 @@ public:
 	ECollisionDirect GetCollisionDirect(float normalx, float normaly);
 	virtual ECollisionDirect GetCollisionDirect(GameObject* other);
 	virtual Box GetBox();
+	virtual int getWidth();
+	virtual int getHeight();
 	virtual void SetActive(float x, float y);
 	virtual void SetActive();
 	virtual void Remove();

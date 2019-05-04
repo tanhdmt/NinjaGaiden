@@ -56,12 +56,7 @@ void Ryu::Update(int dt) {
 	if (_hasJump) {
 		ryuJump->Update(dt);
 		_heightJump += vY * dt;
-		int maxHeight;
-		if (_isFall)
-			maxHeight = 300.0f;
-		else
-			maxHeight = MAX_HEIGHT;
-		if (_heightJump >= maxHeight)
+		if (_heightJump >= MAX_HEIGHT)
 		{
 			vY = -SPEED_Y;
 		}
@@ -84,7 +79,12 @@ void Ryu::Update(int dt) {
 				isAtk = true;
 			}
 			_heightJump += vY * dt;
-			if (_heightJump >= MAX_HEIGHT)
+			int maxHeight;
+			if (!_isFall)
+				maxHeight = MAX_HEIGHT;
+			else
+				maxHeight = 300.0f;
+			if (_heightJump >= maxHeight)
 			{
 				vY = -SPEED_Y;
 			}
@@ -113,9 +113,12 @@ void Ryu::Update(int dt) {
 	//nhay len sau khi rot dat
 	if (posY < -80)
 	{
+		posY = 250;
 		_isFall = true;
 		_hasJump = true;
-		posY = 100;
+		Jump();
+		onLand = false;
+		
 		//vY = SPEED_Y;
 		vX = _vLast;
 	}
@@ -124,7 +127,17 @@ void Ryu::Update(int dt) {
 
 Box Ryu::GetBox()
 {
-	return Box(posX - width / 2 , (posY + height / 2), width, height);
+	/*if (_hasSit)
+		return Box(posX - ryuSit->_texture->FrameWidth / 2, (posY + ryuSit->_texture->FrameHeight / 2), ryuSit->_texture->FrameWidth, ryuSit->_texture->FrameHeight);
+	else if (_hasClimb)
+		return Box(posX - ryuClimb->_texture->FrameWidth / 2, (posY + ryuClimb->_texture->FrameHeight / 2), ryuClimb->_texture->FrameWidth, ryuClimb->_texture->FrameHeight);
+	if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb)
+	{
+		if (_hasJump)
+			return Box(posX - ryuJump->_texture->FrameWidth / 2, (posY + ryuJump->_texture->FrameHeight / 2), ryuJump->_texture->FrameWidth, ryuJump->_texture->FrameHeight);
+		return Box(posX - ryuRun->_texture->FrameWidth / 2, (posY + ryuRun->_texture->FrameHeight / 2), ryuRun->_texture->FrameWidth, ryuRun->_texture->FrameHeight);
+	}*/
+	return Box(posX - sprite->_texture->FrameWidth / 2 , (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 }
 
 void Ryu::Collision(list<GameObject*> &obj, float dt)
@@ -151,24 +164,23 @@ void Ryu::Collision(list<GameObject*> &obj, float dt)
 			case EnumID::Ground1_ID:
 			{
 				countCollis++;
-				
-				//va cham canh
-				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
+				if (!_isFall)
 				{
-					vX = 0;
-					if (dir == ECollisionDirect::Colls_Right && _action == Action::Run_Right)
+					//va cham canh
+					if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
 					{
-						vX = SPEED_X;
+						vX = 0;
+						if (dir == ECollisionDirect::Colls_Right && _action == Action::Run_Right)
+						{
+							vX = SPEED_X;
+						}
+						else if (dir == ECollisionDirect::Colls_Left && _action == Action::Run_Left)
+						{
+							vX = -SPEED_X;
+						}
 					}
-					else if (dir == ECollisionDirect::Colls_Left && _action == Action::Run_Left)
-					{
-						vX = -SPEED_X;
-					}
-				}
-				//va cham tren
-				else if (dir == ECollisionDirect::Colls_Top)
-				{
-					if (!_isFall)
+					//va cham tren
+					else if (dir == ECollisionDirect::Colls_Top)
 					{
 						if (!_hasClimb)
 						{
@@ -185,8 +197,8 @@ void Ryu::Collision(list<GameObject*> &obj, float dt)
 							onLand = false;
 						}
 					}
-					
 				}
+				
 				//xet cham dat
 				if (vY < 0 && !onLand && dir == ECollisionDirect::Colls_Bot)
 				{
@@ -322,6 +334,7 @@ void Ryu::TurnLeft()
 	_action = Action::Run_Left;
 	_hasClimb = false;
 	_hasSit = false;
+	onLand = false;
 }
 
 void Ryu::TurnRight() 
@@ -331,6 +344,7 @@ void Ryu::TurnRight()
 	_action = Action::Run_Right;
 	_hasClimb = false;
 	_hasSit = false;
+	onLand = false;
 }
 
 void Ryu::Climb(bool isUp)
@@ -355,6 +369,7 @@ void Ryu::Sit()
 			_action = Action::Sit;
 		else
 			_action = Action::SitAttack;
+		onLand = false;
 	}
 }
 void Ryu::Jump()
@@ -369,6 +384,7 @@ void Ryu::Jump()
 		_hasJump = true;
 		_hasClimb = false;
 		_hasSit = false;
+		onLand = false;
 	}
 }
 void Ryu::Attack()
@@ -405,8 +421,10 @@ void Ryu::Stop()
 
 ECollisionDirect Ryu::GetCollisionDirect(GameObject* other)
 {
-	float x = this->posX - other->posX;
-	float y = this->posY - other->posY;
+	float x = (this->posX) - (other->posX);
+	float y = (this->posY) - (other->posY);
+	/*float x = (this->posX-(this->getWidth()/2)) - (other->posX-(other->getWidth()/2));
+	float y = (this->posY+ (this->getHeight() / 2)) - (other->posY+(other->getHeight() / 2));*/
 	if (abs(x) > abs(y)) {
 		if (x < 0)
 			return ECollisionDirect::Colls_Left;
@@ -427,6 +445,32 @@ ECollisionDirect Ryu::GetCollisionDirect(GameObject* other)
 D3DXVECTOR2* Ryu::getPos()
 {
 	return new D3DXVECTOR2(this->posX, this->posY);
+}
+
+int Ryu::getWidth()
+{
+	/*if (_hasSit)
+		return ryuSit->_texture->FrameWidth;
+	if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb)
+	{
+		if (_hasJump)
+			return ryuJump->_texture->FrameWidth;
+		return ryuRun->_texture->FrameWidth;
+	}*/
+	return sprite->_texture->FrameWidth;
+}
+
+int Ryu::getHeight()
+{
+	/*if (_hasSit)
+		return ryuSit->_texture->FrameHeight;
+	if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb)
+	{
+		if (_hasJump)
+			return ryuJump->_texture->FrameHeight;
+		return ryuRun->_texture->FrameHeight;
+	}*/
+	return sprite->_texture->FrameHeight;
 }
 
 Ryu::~Ryu(void)

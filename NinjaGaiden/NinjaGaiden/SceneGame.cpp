@@ -13,7 +13,7 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 
 void SceneGame::LoadLevel(int level)
 {
-	ResetLevel();
+	ResetLevel(); 
 	switch (level)
 	{
 	case 1:
@@ -31,7 +31,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(2085, 300);
+		ryu = new Ryu(50, 300);
 		_gameScore->initTimer(150);
 	}
 	break;
@@ -77,19 +77,18 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 {
 	if (_levelNow > 0)
 	{
-		if (ryu->posX > bg->getWidth() - 100 && !_loadLevel) 
+		if (ryu->posX > bg->getWidth() - 100 && _levelNow < 3)
 		{
 			_levelNow++;
 			LoadResources(G_Device);
 			ryu->sprite->SelectIndex(0);
 			ryu->_action = Action::Idle;
-			_loadLevel = true;
 		}
 		//Xu ly scene
 		//--------------Over time-------------------
 		//if (_gameScore->getTimer() <= 0)
 			//sceneState = ESceneState::Menu_Scene;
-		_gameScore->updateScore(_levelNow, _score, deltaTime, 16, _lifes, EnumID::None_ID, 0, 16);
+		_gameScore->updateScore(_levelNow, _score, 30, 16, _lifes, EnumID::None_ID, 0, 16);
 
 		qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());

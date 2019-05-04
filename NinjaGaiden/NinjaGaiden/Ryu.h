@@ -50,6 +50,8 @@ public:
 
 	void Initialize();
 	D3DXVECTOR2* getPos();
+	int getWidth();
+	int getHeight();
 	
 };
 #endif
