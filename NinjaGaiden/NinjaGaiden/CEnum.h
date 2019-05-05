@@ -60,7 +60,7 @@ enum EnumID
 	Stair_ID,
 	Ground2_ID,
 	//Enemy
-
+	SwordMan_ID,
 	//Items
 	Hp_ID,
 	GameScore_ID,

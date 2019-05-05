@@ -21,7 +21,7 @@ void SceneGame::LoadLevel(int level)
 		camera->viewport.y = 420;
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
-		ryu = new Ryu(50, 400);
+		ryu = new Ryu(60, 400);
 		_gameScore->initTimer(150);
 	}
 	break;
@@ -31,7 +31,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(50, 300);
+		ryu = new Ryu(2085, 300);
 		_gameScore->initTimer(150);
 	}
 	break;
@@ -92,8 +92,8 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 
 		qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
-		ryu->Collision(*(qGameObject->_staticObject), deltaTime);
-		//samus->Collision(*(qGameObject->_dynamicObject), deltaTime);
+		ryu->Collision(*(qGameObject->_staticObject), deltaTime, false);
+		ryu->Collision(*(qGameObject->_dynamicObject), deltaTime, true);
 
 		qGameObject->Collision(deltaTime);
 

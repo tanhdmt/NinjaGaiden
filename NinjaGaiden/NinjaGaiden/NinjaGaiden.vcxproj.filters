@@ -34,6 +34,9 @@
     <Filter Include="GameObject\StaticObject">
       <UniqueIdentifier>{cc82b371-0b1d-42a3-b7f1-dbde38dc6e33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Enemy">
+      <UniqueIdentifier>{c9094ab1-ee0b-4271-a398-2e5b64507548}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="GameScore.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SwordMan.cpp">
+      <Filter>GameObject\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="GameScore.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SwordMan.h">
+      <Filter>GameObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

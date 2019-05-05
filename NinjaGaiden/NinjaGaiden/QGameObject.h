@@ -1,6 +1,7 @@
 #include <list>
 #include <map>
 #include "Ryu.h"
+#include "SwordMan.h"
 #include "Ground.h"
 #include "Singleton.h"
 #include "Camera.h"
@@ -22,6 +23,7 @@ public:
 	void Initialize();
 
 	list<GameObject*> *_staticObject;
+	list<GameObject*> *_dynamicObject;
 
 	QGameObject(void);
 	~QGameObject(void);

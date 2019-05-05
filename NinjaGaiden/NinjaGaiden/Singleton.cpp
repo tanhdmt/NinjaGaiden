@@ -28,6 +28,8 @@ Singleton::Singleton()
 
 	hp = new CTexture("Resources/Items/HP.png", 1, 1, 1);
 	gameScore = new CTexture("Resources/Items/GameScore.png", 1, 1, 1);
+
+	swordMan = new CTexture("Resources/Enemy/Sword_Man_x2.png", 3, 1, 3);
 }
 
 CTexture* Singleton::getTexture(EnumID id)
@@ -52,6 +54,8 @@ CTexture* Singleton::getTexture(EnumID id)
 			return hp;
 		case EnumID::GameScore_ID:
 			return gameScore;
+		case EnumID::SwordMan_ID:
+			return swordMan;
 
 	}
 }

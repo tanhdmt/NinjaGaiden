@@ -26,8 +26,10 @@ GameObject::GameObject(float _posX, float _posY, EnumID _id)
 	vY = 0;
 	id = _id;
 	active = true;
+	death = false;
 	type = ObjectType::None_Type;
 	canMove = false;
+	hp = 1;
 
 	CreateSprite();
 	if (sprite != NULL)
@@ -45,6 +47,9 @@ void GameObject::CreateSprite()
 	case EnumID::Ground2_ID:
 	case EnumID::Stair_ID:
 		sprite = NULL;
+		break;
+	case EnumID::SwordMan_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 80);
 		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);

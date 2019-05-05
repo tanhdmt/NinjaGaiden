@@ -21,8 +21,10 @@ public:
 	int height;
 	EnumID id;
 	bool active;
+	bool death;
 	ObjectType type;
 	bool canMove;
+	int hp;
 
 	virtual void Update(int dt);
 	virtual void Update(int dt, D3DXVECTOR2* ryuPos);

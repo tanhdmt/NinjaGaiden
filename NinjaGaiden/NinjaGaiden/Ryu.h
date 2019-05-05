@@ -46,7 +46,7 @@ public:
 	void Draw(CCamera*);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	Box GetBox();
-	void Collision(list<GameObject*> &obj, float dt);
+	void Collision(list<GameObject*> &obj, float dt, bool isDynamic);
 
 	void Initialize();
 	D3DXVECTOR2* getPos();

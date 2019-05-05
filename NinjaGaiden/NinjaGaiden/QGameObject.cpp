@@ -12,6 +12,7 @@ QGameObject::QGameObject(string fileName)
 	ifstream map(fileName);
 
 	_staticObject = new list<GameObject*>();
+	_dynamicObject = new list<GameObject*>();
 
 	if (map.is_open())
 	{
@@ -34,6 +35,9 @@ QGameObject::QGameObject(string fileName)
 				break;
 			case 612:
 				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Stair_ID));
+				break;
+			case 211:
+				_dynamicObject->push_back(new SwordMan(posX, posY));
 				break;
 			case 26:
 				G_MinSize = posX;
@@ -60,6 +64,14 @@ void QGameObject::Draw(CCamera *camera)
 			obj->Draw(camera);
 		}
 	}
+	for (list<GameObject*>::iterator i = _dynamicObject->begin(); i != _dynamicObject->end(); i++)
+	{
+		GameObject* obj = (*i);
+		if (obj->active)
+		{
+			obj->Draw(camera);
+		}
+	}
 }
 void QGameObject::Update(int deltaTime)
 {
@@ -69,11 +81,29 @@ void QGameObject::Update(int deltaTime)
 		(*it)->Update(deltaTime);
 		++it;
 	}
+	it = _dynamicObject->begin();
+	while (it != _dynamicObject->end())
+	{
+
+		if ((*it)->active)
+		{
+			(*it)->Update(deltaTime);
+		}
+		++it;
+	}
 }
 
 void QGameObject::Update(int deltaTime, D3DXVECTOR2* ryuPos)
 {
-
+	/*list<GameObject*>::iterator it = _dynamicObject->begin();
+	while (it != _dynamicObject->end())
+	{
+		if ((*it)->active && (*it)->id == EnumID::Skree_ID)
+		{
+			(*it)->Update(deltaTime, samusPos);
+		}
+		++it;
+	}*/
 }
 
 void QGameObject::Collision(int dt)
@@ -85,7 +115,13 @@ void QGameObject::Collision(int dt)
 			(*i)->Collision((*_staticObject), dt);
 		}
 	}
-
+	for (list<GameObject*>::iterator i = _dynamicObject->begin(); i != _dynamicObject->end(); i++)
+	{
+		if ((*i)->active)
+		{
+			(*i)->Collision((*_staticObject), dt);
+		}
+	}
 }
 
 void QGameObject::Initialize()
@@ -94,6 +130,7 @@ void QGameObject::Initialize()
 
 void QGameObject::RemoveAllObject()
 {
+	_dynamicObject->clear();
 }
 
 QGameObject::~QGameObject(void)
