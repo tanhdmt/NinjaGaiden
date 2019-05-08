@@ -19,8 +19,13 @@ private:
 
 	CTexture* hp;
 	CTexture* gameScore;
+	CTexture* fire;
+	CTexture* bullet;
+	//CTexture* sword;
 
 	CTexture* swordMan;
+	CTexture* rocketMan;
+	CTexture* banshee;
 
 	static Singleton *single;
 	Singleton();

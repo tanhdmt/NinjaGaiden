@@ -2,6 +2,7 @@
 #include <map>
 #include "Ryu.h"
 #include "SwordMan.h"
+#include "RocketMan.h"
 #include "Ground.h"
 #include "Singleton.h"
 #include "Camera.h"

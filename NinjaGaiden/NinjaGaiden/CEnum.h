@@ -61,9 +61,14 @@ enum EnumID
 	Ground2_ID,
 	//Enemy
 	SwordMan_ID,
+	RocketMan_ID,
+	Banshee_ID,
 	//Items
 	Hp_ID,
 	GameScore_ID,
+	Bullet_ID,
+	Sword_ID,
+	Fire_ID
 };
 
 

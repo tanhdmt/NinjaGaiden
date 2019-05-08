@@ -129,9 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Banshee.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CText.cpp" />
     <ClCompile Include="DynamicObject.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScore.cpp" />
@@ -139,27 +142,34 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="QGameObject.cpp" />
+    <ClCompile Include="RocketMan.cpp" />
     <ClCompile Include="Ryu.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Sword.cpp" />
     <ClCompile Include="SwordMan.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Banshee.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CEnum.h" />
     <ClInclude Include="CText.h" />
     <ClInclude Include="DynamicObject.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScore.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="RocketMan.h" />
+    <ClInclude Include="Sword.h" />
     <ClInclude Include="QGameObject.h" />
     <ClInclude Include="Ryu.h" />
     <ClInclude Include="Scene.h" />

@@ -39,6 +39,9 @@ QGameObject::QGameObject(string fileName)
 			case 211:
 				_dynamicObject->push_back(new SwordMan(posX, posY));
 				break;
+			case 214:
+				_dynamicObject->push_back(new RocketMan(posX, posY));
+				break;
 			case 26:
 				G_MinSize = posX;
 				break;
@@ -73,6 +76,7 @@ void QGameObject::Draw(CCamera *camera)
 		}
 	}
 }
+
 void QGameObject::Update(int deltaTime)
 {
 	list<GameObject*>::iterator it = _staticObject->begin();
@@ -85,7 +89,7 @@ void QGameObject::Update(int deltaTime)
 	while (it != _dynamicObject->end())
 	{
 
-		if ((*it)->active)
+		if ((*it)->active && (*it)->id != EnumID::RocketMan_ID)
 		{
 			(*it)->Update(deltaTime);
 		}
@@ -95,15 +99,15 @@ void QGameObject::Update(int deltaTime)
 
 void QGameObject::Update(int deltaTime, D3DXVECTOR2* ryuPos)
 {
-	/*list<GameObject*>::iterator it = _dynamicObject->begin();
+	list<GameObject*>::iterator it = _dynamicObject->begin();
 	while (it != _dynamicObject->end())
 	{
-		if ((*it)->active && (*it)->id == EnumID::Skree_ID)
+		if ((*it)->active && (*it)->id == EnumID::RocketMan_ID)
 		{
-			(*it)->Update(deltaTime, samusPos);
+			(*it)->Update(deltaTime, ryuPos);
 		}
 		++it;
-	}*/
+	}
 }
 
 void QGameObject::Collision(int dt)
