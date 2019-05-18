@@ -34,6 +34,7 @@ Singleton::Singleton()
 	swordMan = new CTexture("Resources/Enemy/Sword_Man_x2.png", 3, 1, 3);
 	rocketMan = new CTexture("Resources/Enemy/Bazoka_Man_x2.png", 1, 1, 1);
 	banshee = new CTexture("Resources/Enemy/Banshee_x2.png", 3, 1, 3);
+	boss = new CTexture("Resources/Enemy/Final_Boss_x2.png", 2, 1, 2);
 }
 
 CTexture* Singleton::getTexture(EnumID id)
@@ -68,5 +69,7 @@ CTexture* Singleton::getTexture(EnumID id)
 			return rocketMan;
 		case EnumID::Banshee_ID:
 			return banshee;
+		case EnumID::Boss_ID:
+			return boss;
 	}
 }

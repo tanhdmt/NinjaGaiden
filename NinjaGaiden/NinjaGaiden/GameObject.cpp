@@ -1,5 +1,6 @@
 
 #include "GameObject.h"
+#include "Camera.h"
 #include <d3d9.h>
 
 GameObject::GameObject(void)
@@ -20,8 +21,8 @@ void GameObject::SetActive()
 
 GameObject::GameObject(float _posX, float _posY, EnumID _id)
 {
-	posX = _posX;
-	posY = _posY;
+	posX = initX = _posX;
+	posY = initY = _posY;
 	vX = 0;
 	vY = 0;
 	id = _id;
@@ -50,6 +51,9 @@ void GameObject::CreateSprite()
 		break;
 	case EnumID::SwordMan_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 80);
+		break;
+	case EnumID::Boss_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
 		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
@@ -140,6 +144,62 @@ int GameObject::getHeight()
 	if (sprite == NULL)
 		return 32;
 	return sprite->_texture->FrameHeight;
+}
+
+void GameObject::setX(float x)
+{
+	this->posX = x;
+}
+
+void GameObject::setY(float y)
+{
+	this->posY = y;
+}
+
+float GameObject::getX()
+{
+	return this->posX;
+}
+
+float GameObject::getY()
+{
+	return this->posY;
+}
+
+void GameObject::onReborn()
+{
+	setX(initX);
+	setY(initY);
+}
+
+float GameObject::getInitX()
+{
+	return this->initX;
+}
+
+float GameObject::getInitY()
+{
+	return this->initY;
+}
+
+float GameObject::getLeft()
+{
+	return this->posX;
+}
+
+float GameObject::getRight()
+{
+	return this->posX - width;
+}
+
+float GameObject::getTop()
+{
+	return this->posY;
+}
+
+float GameObject::getBottom()
+{
+	return this->posY + height;
 }
 
 void GameObject::ProcessInput(LPDIRECT3DDEVICE9 d3ddv, int t) {}

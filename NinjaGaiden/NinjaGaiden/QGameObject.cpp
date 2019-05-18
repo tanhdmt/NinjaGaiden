@@ -42,6 +42,9 @@ QGameObject::QGameObject(string fileName)
 			case 214:
 				_dynamicObject->push_back(new RocketMan(posX, posY));
 				break;
+			case 219:
+				_dynamicObject->push_back(new Boss(posX, posY));
+				break;
 			case 26:
 				G_MinSize = posX;
 				break;

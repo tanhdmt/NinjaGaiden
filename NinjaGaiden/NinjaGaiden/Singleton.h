@@ -26,6 +26,7 @@ private:
 	CTexture* swordMan;
 	CTexture* rocketMan;
 	CTexture* banshee;
+	CTexture* boss;
 
 	static Singleton *single;
 	Singleton();

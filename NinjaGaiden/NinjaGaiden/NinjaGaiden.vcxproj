@@ -130,8 +130,10 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Banshee.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CText.cpp" />
     <ClCompile Include="DynamicObject.cpp" />
     <ClCompile Include="Fire.cpp" />
@@ -139,6 +141,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="Global.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="QGameObject.cpp" />
@@ -157,8 +160,10 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Banshee.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="CEnum.h" />
     <ClInclude Include="CText.h" />
     <ClInclude Include="DynamicObject.h" />
@@ -167,6 +172,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScore.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="RocketMan.h" />
     <ClInclude Include="Sword.h" />

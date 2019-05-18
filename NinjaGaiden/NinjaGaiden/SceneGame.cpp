@@ -1,10 +1,14 @@
 #include "SceneGame.h"
 
+#define GRID Grid::getInstance()
+bool isLoadStage = false;
+
 SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 {
 	camera = new CCamera();
 	bg = NULL;
 	_gameScore = NULL;
+	grid = GRID;
 	_levelNow = 1;
 	_loadLevel = false;
 	_score = 0;
@@ -41,7 +45,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(100, 300);
+		ryu = new Ryu(90, 300);
 		_gameScore->initTimer(150);
 	}
 	break;
@@ -57,16 +61,31 @@ void SceneGame::LoadStage(int level)
 	case 1:
 	{
 		qGameObject = new QGameObject("Resources\\Maps\\Stage3.1-GameObj.txt");
+		if (!isLoadStage)
+		{
+			grid->addObject(qGameObject->_staticObject);
+			grid->addObject(qGameObject->_dynamicObject);
+		}
 	}
 	break;
 	case 2:
 	{
 		qGameObject = new QGameObject("Resources\\Maps\\Stage3.2-GameObj.txt");
+		if (!isLoadStage)
+		{
+			grid->addObject(qGameObject->_staticObject);
+			grid->addObject(qGameObject->_dynamicObject);
+		}
 	}
 	break;
 	case 3:
 	{
 		qGameObject = new QGameObject("Resources\\Maps\\Stage3.3-GameObj.txt");
+		if (!isLoadStage)
+		{
+			grid->addObject(qGameObject->_staticObject);
+			grid->addObject(qGameObject->_dynamicObject);
+		}
 	}
 	break;
 	}
@@ -83,26 +102,45 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			LoadResources(G_Device);
 			ryu->sprite->SelectIndex(0);
 			ryu->_action = Action::Idle;
+			isLoadStage = false;
 		}
 		//Xu ly scene
 		//--------------Over time-------------------
 		//if (_gameScore->getTimer() <= 0)
 			//sceneState = ESceneState::Menu_Scene;
+		list<GameObject*> lstObjectsHaveToWork;
+		vector<GameObject*> allObjectsHaveToWork = grid->getObjectActive(camera);
+		std::copy(allObjectsHaveToWork.begin(), allObjectsHaveToWork.end(), std::back_inserter(lstObjectsHaveToWork));
+		//*(qGameObject->_dynamicObject) = allObjectsHaveToWork;
+		for (size_t i = 0; i < allObjectsHaveToWork.size(); i++)
+		{
+			allObjectsHaveToWork[i]->Update(deltaTime);
+			allObjectsHaveToWork[i]->Update(deltaTime, ryu->getPos());
+			ryu->Collision(lstObjectsHaveToWork, deltaTime, false);
+			allObjectsHaveToWork[i]->Collision(lstObjectsHaveToWork, deltaTime);
+		}
+
 		_gameScore->updateScore(_levelNow, _score, 30, 16, _lifes, EnumID::None_ID, 0, 16);
-
-		qGameObject->Update(deltaTime);
+		/*ryu->Collision(*(qGameObject->_staticObject), deltaTime, false);
+		ryu->Collision(*(qGameObject->_dynamicObject), deltaTime, true);*/
+		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
-		ryu->Collision(*(qGameObject->_staticObject), deltaTime, false);
-		ryu->Collision(*(qGameObject->_dynamicObject), deltaTime, true);
+		
+		ryu->Collision(*(qGameObject->_dynamicObject), deltaTime, true);*/
+		//ryu->Collision(*(qGameObject->_staticObject), deltaTime, false);
 
-		qGameObject->Collision(deltaTime);
+		//qGameObject->Collision(deltaTime);
 
 		G_SpriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 		ryu->Update(deltaTime);
 		camera->UpdateCamera(ryu->posX);
 
 		bg->Draw(camera);
-		qGameObject->Draw(camera);
+		for (size_t i = 0; i < allObjectsHaveToWork.size(); i++)
+		{
+			allObjectsHaveToWork[i]->Draw(camera);
+		}
+		//qGameObject->Draw(camera);
 		ryu->Draw(camera);
 		_gameScore->drawTable();
 		G_SpriteHandler->End();
@@ -160,6 +198,7 @@ void SceneGame::LoadResources(LPDIRECT3DDEVICE9 d3ddv)
 	{
 		LoadLevel(_levelNow);
 		LoadStage(_levelNow);
+		isLoadStage = true;
 	}
 }
 

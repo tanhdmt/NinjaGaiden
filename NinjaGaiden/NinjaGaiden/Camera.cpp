@@ -1,9 +1,22 @@
 ﻿#include "Camera.h"
 
+CCamera* CCamera::instance = 0;
+
 CCamera::CCamera()
 {
 	viewport.x = 1;
 	viewport.y = G_ScreenHeight;
+}
+
+CCamera::~CCamera()
+{
+
+}
+
+CCamera* CCamera::getInstance()
+{
+	if (instance == 0) instance = new CCamera();
+	return instance;
 }
 
 void CCamera::SetSizeMap(int _max, int _min)
@@ -69,4 +82,34 @@ void CCamera::UpdateCamera(int &w, int &h)
 		h += 4;
 		viewport.y -= 4;
 	}
+}
+
+float CCamera::getLeft()
+{
+	return viewport.x;
+}
+
+float CCamera::getRight()
+{
+	return viewport.x + G_ScreenWidth;
+}
+
+float CCamera::getTop()
+{
+	return viewport.y;
+}
+
+float CCamera::getBottom()
+{
+	return viewport.y - G_ScreenHeight;
+}
+
+float CCamera::getX()
+{
+	return viewport.x;
+}
+
+float CCamera::getY()
+{
+	return viewport.y;
 }

@@ -63,6 +63,7 @@ enum EnumID
 	SwordMan_ID,
 	RocketMan_ID,
 	Banshee_ID,
+	Boss_ID,
 	//Items
 	Hp_ID,
 	GameScore_ID,

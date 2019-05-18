@@ -8,6 +8,7 @@
 #include "CText.h"
 #include "QGameObject.h"
 #include "GameScore.h"
+#include "Grid.h"
 using namespace std;
 
 class SceneGame : public Scene
@@ -29,6 +30,7 @@ protected:
 	Ryu* ryu;
 	QGameObject* qGameObject;
 	GameScore* _gameScore;
+	Grid* grid;
 
 	CCamera *camera;
 	CText* arial;

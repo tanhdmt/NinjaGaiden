@@ -117,6 +117,15 @@
     <ClCompile Include="Fire.cpp">
       <Filter>GameObject\Others</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -196,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="Fire.h">
       <Filter>GameObject\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Background</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
