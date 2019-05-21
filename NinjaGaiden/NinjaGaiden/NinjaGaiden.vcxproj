@@ -130,12 +130,14 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Banshee.cpp" />
+    <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CText.cpp" />
     <ClCompile Include="DynamicObject.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -160,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Banshee.h" />
+    <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="CEnum.h" />
     <ClInclude Include="CText.h" />
     <ClInclude Include="DynamicObject.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

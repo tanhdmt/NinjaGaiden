@@ -1,6 +1,7 @@
 #ifndef _RYU_H_
 #define _RYU_H_
 #include "DynamicObject.h"
+#include "Explosion.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
 	GameObject* _lastCollidedGround;
 	ECollisionDirect _curCollideDir;
 	GameObject* _sideCollidedGround;
+	Explosion* explosion;
 	//dem so object va cham
 	int _demVaCham;
 	bool onLand;
@@ -29,6 +31,13 @@ public:
 	bool _hasClimb;
 	bool _hasSit;
 	bool _isFall;
+	bool useWeapon;
+	int ryuLife;
+	int ryuScore;
+	bool _allowPress;
+	bool bActiveHurt;
+	bool _bHurt;
+	bool isHurt;
 
 	Ryu(void);
 	Ryu(int, int);
@@ -39,11 +48,13 @@ public:
 	void TurnRight();
 	void Jump();
 	void Climb(bool isUp);
-	void Attack();
+	void Attack(bool isUseWeapon);
 	void Sit();
 	void SitAttack();
 	void Stop();
 	void Draw(CCamera*);
+	bool IsHurt();
+
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	Box GetBox();
 	void Collision(list<GameObject*> &obj, float dt, bool isDynamic);

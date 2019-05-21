@@ -40,6 +40,9 @@
     <Filter Include="GameObject\Others">
       <UniqueIdentifier>{49b7036c-19fa-44a5-b355-d842cd078022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Weapons">
+      <UniqueIdentifier>{8ce3fbf1-02b7-4562-9b3d-712bfb5f0be0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -105,12 +108,6 @@
     <ClCompile Include="Banshee.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Sword.cpp">
-      <Filter>GameObject\Others</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>GameObject\Others</Filter>
-    </ClCompile>
     <ClCompile Include="RocketMan.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
@@ -125,6 +122,18 @@
     </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GameObject\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>GameObject\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>GameObject\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>GameObject\Others</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,12 +203,6 @@
     <ClInclude Include="Banshee.h">
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>GameObject\Others</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>GameObject\Others</Filter>
-    </ClInclude>
     <ClInclude Include="RocketMan.h">
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
@@ -214,6 +217,18 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GameObject\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>GameObject\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>GameObject\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>GameObject\Others</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

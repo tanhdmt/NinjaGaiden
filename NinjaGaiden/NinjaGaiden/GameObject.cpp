@@ -55,6 +55,9 @@ void GameObject::CreateSprite()
 	case EnumID::Boss_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
 		break;
+	case EnumID::Boomerang_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 13, 14, 80);
+		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
 		break;
@@ -119,11 +122,16 @@ ECollisionDirect GameObject::GetCollisionDirect(GameObject* other)
 void GameObject::Remove()
 {
 	active = false;
+	death = true;
 }
 
 void GameObject::ReceiveDamage(int damagePoint)
 {
-	
+	if (hp <= 0)
+		return;
+	hp -= damagePoint;
+	if (hp == 0)
+		death = true;
 }
 
 Box GameObject::GetBox()
@@ -170,6 +178,7 @@ void GameObject::onReborn()
 {
 	setX(initX);
 	setY(initY);
+	active = true;
 }
 
 float GameObject::getInitX()
