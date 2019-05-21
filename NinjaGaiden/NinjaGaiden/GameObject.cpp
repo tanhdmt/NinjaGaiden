@@ -55,6 +55,9 @@ void GameObject::CreateSprite()
 	case EnumID::Boss_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
 		break;
+	case EnumID::Banshee_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
+		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
 		break;
@@ -170,6 +173,7 @@ void GameObject::onReborn()
 {
 	setX(initX);
 	setY(initY);
+	this->active = false;
 }
 
 float GameObject::getInitX()

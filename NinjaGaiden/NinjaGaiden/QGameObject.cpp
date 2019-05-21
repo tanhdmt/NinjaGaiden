@@ -46,8 +46,11 @@ QGameObject::QGameObject(string fileName)
 				_dynamicObject->push_back(new Boss(posX, posY));
 				break;
 			case 26:
+				
 				G_MinSize = posX;
 				break;
+			case EnumID::Banshee_ID:
+				_dynamicObject->push_back(new Banshee(posX, posY));
 			case 27:
 				G_MaxSize = posX;
 				break;
@@ -58,7 +61,6 @@ QGameObject::QGameObject(string fileName)
 	}
 	Initialize();
 }
-
 
 void QGameObject::Draw(CCamera *camera)
 {

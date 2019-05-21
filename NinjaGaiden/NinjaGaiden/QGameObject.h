@@ -3,6 +3,7 @@
 #include "Ryu.h"
 #include "SwordMan.h"
 #include "RocketMan.h"
+#include "Banshee.h"
 #include "Boss.h"
 #include "Ground.h"
 #include "Singleton.h"
