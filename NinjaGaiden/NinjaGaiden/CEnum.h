@@ -69,7 +69,9 @@ enum EnumID
 	GameScore_ID,
 	Bullet_ID,
 	Sword_ID,
-	Fire_ID
+	Fire_ID,
+	Boomerang_ID,
+	Explosion_ID
 };
 
 

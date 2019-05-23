@@ -20,7 +20,9 @@ private:
 	CTexture* hp;
 	CTexture* gameScore;
 	CTexture* fire;
+	CTexture* explosion;
 	CTexture* bullet;
+	CTexture* boomerang;
 	//CTexture* sword;
 
 	CTexture* swordMan;

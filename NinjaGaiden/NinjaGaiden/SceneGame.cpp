@@ -104,6 +104,13 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			ryu->_action = Action::Idle;
 			isLoadStage = false;
 		}
+		if (ryu->ryuLife == 0)
+		{
+			LoadResources(G_Device);
+			ryu->sprite->SelectIndex(0);
+			ryu->_action = Action::Idle;
+			isLoadStage = false;
+		}
 		//Xu ly scene
 		//--------------Over time-------------------
 		//if (_gameScore->getTimer() <= 0)
@@ -116,13 +123,11 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 		{
 			allObjectsHaveToWork[i]->Update(deltaTime);
 			allObjectsHaveToWork[i]->Update(deltaTime, ryu->getPos());
-			ryu->Collision(lstObjectsHaveToWork, deltaTime, false);
+			ryu->Collision(lstObjectsHaveToWork, deltaTime, true);
 			allObjectsHaveToWork[i]->Collision(lstObjectsHaveToWork, deltaTime);
 		}
 
-		_gameScore->updateScore(_levelNow, _score, 30, 16, _lifes, EnumID::None_ID, 0, 16);
-		/*ryu->Collision(*(qGameObject->_staticObject), deltaTime, false);
-		ryu->Collision(*(qGameObject->_dynamicObject), deltaTime, true);*/
+		_gameScore->updateScore(_levelNow, _score, 30, 16, ryu->ryuLife, EnumID::None_ID, 0, 16);
 		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
 		
@@ -210,7 +215,7 @@ void SceneGame::OnKeyDown(int KeyCode)
 		ryu->Jump();
 		break;
 	case DIK_K:
-		ryu->Attack();
+		ryu->Attack(false);
 		break;
 	case DIK_L:
 		ryu->Sit();

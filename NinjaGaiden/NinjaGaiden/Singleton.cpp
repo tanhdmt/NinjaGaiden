@@ -29,7 +29,9 @@ Singleton::Singleton()
 	hp = new CTexture("Resources/Items/HP.png", 1, 1, 1);
 	gameScore = new CTexture("Resources/Items/GameScore.png", 1, 1, 1);
 	fire = new CTexture("Resources/Enemy/Fire_x2.png", 1, 1, 1);
+	explosion = new CTexture("Resources/Enemy/explosion_x2.png", 1, 1, 1);
 	bullet = new CTexture("Resources/Enemy/Bullet_x2.png", 1, 1, 1);
+	boomerang = new CTexture("Resources/Enemy/Item_x2.png", 2, 1, 2);
 
 	swordMan = new CTexture("Resources/Enemy/Sword_Man_x2.png", 3, 1, 3);
 	rocketMan = new CTexture("Resources/Enemy/Bazoka_Man_x2.png", 1, 1, 1);
@@ -63,6 +65,10 @@ CTexture* Singleton::getTexture(EnumID id)
 			return bullet;
 		case EnumID::Fire_ID:
 			return fire;
+		case EnumID::Explosion_ID:
+			return explosion;
+		case EnumID::Boomerang_ID:
+			return boomerang;
 		case EnumID::SwordMan_ID:
 			return swordMan;
 		case EnumID::RocketMan_ID:

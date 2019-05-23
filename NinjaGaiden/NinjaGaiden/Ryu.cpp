@@ -3,6 +3,7 @@
 #define SPEED_X 0.5f
 #define SPEED_Y 0.8f
 #define MAX_HEIGHT 120.0f
+#define HURT_STATE 25
 bool isCol = false;
 bool isAtk = false;
 
@@ -14,6 +15,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 {
 	_action = Action::Idle;
 	_vLast = 0.2f;
+	_allowPress = true;
 	_lastCollidedGround = nullptr;
 	_hasJump = false;
 	_hasAttack = false;
@@ -21,6 +23,8 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	_hasSit = false;
 	_isFall = false;
 	_heightJump = 0.0f;
+	ryuLife = 3;
+	isHurt = false;
 	onLand = false;
 	ryuRun = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuRun_ID), 0, 2, 18);
 	ryuJump = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuJump1_ID), 0, 3, 18);
@@ -28,6 +32,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	ryuAttack = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuAttack_ID), 0, 2, 40);
 	ryuSit = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuSit_ID), 1);
 	ryuSitAttack = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuSitAttack_ID), 0, 2, 40);
+	explosion = new Explosion(_posX, _posY, EnumID::Explosion_ID);
 	Initialize();
 }
 
@@ -54,11 +59,24 @@ void Ryu::Update(int dt) {
 		posY += vY * dt;
 	}
 	if (_hasJump) {
-		ryuJump->Update(dt);
-		_heightJump += vY * dt;
-		if (_heightJump >= MAX_HEIGHT)
+		if (!bActiveHurt)
 		{
-			vY = -SPEED_Y;
+			ryuJump->Update(dt);
+			_heightJump += vY * dt;
+			if (_heightJump >= MAX_HEIGHT)
+			{
+				vY = -SPEED_Y;
+			}
+		}
+		else
+		{
+			if (_heightJump < 0)
+				_heightJump = 0;
+			_heightJump += vY * dt;
+			if (_heightJump >= 80)
+			{
+				vY = -SPEED_Y;
+			}
 		}
 	}
 	if (_hasClimb && vY != 0)
@@ -113,16 +131,20 @@ void Ryu::Update(int dt) {
 	//nhay len sau khi rot dat
 	if (posY < -80)
 	{
-		posY = 250;
-		_isFall = true;
-		_hasJump = true;
-		Jump();
-		onLand = false;
-		
-		//vY = SPEED_Y;
-		vX = _vLast;
+		if (ryuLife > 0)
+		{
+			ryuLife--;
+			posY = 250;
+			_isFall = true;
+			_hasJump = true;
+			Jump();
+			onLand = false;
+			//vY = SPEED_Y;
+			vX = _vLast;
+		}
 	}
-	
+	if (explosion->active)
+		explosion->Update(dt);
 }
 
 Box Ryu::GetBox()
@@ -210,7 +232,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 
 					//xet cham dat
-					if (vY < 0 && !onLand && dir == ECollisionDirect::Colls_Bot)
+					if (vY < 0  && dir == ECollisionDirect::Colls_Bot)
 					{
 						//posY += moveY;
 						onLand = true;
@@ -255,6 +277,47 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					break;
 				}
+				case EnumID::SwordMan_ID:
+				case EnumID::RocketMan_ID:
+				{
+					if (_hasAttack)
+					{
+						int enemyPosX = other->getX();
+						int enemyPosY = other->getY();
+						other->active = false;
+						explosion->setX(enemyPosX);
+						explosion->setY(enemyPosY);
+						explosion->active = true;
+					}
+					else
+					{
+							if (!bActiveHurt)
+							{
+								bActiveHurt = true;
+								_allowPress = false;
+								isHurt = true;
+								_localHurtTime = GetTickCount();
+								isCol = true;
+								_hasJump = true;
+								ryuJump->SelectIndex(0);
+								if (dir == ECollisionDirect::Colls_Left)
+								{
+									vX = -0.2f;
+									//isColRight = false;
+								}
+								else if (dir == ECollisionDirect::Colls_Right)
+								{
+									vX = 0.2f;
+									//_vLast = vX;
+									//isColRight = true;
+								}
+								vY = 0.4f;
+
+								//vY = 1.5f;
+							}
+					}
+					break;
+				}
 				default:
 					break;
 				}
@@ -272,151 +335,203 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 
 void Ryu::Draw(CCamera* camera) {
 	D3DXVECTOR2 center = camera->Transform(posX, posY);
-
-	if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb) 
+	if (explosion->active)
+		explosion->Draw(camera);
+	if (!IsHurt())
 	{
-		if (_vLast > 0)
-		{
-			if (_hasJump)
-			{
-				ryuJump->Draw(center.x, center.y);
-				return;
-			}
-			ryuRun->Draw(center.x, center.y);
-		}
-		else {
-			if (_hasJump)
-			{
-				ryuJump->DrawFlipX(center.x, center.y);
-				return;
-			}
-			ryuRun->DrawFlipX(center.x, center.y);
-		}
-	}
-	else if (_hasClimb)
-	{
-		ryuClimb->Draw(center.x, center.y);
-	}
-	else if (_hasSit)
-	{
-		if (_hasAttack)
+		if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb)
 		{
 			if (_vLast > 0)
 			{
-				ryuSitAttack->Draw(center.x + 23, center.y);
-				return;
+				if (_hasJump)
+				{
+					ryuJump->Draw(center.x, center.y);
+					return;
+				}
+				ryuRun->Draw(center.x, center.y);
 			}
 			else {
-				ryuSitAttack->DrawFlipX(center.x - 23, center.y);
-				return;
+				if (_hasJump)
+				{
+					ryuJump->DrawFlipX(center.x, center.y);
+					return;
+				}
+				ryuRun->DrawFlipX(center.x, center.y);
 			}
 		}
-		if (_vLast > 0)
+		else if (_hasClimb)
 		{
-			ryuSit->Draw(center.x, center.y);
+			ryuClimb->Draw(center.x, center.y);
 		}
-		else {
-			ryuSit->DrawFlipX(center.x, center.y);
-		}
-	}
-	else
-	{
-		if (_vLast > 0)
+		else if (_hasSit)
 		{
 			if (_hasAttack)
 			{
-				ryuAttack->Draw(center.x + 23, center.y);
-				
-				return;
+				if (_vLast > 0)
+				{
+					ryuSitAttack->Draw(center.x + 23, center.y);
+					return;
+				}
+				else {
+					ryuSitAttack->DrawFlipX(center.x - 23, center.y);
+					return;
+				}
 			}
-			sprite->Draw(center.x, center.y);
-		}
-		else {
-			if (_hasAttack)
+			if (_vLast > 0)
 			{
-				ryuAttack->DrawFlipX(center.x - 23, center.y);
-				return;
+				ryuSit->Draw(center.x, center.y);
 			}
-			sprite->DrawFlipX(center.x, center.y);
+			else {
+				ryuSit->DrawFlipX(center.x, center.y);
+			}
+		}
+		else
+		{
+			if (_vLast > 0)
+			{
+				if (_hasAttack)
+				{
+					ryuAttack->Draw(center.x + 23, center.y);
+
+					return;
+				}
+				sprite->Draw(center.x, center.y);
+			}
+			else {
+				if (_hasAttack)
+				{
+					ryuAttack->DrawFlipX(center.x - 23, center.y);
+					return;
+				}
+				sprite->DrawFlipX(center.x, center.y);
+			}
 		}
 	}
-	
 }
 
 void Ryu::TurnLeft()
 {
-	vX = -SPEED_X;
-	_vLast = vX;
-	_action = Action::Run_Left;
-	_hasClimb = false;
-	_hasSit = false;
-	onLand = false;
-}
-
-void Ryu::TurnRight() 
-{
-	vX = SPEED_X;
-	_vLast = vX;
-	_action = Action::Run_Right;
-	_hasClimb = false;
-	_hasSit = false;
-	onLand = false;
-}
-
-void Ryu::Climb(bool isUp)
-{
-	if (_hasClimb)
+	if (_allowPress)
 	{
-		if (isUp)
-			vY = SPEED_Y * 0.5;
-		else 
-			vY = -(SPEED_Y * 0.5);
-		vX = 0;
-		_action = Action::Climb;
-	}
-}
-
-void Ryu::Sit()
-{
-	if (!_hasSit)
-	{
-		_hasSit = true;
-		if (!_hasAttack)
-			_action = Action::Sit;
-		else
-			_action = Action::SitAttack;
-		onLand = false;
-	}
-}
-void Ryu::Jump()
-{
-	if (!_hasJump)
-	{
-		vX = 0;
-		vY = SPEED_Y;
-		_heightJump = 0;
-		ryuJump->SelectIndex(0);
-		_action = Action::Jump1;
-		_hasJump = true;
+		vX = -SPEED_X;
+		_vLast = vX;
+		_action = Action::Run_Left;
 		_hasClimb = false;
 		_hasSit = false;
 		onLand = false;
 	}
 }
-void Ryu::Attack()
+
+void Ryu::TurnRight() 
 {
-	if (!_hasAttack)
+	if (_allowPress)
 	{
-		//Stop();
-		_hasJump = false;
-		ryuAttack->SelectIndex(0);
-		_action = Action::Attack;
-		_hasAttack = true;
+		vX = SPEED_X;
+		_vLast = vX;
+		_action = Action::Run_Right;
+		_hasClimb = false;
+		_hasSit = false;
+		onLand = false;
+	}
+}
+
+void Ryu::Climb(bool isUp)
+{
+	if (_allowPress)
+	{
+		if (_hasClimb)
+		{
+			if (isUp)
+				vY = SPEED_Y * 0.5;
+			else
+				vY = -(SPEED_Y * 0.5);
+			vX = 0;
+			_action = Action::Climb;
+		}
+	}
+}
+
+void Ryu::Sit()
+{
+	if (_allowPress)
+	{
+		if (!_hasSit)
+		{
+			_hasSit = true;
+			if (!_hasAttack)
+				_action = Action::Sit;
+			else
+				_action = Action::SitAttack;
+			onLand = false;
+		}
+	}
+}
+void Ryu::Jump()
+{
+	if (_allowPress)
+	{
+		if (!_hasJump)
+		{
+			vX = 0;
+			vY = SPEED_Y;
+			_heightJump = 0;
+			ryuJump->SelectIndex(0);
+			_action = Action::Jump1;
+			_hasJump = true;
+			_hasClimb = false;
+			_hasSit = false;
+			onLand = false;
+		}
+	}
+}
+void Ryu::Attack(bool isUseWeapon)
+{
+	if (_allowPress)
+	{
+		if (!_hasAttack)
+		{
+			//Stop();
+			if (isUseWeapon)
+			{
+				//_hasJump = true;
+				useWeapon = true;
+
+			}
+			else
+			{
+				_hasJump = false;
+				ryuAttack->SelectIndex(0);
+			}
+			_action = Action::Attack;
+			_hasAttack = true;
+		}
 	}
 }
 void Ryu::Initialize()
 {
 	sprite->SelectIndex(0);
+	_bHurt = false;
+}
+
+bool Ryu::IsHurt()
+{
+	if (!bActiveHurt)
+		return false;
+	bool result = _bHurt;
+	DWORD now = GetTickCount();
+	DWORD deltaTime = now - _localHurtTime;
+	if (deltaTime >= 1000)
+	{
+		bActiveHurt = false;
+		isCol = false;
+		_allowPress = true;
+		isHurt = false;
+	}
+	if (deltaTime % (int)(1000 / HURT_STATE) < 15)
+	{
+		_bHurt = !_bHurt;
+	}
+	return result;
 }
 
 void Ryu::Stop()
