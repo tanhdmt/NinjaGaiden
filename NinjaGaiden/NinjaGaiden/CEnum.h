@@ -64,6 +64,13 @@ enum EnumID
 	RocketMan_ID,
 	Banshee_ID,
 	Boss_ID,
+	Butterfly_ID,
+	Bird_ID,
+	BrownBird_ID,
+	MachineGunGuy_ID,
+	YellowDog_ID,
+	Bat_ID,
+	Runner_ID,
 	//Items
 	Hp_ID,
 	GameScore_ID,

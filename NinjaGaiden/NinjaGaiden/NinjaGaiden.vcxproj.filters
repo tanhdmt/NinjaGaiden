@@ -135,6 +135,18 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>GameObject\Others</Filter>
     </ClCompile>
+    <ClCompile Include="Butterfly.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bird.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="YellowDog.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -229,6 +241,18 @@
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>GameObject\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Butterfly.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bird.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="YellowDog.h">
+      <Filter>GameObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

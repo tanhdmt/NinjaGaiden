@@ -130,9 +130,12 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Banshee.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CText.cpp" />
@@ -158,13 +161,17 @@
     <ClCompile Include="SwordMan.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="YellowDog.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Banshee.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Bird.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CEnum.h" />
@@ -191,6 +198,7 @@
     <ClInclude Include="SwordMan.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="YellowDog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -32,11 +32,18 @@ Singleton::Singleton()
 	explosion = new CTexture("Resources/Enemy/explosion_x2.png", 1, 1, 1);
 	bullet = new CTexture("Resources/Enemy/Bullet_x2.png", 1, 1, 1);
 	boomerang = new CTexture("Resources/Enemy/Item_x2.png", 2, 1, 2);
+	sword = new CTexture("Resources/Enemy/Bullet_x2.png", 1, 1, 1);
 
 	swordMan = new CTexture("Resources/Enemy/Sword_Man_x2.png", 3, 1, 3);
 	rocketMan = new CTexture("Resources/Enemy/Bazoka_Man_x2.png", 1, 1, 1);
 	banshee = new CTexture("Resources/Enemy/Banshee_x2.png", 3, 1, 3);
 	boss = new CTexture("Resources/Enemy/Final_Boss_x2.png", 2, 1, 2);
+	butterfly = new CTexture("Resources/Enemy/Butterfly_x2.png", 2, 1, 2);
+	bird = new CTexture("Resources/Enemy/Bird_x2.png", 2, 1, 2);
+	bat = new CTexture("Resources/Enemy/Grey_Bat_x2.png", 2, 1, 2);
+	yellowDog = new CTexture("Resources/Enemy/Yellow_Dog_x2.png", 2, 1, 2);
+	//machineGunGuy = new CTexture("Resources/Enemy/Bird_x2.png", 2, 1, 2);
+	runner = new CTexture("Resources/Enemy/Runner_x2.png", 2, 1, 2);
 }
 
 CTexture* Singleton::getTexture(EnumID id)
@@ -77,5 +84,21 @@ CTexture* Singleton::getTexture(EnumID id)
 			return banshee;
 		case EnumID::Boss_ID:
 			return boss;
+		case EnumID::Butterfly_ID:
+			return butterfly;
+		case EnumID::Sword_ID:
+			return sword;
+		case EnumID::Bird_ID:
+			return bird;
+		case EnumID::BrownBird_ID:
+			return brownBrid;
+		case EnumID::Runner_ID:
+			return runner;
+		case EnumID::YellowDog_ID:
+			return yellowDog;
+		case EnumID::MachineGunGuy_ID:
+			return machineGunGuy;
+		case EnumID::Bat_ID:
+			return bat;
 	}
 }

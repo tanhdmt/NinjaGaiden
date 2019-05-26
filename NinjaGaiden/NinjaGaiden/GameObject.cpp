@@ -57,11 +57,22 @@ void GameObject::CreateSprite()
 		break;
 
 	case EnumID::Banshee_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
-
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
+		break;
 	case EnumID::Boomerang_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 13, 14, 80);
-
+		break;
+	case EnumID::Bat_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
+		break;
+	case EnumID::Bird_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
+		break;
+	case EnumID::Butterfly_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
+		break;
+	case EnumID::YellowDog_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);

@@ -1,56 +1,37 @@
-#include "Banshee.h"
+#include "YellowDog.h"
 
-#define SPEED_X 0.2f
+
+
+#define SPEED_X 0.4f
 #define SPEED_Y 0.35f
 #define MAX_HEIGHT 250.0f
 
-Banshee::Banshee(void) : DynamicObject()
+YellowDog::YellowDog(void) : DynamicObject()
 {
 }
 
-Banshee::Banshee(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Banshee_ID)
+YellowDog::YellowDog(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::YellowDog_ID)
 {
 	type = ObjectType::Enemy_Type;
 	//point = 300;
 	active = false;
 	//hp = 3;
-	sword = new list<Sword*>();
-	vX = -1;
-	sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
+	vX = SPEED_X;
+	vY = SPEED_Y;
 }
 
-void Banshee::Update(int dt)
+void YellowDog::Update(int dt)
 {
 	sprite->Update(dt);
 	if (sprite == NULL || !active)
 		return;
-	//if (abs(startPosX - samusPos->x) <= 70 && abs(posY - samusPos->y) >= 50 && abs(vX) <= SPEED_X
-	//else
-		//vX = SPEED_X;
-	/*if (abs(vX) > SPEED_X)
-		vX = SPEED_X * 3;
-	if (samusPos->x < posX)
-		vX = -vX;*/
-	list<Sword *>::iterator i = sword->begin();
-	while (i != sword->end())
-	{
-		if (!(*i)->active)
-		{
-			sword->erase(i++);
-			sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
-		}
-		else
-		{
-			(*i)->Update(dt);
-			++i;
-		}
-	}
+
 	posX += vX * dt;
 	posY += vY * dt;
 }
 
 
-void Banshee::Collision(list<GameObject*> obj, int dt)
+void YellowDog::Collision(list<GameObject*> obj, int dt)
 {
 	int countCollis = 0;
 	list<GameObject*>::iterator _itBegin;
@@ -73,7 +54,10 @@ void Banshee::Collision(list<GameObject*> obj, int dt)
 				countCollis++;
 				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
 				{
-					vX = -vX;
+					//vX = -vX;
+				}
+				if (dir == ECollisionDirect::Colls_Bot || dir == ECollisionDirect::Colls_Bot){
+					vY = 0;
 				}
 				break;
 			}
@@ -81,12 +65,17 @@ void Banshee::Collision(list<GameObject*> obj, int dt)
 	}
 	if (countCollis == 0)
 	{
-		vX = -vX;
+		vY = SPEED_Y;
 	}
 }
 
+//void Skree::Draw(CCamera* camera)
+//{
+//	
+//
+//}
 
-void Banshee::SetActive(float x, float y)
+void YellowDog::SetActive(float x, float y)
 {
 
 	if (abs(posX - x) <= 300 && !active)
@@ -96,8 +85,10 @@ void Banshee::SetActive(float x, float y)
 	}
 }
 
-ECollisionDirect Banshee::GetCollisionDirect(GameObject* other)
+ECollisionDirect YellowDog::GetCollisionDirect(GameObject* other)
 {
+	/*float x = (this->posX) - (other->posX);
+	float y = (this->posY) - (other->posY);*/
 	float x = 0;
 	if (vX < 0)
 		x = (this->posX - (this->getWidth() / 2) - 32) - (other->posX - (other->getWidth() / 2));
@@ -120,25 +111,7 @@ ECollisionDirect Banshee::GetCollisionDirect(GameObject* other)
 
 	return ECollisionDirect::Colls_None;
 }
-void Banshee::Draw(CCamera* camera) {
-	if (sprite == NULL || !active || IsHurt()) {
-		return;
-	}
-	D3DXVECTOR2 center = camera->Transform(posX, posY);
-	if (vX < 0)
-		sprite->DrawFlipX(center.x, center.y);
-	else
-		sprite->Draw(center.x, center.y);
-	if (active)
-	{
-		for (list<Sword*>::iterator i = sword->begin(); i != sword->end(); i++)
-		{
-			if ((*i)->active)
-				(*i)->Draw(camera);
-		}
-	}
-}
 
-Banshee::~Banshee(void)
+YellowDog::~YellowDog(void)
 {
 }

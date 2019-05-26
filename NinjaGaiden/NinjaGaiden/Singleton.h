@@ -23,12 +23,19 @@ private:
 	CTexture* explosion;
 	CTexture* bullet;
 	CTexture* boomerang;
-	//CTexture* sword;
+	CTexture* sword;
 
 	CTexture* swordMan;
 	CTexture* rocketMan;
 	CTexture* banshee;
+	CTexture* butterfly;
+	CTexture* bird;
+	CTexture* bat;
+	CTexture* yellowDog;
+	CTexture* machineGunGuy;
+	CTexture* runner;
 	CTexture* boss;
+	CTexture* brownBrid;
 
 	static Singleton *single;
 	Singleton();

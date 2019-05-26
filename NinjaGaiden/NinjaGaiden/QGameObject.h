@@ -8,6 +8,10 @@
 #include "Ground.h"
 #include "Singleton.h"
 #include "Camera.h"
+#include "Butterfly.h"
+#include "Banshee.h"
+#include "Bat.h"
+#include "YellowDog.h"
 #include <fstream>
 #include <iostream>
 #include <conio.h>
