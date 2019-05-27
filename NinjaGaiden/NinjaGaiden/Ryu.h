@@ -2,6 +2,7 @@
 #define _RYU_H_
 #include "DynamicObject.h"
 #include "Explosion.h"
+#include "Boomerang.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ public:
 	CSprite* ryuJump;
 	CSprite* ryuClimb;
 	CSprite* ryuAttack;
+	CSprite* ryuAttack2;
 	CSprite* ryuSit;
 	CSprite* ryuSitAttack;
 
@@ -22,12 +24,15 @@ public:
 	ECollisionDirect _curCollideDir;
 	GameObject* _sideCollidedGround;
 	Explosion* explosion;
+	list<Weapon*> *_weapon;
+	EnumID _weaponID;
 	//dem so object va cham
 	int _demVaCham;
 	bool onLand;
 	bool _hasJump;
 	float _heightJump;
 	bool _hasAttack;
+	bool _hasAttack2;
 	bool _hasClimb;
 	bool _hasSit;
 	bool _isFall;
@@ -54,7 +59,9 @@ public:
 	void Stop();
 	void Draw(CCamera*);
 	bool IsHurt();
-
+	void UseWeapon();
+	void SetWeapon();
+	void ChangeWeapon(EnumID idWeapon);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	Box GetBox();
 	void Collision(list<GameObject*> &obj, float dt, bool isDynamic);

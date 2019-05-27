@@ -1,15 +1,14 @@
 #include "SceneGame.h"
 
-#define GRID Grid::getInstance()
 bool isLoadStage = false;
+int backScore = 0;
 
 SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 {
 	camera = new CCamera();
 	bg = NULL;
 	_gameScore = NULL;
-	grid = GRID;
-	_levelNow = 1;
+	_levelNow = 2;
 	_loadLevel = false;
 	_score = 0;
 	_lifes = 3;
@@ -18,6 +17,7 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 void SceneGame::LoadLevel(int level)
 {
 	ResetLevel(); 
+	backScore += _score;
 	switch (level)
 	{
 	case 1:
@@ -25,8 +25,9 @@ void SceneGame::LoadLevel(int level)
 		camera->viewport.y = 420;
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
-		ryu = new Ryu(60, 400);
+		ryu = new Ryu(3500, 400);
 		_gameScore->initTimer(150);
+		grid = Grid::getInstance(level);
 	}
 	break;
 	case 2:
@@ -37,6 +38,7 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(2085, 300);
 		_gameScore->initTimer(150);
+		grid = Grid::getInstance(level);
 	}
 	break;
 	case 3:
@@ -47,6 +49,7 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(90, 300);
 		_gameScore->initTimer(150);
+		grid = Grid::getInstance(level);
 	}
 	break;
 	default:
@@ -110,6 +113,7 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			ryu->sprite->SelectIndex(0);
 			ryu->_action = Action::Idle;
 			isLoadStage = false;
+			_score = backScore = ryu->ryuScore = 0;
 		}
 		//Xu ly scene
 		//--------------Over time-------------------
@@ -126,7 +130,8 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			ryu->Collision(lstObjectsHaveToWork, deltaTime, true);
 			allObjectsHaveToWork[i]->Collision(lstObjectsHaveToWork, deltaTime);
 		}
-
+		if (_score - backScore != ryu->ryuScore)
+			_score = ryu->ryuScore + backScore;
 		_gameScore->updateScore(_levelNow, _score, 30, 16, ryu->ryuLife, EnumID::None_ID, 0, 16);
 		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
@@ -216,6 +221,9 @@ void SceneGame::OnKeyDown(int KeyCode)
 		break;
 	case DIK_K:
 		ryu->Attack(false);
+		break;
+	case DIK_Q:
+		ryu->Attack(true);
 		break;
 	case DIK_L:
 		ryu->Sit();
