@@ -45,7 +45,23 @@ QGameObject::QGameObject(string fileName)
 			case 219:
 				_dynamicObject->push_back(new Boss(posX, posY));
 				break;
+			case 221:
+				_dynamicObject->push_back(new Butterfly(posX, posY));
+				break;
+			case 212:
+				_dynamicObject->push_back(new YellowDog(posX, posY));
+				break;
+			case 215:
+				_dynamicObject->push_back(new Banshee(posX, posY));
+				break;
+			case 220:
+				_dynamicObject->push_back(new Bat(posX, posY));
+				break; 
+			case 217:
+					//_dynamicObject->push_back(new BrownBird(posX, posY));
+					break;
 			case 26:
+				
 				G_MinSize = posX;
 				break;
 			case 27:
@@ -58,7 +74,6 @@ QGameObject::QGameObject(string fileName)
 	}
 	Initialize();
 }
-
 
 void QGameObject::Draw(CCamera *camera)
 {

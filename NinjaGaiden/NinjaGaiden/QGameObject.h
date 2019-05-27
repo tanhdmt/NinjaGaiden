@@ -3,10 +3,15 @@
 #include "Ryu.h"
 #include "SwordMan.h"
 #include "RocketMan.h"
+#include "Banshee.h"
 #include "Boss.h"
 #include "Ground.h"
 #include "Singleton.h"
 #include "Camera.h"
+#include "Butterfly.h"
+#include "Banshee.h"
+#include "Bat.h"
+#include "YellowDog.h"
 #include <fstream>
 #include <iostream>
 #include <conio.h>
