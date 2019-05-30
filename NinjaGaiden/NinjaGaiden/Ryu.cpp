@@ -169,7 +169,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 	{
 		GameObject* other = (*_itBegin);
 		
-		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID)
+		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID||other->id==EnumID::YellowDog_ID||other->id==EnumID::MachineGunGuy_ID)
 		{
 			other->SetActive(this->posX, this->posY);
 		}

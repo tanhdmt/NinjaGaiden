@@ -21,7 +21,8 @@ void DynamicObject::Update(int dt) {
 	if (posX <= width / 2 + 2 || posX >= G_MapWidth - (width / 2 - 2))
 		vX = -vX;
 	posY = vY * dt;
-	sprite->Update(dt);
+	if (active)
+		sprite->Update(dt);
 }
 
 void DynamicObject::Draw(CCamera* camera)

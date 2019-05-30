@@ -1,39 +1,48 @@
-#include "YellowDog.h"
+#include "MachineGunGuy.h"
 
 
 
-#define SPEED_X 0.8f
-#define SPEED_Y 0.15f
+#define SPEED_X 0.2f
+#define SPEED_Y 0.35f
 #define MAX_HEIGHT 250.0f
 
-YellowDog::YellowDog(void) : DynamicObject()
+MachineGunGuy::MachineGunGuy(void) : DynamicObject()
 {
 }
 
-YellowDog::YellowDog(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::YellowDog_ID)
+MachineGunGuy::MachineGunGuy(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::MachineGunGuy_ID)
 {
 	type = ObjectType::Enemy_Type;
 	//point = 300;
 	active = false;
 	//hp = 3;
-	vX = SPEED_X;
-	vY = SPEED_Y;
 }
 
-void YellowDog::Update(int dt)
+void MachineGunGuy::Update(int dt)
 {
-	if (active)
-		sprite->Update(dt);
-
+	sprite->Update(dt);
 	if (sprite == NULL || !active)
 		return;
-	posX += vX * dt;
-	posY -= vY * dt;
+	//if (abs(startPosX - samusPos->x) <= 70 && abs(posY - samusPos->y) >= 50 && abs(vX) <= SPEED_X
+	//else
+		//vX = SPEED_X;
+	/*if (abs(vX) > SPEED_X)
+		vX = SPEED_X * 3;
+	if (samusPos->x < posX)
+		vX = -vX;*/
 
+	posX += vX * dt;
+	posY += vY * dt;
 }
 
+Box MachineGunGuy::GetBox()
+{
+	if (vX < 0)
+		return Box(posX - sprite->_texture->FrameWidth / 2 - 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+	return Box(posX - sprite->_texture->FrameWidth / 2 + 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+}
 
-void YellowDog::Collision(list<GameObject*> obj, int dt)
+void MachineGunGuy::Collision(list<GameObject*> obj, int dt)
 {
 	int countCollis = 0;
 	list<GameObject*>::iterator _itBegin;
@@ -56,10 +65,7 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 				countCollis++;
 				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
 				{
-					//vX = -vX;
-				}
-				if (dir == ECollisionDirect::Colls_Bot || dir == ECollisionDirect::Colls_Bot){
-					vY = 0;
+					vX = -vX;
 				}
 				break;
 			}
@@ -67,7 +73,7 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 	}
 	if (countCollis == 0)
 	{
-		vY = SPEED_Y;
+		vX = -vX;
 	}
 }
 
@@ -77,17 +83,17 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 //
 //}
 
-void YellowDog::SetActive(float x, float y)
+void MachineGunGuy::SetActive(float x, float y)
 {
 
-	if (abs(posX - x) <= 400 && !active)
+	if (abs(posX - x) <= 300 && !active)
 	{
 		active = true;
-		vX = SPEED_X;
+		vX = -SPEED_X;
 	}
 }
 
-ECollisionDirect YellowDog::GetCollisionDirect(GameObject* other)
+ECollisionDirect MachineGunGuy::GetCollisionDirect(GameObject* other)
 {
 	/*float x = (this->posX) - (other->posX);
 	float y = (this->posY) - (other->posY);*/
@@ -114,6 +120,6 @@ ECollisionDirect YellowDog::GetCollisionDirect(GameObject* other)
 	return ECollisionDirect::Colls_None;
 }
 
-YellowDog::~YellowDog(void)
+MachineGunGuy::~MachineGunGuy(void)
 {
 }
