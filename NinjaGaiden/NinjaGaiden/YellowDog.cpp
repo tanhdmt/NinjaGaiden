@@ -3,7 +3,7 @@
 
 
 #define SPEED_X 0.8f
-#define SPEED_Y 0.15f
+#define SPEED_Y 0.4f
 #define MAX_HEIGHT 250.0f
 
 YellowDog::YellowDog(void) : DynamicObject()
@@ -59,6 +59,16 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 					//vX = -vX;
 				}
 				if (dir == ECollisionDirect::Colls_Bot || dir == ECollisionDirect::Colls_Bot){
+					vY = 0;
+				}
+				break;
+			case EnumID::Ground2_ID:
+				countCollis++;
+				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
+				{
+					//vX = -vX;
+				}
+				if (dir == ECollisionDirect::Colls_Bot || dir == ECollisionDirect::Colls_Bot) {
 					vY = 0;
 				}
 				break;
