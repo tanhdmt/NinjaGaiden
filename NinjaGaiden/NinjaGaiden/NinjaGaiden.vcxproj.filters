@@ -147,6 +147,12 @@
     <ClCompile Include="YellowDog.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Ground2.cpp">
+      <Filter>GameObject\StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MachineGunGuy.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -252,6 +258,12 @@
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="YellowDog.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground2.h">
+      <Filter>GameObject\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MachineGunGuy.h">
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
