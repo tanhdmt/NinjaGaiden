@@ -14,6 +14,7 @@ enum Action
 	Fall,
 	Climb,
 	Attack,
+	Attack2,
 };
 
 static enum ESceneState
@@ -53,6 +54,7 @@ enum EnumID
 	RyuJump2_ID,
 	RyuClimb_ID,
 	RyuAttack_ID,
+	RyuAttack2_ID,
 	RyuSit_ID,
 	RyuSitAttack_ID,
 	//Ground
@@ -74,11 +76,22 @@ enum EnumID
 	//Items
 	Hp_ID,
 	GameScore_ID,
+	//Weapon
 	Bullet_ID,
 	Sword_ID,
 	Fire_ID,
+	Explosion_ID,
 	Boomerang_ID,
-	Explosion_ID
+	//Items
+	BonusBlue_ID,
+	BonusRed_ID,
+	ThrowStar_ID,
+	WindmillThrowStar_ID,
+	TimeFreeze_ID,
+	FireWheel_ID,
+	SpititualBlue_ID,
+	SpiritualRed_ID,
+	RestoreStrength_ID,
 };
 
 

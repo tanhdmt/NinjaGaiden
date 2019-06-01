@@ -23,6 +23,7 @@ Singleton::Singleton()
 	ryuJump1 = new CTexture("Resources/ryuJump.png", 4, 1, 4);
 	ryuClimb = new CTexture("Resources/ryuClimb.png", 2, 1, 2);
 	ryuAttack = new CTexture("Resources/ryuAttack.png", 3, 1, 3);
+	ryuAttack2 = new CTexture("Resources/ryuAttack2.png", 3, 1, 3);
 	ryuSit = new CTexture("Resources/ryuSit.png", 1, 1, 1);
 	ryuSitAttack = new CTexture("Resources/ryuSitAttack.png", 3, 1, 3);
 
@@ -31,7 +32,7 @@ Singleton::Singleton()
 	fire = new CTexture("Resources/Enemy/Fire_x2.png", 1, 1, 1);
 	explosion = new CTexture("Resources/Enemy/explosion_x2.png", 1, 1, 1);
 	bullet = new CTexture("Resources/Enemy/Bullet_x2.png", 1, 1, 1);
-	boomerang = new CTexture("Resources/Enemy/Item_x2.png", 2, 1, 2);
+	boomerang = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
 	sword = new CTexture("Resources/Enemy/Bullet_x2.png", 1, 1, 1);
 
 	swordMan = new CTexture("Resources/Enemy/Sword_Man_x2.png", 3, 1, 3);
@@ -44,6 +45,16 @@ Singleton::Singleton()
 	yellowDog = new CTexture("Resources/Enemy/Yellow_Dog_x2.png", 2, 1, 2);
 	machineGunGuy = new CTexture("Resources/Enemy/machingunguy_x2.png", 2, 1, 2);
 	runner = new CTexture("Resources/Enemy/Runner_x2.png", 2, 1, 2);
+
+	bonusBlue = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	bonusRed = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	throwStar = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	windmillThrowStar = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	timeFreeze = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	spititualBlue = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	spiritualRed = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	restoreStrength = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
+	fireWheel = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
 }
 
 CTexture* Singleton::getTexture(EnumID id)
@@ -60,6 +71,8 @@ CTexture* Singleton::getTexture(EnumID id)
 			return ryuClimb;
 		case EnumID::RyuAttack_ID:
 			return ryuAttack;
+		case EnumID::RyuAttack2_ID:
+			return ryuAttack2;
 		case EnumID::RyuSit_ID:
 			return ryuSit;
 		case EnumID::RyuSitAttack_ID:
@@ -100,5 +113,24 @@ CTexture* Singleton::getTexture(EnumID id)
 			return machineGunGuy;
 		case EnumID::Bat_ID:
 			return bat;
+
+		case EnumID::BonusBlue_ID:
+			return bonusBlue;
+		case EnumID::BonusRed_ID:
+			return bonusRed;
+		case EnumID::ThrowStar_ID:
+			return throwStar;
+		case EnumID::WindmillThrowStar_ID:
+			return windmillThrowStar;
+		case EnumID::TimeFreeze_ID:
+			return timeFreeze;
+		case EnumID::FireWheel_ID:
+			return fireWheel;
+		case EnumID::SpititualBlue_ID:
+			return spititualBlue;
+		case EnumID::SpiritualRed_ID:
+			return spiritualRed;
+		case EnumID::RestoreStrength_ID:
+			return restoreStrength;
 	}
 }

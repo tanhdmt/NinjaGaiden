@@ -135,6 +135,9 @@
     <ClCompile Include="Explosion.cpp">
       <Filter>GameObject\Others</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>GameObject\Weapons</Filter>
+    </ClCompile>
     <ClCompile Include="Butterfly.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>GameObject\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>GameObject\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Butterfly.h">
       <Filter>GameObject\Enemy</Filter>

@@ -5,22 +5,49 @@
 #define CAMERA CCamera::getInstance()
 
 Grid * Grid::instance = NULL;
-Grid * Grid::getInstance()
+Grid * Grid::getInstance(int level)
 {
-	if (instance == NULL) instance = new Grid();
+	if (instance == NULL) instance = new Grid(level);
 	return instance;
 }
 
 
 
-Grid::Grid()
+Grid::Grid(int level)
 {
-	widthLevel1 = 4096;
-	heightLevel1 = 416;
-	cellWidth = 128;
-	cellHeight = 52;
-	rowCells = 8;
-	columnCells = 32;
+	switch (level)
+	{
+	case 1:
+	{
+		widthLevel = 4096;
+		heightLevel = 416;
+		cellWidth = 128;
+		cellHeight = 52;
+		rowCells = 8;
+		columnCells = 32;
+	}
+	break;
+	case 2:
+	{
+		widthLevel = 6144;
+		heightLevel = 416;
+		cellWidth = 128;
+		cellHeight = 52;
+		rowCells = 8;
+		columnCells = 48;
+	}
+	break;
+	case 3:
+	{
+		widthLevel = 512;
+		heightLevel = 352;
+		cellWidth = 128;
+		cellHeight = 44;
+		rowCells = 8;
+		columnCells = 4;
+	}
+	break;
+	}
 
 	gridData = new Cell*[rowCells];
 	for (int rowIndex = 0; rowIndex < rowCells; rowIndex++)

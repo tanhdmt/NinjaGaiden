@@ -62,7 +62,34 @@ void GameObject::CreateSprite()
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	case EnumID::Boomerang_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 13, 14, 80);
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 14, 14, 0);
+		break;
+	case EnumID::BonusBlue_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 8);
+		break;
+	case EnumID::BonusRed_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 9);
+		break;
+	case EnumID::ThrowStar_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 2);
+		break;
+	case EnumID::WindmillThrowStar_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 3);
+		break;
+	case EnumID::TimeFreeze_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 12);
+		break;
+	case EnumID::FireWheel_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 5);
+		break;
+	case EnumID::SpititualBlue_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0);
+		break;
+	case EnumID::SpiritualRed_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
+		break;
+	case EnumID::RestoreStrength_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 11);
 		break;
 	case EnumID::Bat_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);

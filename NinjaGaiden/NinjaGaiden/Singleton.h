@@ -14,6 +14,7 @@ private:
 	CTexture* ryuJump2;
 	CTexture* ryuClimb;
 	CTexture* ryuAttack;
+	CTexture* ryuAttack2;
 	CTexture* ryuSit;
 	CTexture* ryuSitAttack;
 
@@ -24,6 +25,17 @@ private:
 	CTexture* bullet;
 	CTexture* boomerang;
 	CTexture* sword;
+	CTexture* bonusBlue;
+	CTexture* bonusRed;
+	CTexture* throwStar;
+	CTexture* windmillThrowStar;
+	CTexture* timeFreeze;
+	CTexture* spititualBlue;
+	CTexture* spiritualRed;
+	CTexture* restoreStrength;
+	CTexture* fireWheel;
+
+	//CTexture* sword;
 
 	CTexture* swordMan;
 	CTexture* rocketMan;

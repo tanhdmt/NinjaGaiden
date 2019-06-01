@@ -5,7 +5,7 @@
 
 class Grid
 {
-	int widthLevel1, heightLevel1;
+	int widthLevel, heightLevel;
 	int rowCells, columnCells;
 	int cellWidth, cellHeight;
 	Cell** gridData;
@@ -14,12 +14,12 @@ class Grid
 	CCamera* camera;
 
 public:
-	static Grid* getInstance();
+	static Grid* getInstance(int level);
 	void addObject(list<GameObject*> *lstObject);
 	vector<GameObject*> getObjectInCameraCells();
 	//Hàm này đóng vai trò là bao chứa các object đã đang hoạt động trong camera và các object mới được camera quét qua
 	vector<GameObject*> getObjectActive(CCamera* camera);
-	Grid();
+	Grid(int level);
 	~Grid();
 };
 
