@@ -92,12 +92,6 @@ enum EnumID
 	SpititualBlue_ID,
 	SpiritualRed_ID,
 	RestoreStrength_ID,
-
-	Hp_ID,
-	GameScore_ID,
-	
-	
-	
 };
 
 

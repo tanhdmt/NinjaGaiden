@@ -211,7 +211,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 		if ((*i)->active)
 		{
 			if ((*i)->id == EnumID::Boomerang_ID)
-				(*i)->Collision(this->GetBox());
+				(*i)->Collision(this->GetBox(), obj, dt);
 			(*i)->Collision(obj, dt);
 			/*point += (*i)->point;
 			(*i)->point = 0;*/

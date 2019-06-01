@@ -14,7 +14,7 @@ public:
 	Boomerang(void);
 	Boomerang(float x, float y, float _huong);
 	void Update(int dt);
-	void Collision(Box simonBox);
+	void Collision(Box ryuBox, list<GameObject*> &obj, int dt);
 	void Draw(CCamera*);
 	~Boomerang(void);
 };

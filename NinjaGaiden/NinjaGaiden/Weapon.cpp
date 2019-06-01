@@ -14,6 +14,7 @@ Weapon::Weapon(float x, float y, float _huong, EnumID id) : DynamicObject(x, y, 
 	{
 		vX = -SPEED_X;
 	}
+	explosion = new Explosion(x, y, EnumID::Explosion_ID);
 	active = true;
 }
 
@@ -109,7 +110,7 @@ void Weapon::Collision(list<GameObject*> &obj, int dt)
 	//}
 }
 
-void Weapon::Collision(Box simon)
+void Weapon::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 {
 }
 

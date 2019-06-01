@@ -18,7 +18,7 @@ void Boomerang::Update(int dt)
 {
 	_length += vX * dt;
 	posX += (vX + ryuX) * dt;
-	posY -= ryuY * dt;
+	//posY -= ryuY * dt;
 	rad+=30;
 
 	if (abs(_length) >= MAX_WIDTH && count < 5)
@@ -27,18 +27,20 @@ void Boomerang::Update(int dt)
 		rad += 30;
 		count++;
 	}
+	if (explosion->active)
+		explosion->Update(dt);
 }
 
-void Boomerang::Collision(Box ryu)
+void Boomerang::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 {
-	ryuX = ryu.vx;
-	ryuY = ryu.vy;
+	ryuX = ryuBox.vx;
+	ryuY = ryuBox.vy;
 
 	float moveX;
 	float moveY;
 
 	Box box = this->GetBox();
-	Box boxOther = ryu;
+	Box boxOther = ryuBox;
 
 	if (AABB(box, boxOther, moveX, moveY) == true)
 	{
@@ -47,12 +49,53 @@ void Boomerang::Collision(Box ryu)
 			return;
 		}
 	}
+	int countCollis = 0;
+	list<GameObject*>::iterator _itBegin;
+	for (_itBegin = obj.begin(); _itBegin != obj.end(); _itBegin++)
+	{
+		float moveX;
+		float moveY;
+		float normalx;
+		float normaly;
+		GameObject* other = (*_itBegin);
+		Box box = this->GetBox();
+		Box boxOther = other->GetBox();
+
+		if (AABB(box, boxOther, moveX, moveY) == true)
+		{
+			ECollisionDirect dir = this->GetCollisionDirect(other);
+			switch (other->id)
+			{
+			case EnumID::SwordMan_ID:
+			case EnumID::RocketMan_ID:
+			case EnumID::YellowDog_ID:
+			{
+				if (other->active)
+				{
+					int enemyPosX = other->getX();
+					int enemyPosY = other->getY();
+					other->active = false;
+					explosion->setX(enemyPosX);
+					explosion->setY(enemyPosY);
+					explosion->active = true;
+				}
+			}
+			break;
+			}
+		}
+	}
+	if (countCollis == 0)
+	{
+		vX = -vX;
+	}
 }
 
 void Boomerang::Draw(CCamera* camera)
 {
 	if (sprite == NULL || !active)
 		return;
+	if (explosion->active)
+		explosion->Draw(camera);
 	/*if (posX + width / 2 <= camera->viewport.x || posX - width / 2 >= camera->viewport.x + G_ScreenWidth)
 	{
 		active = false;
