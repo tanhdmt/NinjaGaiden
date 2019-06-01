@@ -57,7 +57,7 @@ void GameObject::CreateSprite()
 		break;
 
 	case EnumID::Banshee_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	case EnumID::Boomerang_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 14, 14, 0);
@@ -101,6 +101,9 @@ void GameObject::CreateSprite()
 	case EnumID::YellowDog_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
+	case EnumID::MachineGunGuy_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
+		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
 		break;
@@ -113,13 +116,13 @@ void GameObject::Collision(list<GameObject*> obj, int dt)
 
 void GameObject::Update(int deltaTime)
 {
-	if (sprite != NULL)
+	if (sprite != NULL && active==true)
 		sprite->Update(deltaTime);
 }
 
 void GameObject::Update(int dt, D3DXVECTOR2 * samusPos)
 {
-	if (sprite != NULL)
+	if (sprite != NULL && active ==true)
 		sprite->Update(dt);
 }
 

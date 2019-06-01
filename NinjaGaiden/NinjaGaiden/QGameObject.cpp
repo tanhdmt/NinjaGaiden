@@ -60,6 +60,9 @@ QGameObject::QGameObject(string fileName)
 			case 217:
 					//_dynamicObject->push_back(new BrownBird(posX, posY));
 					break;
+			case 218:
+				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
+				break;
 			case 26:
 				
 				G_MinSize = posX;
@@ -106,7 +109,6 @@ void QGameObject::Update(int deltaTime)
 	it = _dynamicObject->begin();
 	while (it != _dynamicObject->end())
 	{
-
 		if ((*it)->active && (*it)->id != EnumID::RocketMan_ID)
 		{
 			(*it)->Update(deltaTime);

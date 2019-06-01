@@ -43,7 +43,7 @@ Singleton::Singleton()
 	bird = new CTexture("Resources/Enemy/Bird_x2.png", 2, 1, 2);
 	bat = new CTexture("Resources/Enemy/Grey_Bat_x2.png", 2, 1, 2);
 	yellowDog = new CTexture("Resources/Enemy/Yellow_Dog_x2.png", 2, 1, 2);
-	//machineGunGuy = new CTexture("Resources/Enemy/Bird_x2.png", 2, 1, 2);
+	machineGunGuy = new CTexture("Resources/Enemy/machingunguy_x2.png", 2, 1, 2);
 	runner = new CTexture("Resources/Enemy/Runner_x2.png", 2, 1, 2);
 
 	bonusBlue = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
