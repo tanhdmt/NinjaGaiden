@@ -15,6 +15,7 @@ class GameObject
 public:
 	float posX, posY;
 	float vX, vY;
+	float aX, aY;
 	float initX, initY;
 	LPDIRECT3DTEXTURE9 texture;
 	CSprite* sprite;

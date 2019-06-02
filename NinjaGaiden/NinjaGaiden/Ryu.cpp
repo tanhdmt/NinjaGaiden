@@ -315,6 +315,22 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					break;
 				}
+				case EnumID::Ground4_ID:
+				{
+					if (countCollis>0 && vY < 0 && !_hasClimb)
+					{
+						onLand = true;
+						_hasJump = false;
+						_hasClimb = false;
+					}
+					else
+					{
+						onLand = false;
+						_hasJump = false;
+						_hasClimb = false;
+					}
+					break;
+				}
 				case EnumID::Stair_ID:
 				{
 					//va cham canh

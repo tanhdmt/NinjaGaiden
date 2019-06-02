@@ -61,6 +61,7 @@ enum EnumID
 	Ground1_ID,
 	Stair_ID,
 	Ground2_ID,
+	Ground4_ID,
 	//Enemy
 	SwordMan_ID,
 	RocketMan_ID,

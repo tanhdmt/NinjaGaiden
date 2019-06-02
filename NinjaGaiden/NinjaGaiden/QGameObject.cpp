@@ -33,6 +33,9 @@ QGameObject::QGameObject(string fileName)
 			case 702:
 				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Ground2_ID));
 				break;
+			case 704:
+				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Ground4_ID));
+				break;
 			case 612:
 				_staticObject->push_back(new Ground(posX, posY, width, height, EnumID::Stair_ID));
 				break;
