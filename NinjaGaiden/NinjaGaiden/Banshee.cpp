@@ -14,9 +14,9 @@ Banshee::Banshee(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Banshee_I
 	//point = 300;
 	active = false;
 	//hp = 3;
-	sword = new list<Sword*>();
+	//sword = new list<Sword*>();
 	vX = -1;
-	sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
+	//sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
 }
 
 void Banshee::Update(int dt)
@@ -31,20 +31,20 @@ void Banshee::Update(int dt)
 		vX = SPEED_X * 3;
 	if (samusPos->x < posX)
 		vX = -vX;*/
-	list<Sword *>::iterator i = sword->begin();
-	while (i != sword->end())
-	{
-		if (!(*i)->active)
-		{
-			sword->erase(i++);
-			sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
-		}
-		else
-		{
-			(*i)->Update(dt);
-			++i;
-		}
-	}
+	//list<Sword *>::iterator i = sword->begin();
+	//while (i != sword->end())
+	//{
+	//	if (!(*i)->active)
+	//	{
+	//		sword->erase(i++);
+	//		sword->push_back(new Sword(posX + (24 * vX), posY + 20, vX, EnumID::Sword_ID));
+	//	}
+	//	else
+	//	{
+	//		(*i)->Update(dt);
+	//		++i;
+	//	}
+	//}
 	posX += vX * dt;
 	posY += vY * dt;
 }
@@ -129,14 +129,14 @@ void Banshee::Draw(CCamera* camera) {
 		sprite->DrawFlipX(center.x, center.y);
 	else
 		sprite->Draw(center.x, center.y);
-	if (active)
-	{
-		for (list<Sword*>::iterator i = sword->begin(); i != sword->end(); i++)
-		{
-			if ((*i)->active)
-				(*i)->Draw(camera);
-		}
-	}
+	//if (active)
+	//{
+	//	for (list<Sword*>::iterator i = sword->begin(); i != sword->end(); i++)
+	//	{
+	//		if ((*i)->active)
+	//			(*i)->Draw(camera);
+	//	}
+	//}
 }
 
 Banshee::~Banshee(void)

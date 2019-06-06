@@ -222,7 +222,9 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 	{
 		GameObject* other = (*_itBegin);
 		
-		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID||other->id==EnumID::YellowDog_ID||other->id==EnumID::MachineGunGuy_ID)
+		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID 
+			||other->id==EnumID::YellowDog_ID||other->id==EnumID::MachineGunGuy_ID
+			||other->id==EnumID::Banshee_ID)
 		{
 			other->SetActive(this->posX, this->posY);
 		}
@@ -307,7 +309,23 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					countCollis++;
 					if (dir == ECollisionDirect::Colls_Bot && vY < 0 && !_hasClimb)
 					{
+						onLand = false;
+						_hasJump = false;
+						_hasClimb = false;
+					}
+					break;
+				}
+				case EnumID::Ground4_ID:
+				{
+					if (countCollis>0 && vY < 0 && !_hasClimb)
+					{
 						onLand = true;
+						_hasJump = false;
+						_hasClimb = false;
+					}
+					else
+					{
+						onLand = false;
 						_hasJump = false;
 						_hasClimb = false;
 					}

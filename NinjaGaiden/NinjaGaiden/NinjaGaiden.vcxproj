@@ -148,6 +148,8 @@
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Ground2.cpp" />
+    <ClCompile Include="MachineGunGuy.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="QGameObject.cpp" />
     <ClCompile Include="RocketMan.cpp" />
@@ -186,6 +188,8 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Ground2.h" />
+    <ClInclude Include="MachineGunGuy.h" />
     <ClInclude Include="RocketMan.h" />
     <ClInclude Include="Sword.h" />
     <ClInclude Include="QGameObject.h" />

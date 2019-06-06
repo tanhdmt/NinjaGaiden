@@ -1,7 +1,7 @@
 #include "RocketMan.h"
 
-#define SPEED_X 0.2f
-#define SPEED_Y 0.35f
+#define SPEED_X 0.0f
+#define SPEED_Y 0.0f
 #define MAX_HEIGHT 250.0f
 
 RocketMan::RocketMan(void) : DynamicObject()
@@ -62,37 +62,37 @@ Box RocketMan::GetBox()
 
 void RocketMan::Collision(list<GameObject*> obj, int dt)
 {
-	//int countCollis = 0;
-	//list<GameObject*>::iterator _itBegin;
-	//for (_itBegin = obj.begin(); _itBegin != obj.end(); _itBegin++)
-	//{
-	//	float moveX;
-	//	float moveY;
-	//	float normalx;
-	//	float normaly;
-	//	GameObject* other = (*_itBegin);
-	//	Box box = this->GetBox();
-	//	Box boxOther = other->GetBox();
+	int countCollis = 0;
+	list<GameObject*>::iterator _itBegin;
+	for (_itBegin = obj.begin(); _itBegin != obj.end(); _itBegin++)
+	{
+		float moveX;
+		float moveY;
+		float normalx;
+		float normaly;
+		GameObject* other = (*_itBegin);
+		Box box = this->GetBox();
+		Box boxOther = other->GetBox();
 
-	//	if (AABB(box, boxOther, moveX, moveY) == true)
-	//	{
-	//		ECollisionDirect dir = this->GetCollisionDirect(other);
-	//		switch (other->id)
-	//		{
-	//		case EnumID::Ground1_ID:
-	//			countCollis++;
-	//			if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
-	//			{
-	//				vX = -vX;
-	//			}
-	//			break;
-	//		}
-	//	}
-	//}
-	//if (countCollis == 0)
-	//{
-	//	vX = -vX;
-	//}
+		if (AABB(box, boxOther, moveX, moveY) == true)
+		{
+			ECollisionDirect dir = this->GetCollisionDirect(other);
+			switch (other->id)
+			{
+			case EnumID::Ground1_ID:
+				countCollis++;
+				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
+				{
+					vX = -vX;
+				}
+				break;
+			}
+		}
+	}
+	if (countCollis == 0)
+	{
+		vX = -vX;
+	}
 }
 
 void RocketMan::Draw(CCamera* camera)
