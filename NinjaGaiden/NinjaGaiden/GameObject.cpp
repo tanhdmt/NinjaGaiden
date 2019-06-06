@@ -50,7 +50,7 @@ void GameObject::CreateSprite()
 		sprite = NULL;
 		break;
 	case EnumID::SwordMan_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 80);
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 200);
 		break;
 	case EnumID::Boss_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);

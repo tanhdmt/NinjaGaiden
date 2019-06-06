@@ -17,7 +17,7 @@ Boomerang::Boomerang(float x, float y, float _huong) : Weapon(x, y, _huong, Enum
 void Boomerang::Update(int dt)
 {
 	_length += vX * dt;
-	posX += (vX + ryuX) * dt;
+	posX += (vX) * dt;
 	//posY -= ryuY * dt;
 	rad+=30;
 
@@ -84,10 +84,10 @@ void Boomerang::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 			}
 		}
 	}
-	if (countCollis == 0)
-	{
-		vX = -vX;
-	}
+	//if (countCollis == 0)
+	//{
+	//	vX = -vX;
+	//}
 }
 
 void Boomerang::Draw(CCamera* camera)

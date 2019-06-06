@@ -357,12 +357,12 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 								ryuJump->SelectIndex(0);
 								if (dir == ECollisionDirect::Colls_Left)
 								{
-									vX = -0.2f;
+									vX = -0.3f;
 									//isColRight = false;
 								}
 								else if (dir == ECollisionDirect::Colls_Right)
 								{
-									vX = 0.2f;
+									vX = 0.3f;
 									//_vLast = vX;
 									//isColRight = true;
 								}

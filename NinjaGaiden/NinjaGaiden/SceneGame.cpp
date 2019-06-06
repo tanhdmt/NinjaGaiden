@@ -27,7 +27,6 @@ void SceneGame::LoadLevel(int level)
 		bg = new Background(level);
 		ryu = new Ryu(100, 400);
 		_gameScore->initTimer(150);
-		grid = Grid::getInstance(level);
 	}
 	break;
 	case 2:
@@ -38,7 +37,6 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(2085, 300);
 		_gameScore->initTimer(150);
-		grid = Grid::getInstance(level);
 	}
 	break;
 	case 3:
@@ -49,12 +47,12 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(90, 300);
 		_gameScore->initTimer(150);
-		grid = Grid::getInstance(level);
 	}
 	break;
 	default:
 		break;
 	}
+	grid = Grid::getInstance(level);
 }
 
 void SceneGame::LoadStage(int level)
