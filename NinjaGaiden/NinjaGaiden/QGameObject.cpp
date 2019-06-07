@@ -61,7 +61,7 @@ QGameObject::QGameObject(string fileName)
 				_dynamicObject->push_back(new Bat(posX, posY));
 				break; 
 			case 217:
-					//_dynamicObject->push_back(new BrownBird(posX, posY));
+				_dynamicObject->push_back(new BrownBird(posX, posY));
 					break;
 			case 218:
 				_dynamicObject->push_back(new MachineGunGuy(posX, posY));

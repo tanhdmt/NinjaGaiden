@@ -51,7 +51,7 @@ void GameObject::CreateSprite()
 		sprite = NULL;
 		break;
 	case EnumID::SwordMan_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 80);
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 2, 150);
 		break;
 	case EnumID::Boss_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
@@ -105,6 +105,9 @@ void GameObject::CreateSprite()
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	case EnumID::MachineGunGuy_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
+		break;
+	case EnumID::BrownBird_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	default:

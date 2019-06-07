@@ -62,7 +62,7 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 					vY = 0;
 				}
 				break;
-			case EnumID::Ground2_ID:
+			case EnumID::Ground4_ID:
 				countCollis++;
 				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
 				{
