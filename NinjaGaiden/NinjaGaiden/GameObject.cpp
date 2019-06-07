@@ -107,6 +107,9 @@ void GameObject::CreateSprite()
 	case EnumID::MachineGunGuy_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
+	case EnumID::BrownBird_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
+		break;
 	default:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 1);
 		break;

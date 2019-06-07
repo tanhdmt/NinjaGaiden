@@ -228,7 +228,8 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 		
 		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID 
 			||other->id==EnumID::YellowDog_ID||other->id==EnumID::MachineGunGuy_ID
-			||other->id==EnumID::Banshee_ID)
+			||other->id==EnumID::Banshee_ID
+			|| other->id==EnumID::BrownBird_ID)
 		{
 			other->SetActive(this->posX, this->posY);
 		}
@@ -339,8 +340,6 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					else
 					{
 						onLand = false;
-						_hasJump = false;
-						_hasClimb = false;
 					}
 					break;
 				}

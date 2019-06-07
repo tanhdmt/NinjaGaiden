@@ -45,6 +45,7 @@ Singleton::Singleton()
 	yellowDog = new CTexture("Resources/Enemy/Yellow_Dog_x2.png", 2, 1, 2);
 	machineGunGuy = new CTexture("Resources/Enemy/machingunguy_x2.png", 2, 1, 2);
 	runner = new CTexture("Resources/Enemy/Runner_x2.png", 2, 1, 2);
+	brownBrid = new CTexture("Resources/Enemy/Brown_Bird_x2.png", 2, 1, 2);
 
 	bonusBlue = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
 	bonusRed = new CTexture("Resources/Enemy/items_x2.png", 16, 1, 16);
@@ -113,7 +114,6 @@ CTexture* Singleton::getTexture(EnumID id)
 			return machineGunGuy;
 		case EnumID::Bat_ID:
 			return bat;
-
 		case EnumID::BonusBlue_ID:
 			return bonusBlue;
 		case EnumID::BonusRed_ID:
