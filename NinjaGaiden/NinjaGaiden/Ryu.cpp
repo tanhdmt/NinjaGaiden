@@ -201,6 +201,10 @@ Box Ryu::GetBox()
 			return Box(posX - ryuJump->_texture->FrameWidth / 2, (posY + ryuJump->_texture->FrameHeight / 2), ryuJump->_texture->FrameWidth, ryuJump->_texture->FrameHeight, vX, vY);
 		return Box(posX - ryuRun->_texture->FrameWidth / 2, (posY + ryuRun->_texture->FrameHeight / 2), ryuRun->_texture->FrameWidth, ryuRun->_texture->FrameHeight, vX, vY);
 	}
+	if (_hasAttack)
+	{
+		return Box(posX - ryuAttack->_texture->FrameWidth / 2, (posY + ryuAttack->_texture->FrameHeight / 2), ryuAttack->_texture->FrameWidth, ryuAttack->_texture->FrameHeight, vX, vY);
+	}
 	return Box(posX - sprite->_texture->FrameWidth / 2 , (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight, vX, vY);
 }
 
@@ -317,11 +321,20 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 				}
 				case EnumID::Ground4_ID:
 				{
-					if (countCollis>0 && vY < 0 && !_hasClimb)
+					if (countCollis>0)
 					{
-						onLand = true;
-						_hasJump = false;
-						_hasClimb = false;
+						if (vY < 0 && !_hasClimb)
+						{
+							onLand = true;
+							_hasJump = false;
+							_hasClimb = false;
+						}
+						else 
+						{
+							onLand = false;
+							_hasJump = true;
+							_hasClimb = false;
+						}
 					}
 					else
 					{
@@ -350,17 +363,22 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 				}
 				case EnumID::SwordMan_ID:
 				case EnumID::RocketMan_ID:
+				case EnumID::Banshee_ID:
+				case EnumID::YellowDog_ID:
 				//case EnumID::Fire_ID:
 				{
 					if (_hasAttack || _hasAttack2)
 					{
-						int enemyPosX = other->getX();
-						int enemyPosY = other->getY();
-						other->active = false;
-						explosion->setX(enemyPosX);
-						explosion->setY(enemyPosY);
-						explosion->active = true;
-						ryuScore += 100;
+						if ((_vLast > 0 && (other->vX < 0 || (other->vX > 0 && posX < other->getX()))) || (_vLast < 0 && (other->vX > 0 || (other->vX < 0 && posX > other->getX()))))
+						{
+							int enemyPosX = other->getX();
+							int enemyPosY = other->getY();
+							other->active = false;
+							explosion->setX(enemyPosX);
+							explosion->setY(enemyPosY);
+							explosion->active = true;
+							ryuScore += 100;
+						}
 					}
 					else
 					{
@@ -489,7 +507,7 @@ void Ryu::Draw(CCamera* camera) {
 				}
 				if (_hasAttack2)
 				{
-					ryuAttack2->Draw(center.x + 23, center.y);
+					ryuAttack2->DrawFlipX(center.x + 23, center.y);
 
 					return;
 				}

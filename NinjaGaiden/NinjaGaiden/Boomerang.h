@@ -10,6 +10,7 @@ class Boomerang : public Weapon
 	int count;
 	float rad;
 	float ryuX, ryuY;
+	int ryuWidth;
 public:
 	Boomerang(void);
 	Boomerang(float x, float y, float _huong);

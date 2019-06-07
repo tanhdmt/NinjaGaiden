@@ -1,6 +1,6 @@
 #include "Boomerang.h"
 
-#define MAX_WIDTH 180
+#define MAX_WIDTH 140
 
 Boomerang::Boomerang(void) : Weapon()
 {
@@ -17,13 +17,17 @@ Boomerang::Boomerang(float x, float y, float _huong) : Weapon(x, y, _huong, Enum
 void Boomerang::Update(int dt)
 {
 	_length += vX * dt;
-	posX += (vX) * dt;
-	//posY -= ryuY * dt;
+	posX += vX * dt;
+	//posY += vY * dt;
 	rad+=30;
 
-	if (abs(_length) >= MAX_WIDTH && count < 5)
+	if (abs(ryuX - posX) >= MAX_WIDTH && count < 5)
 	{
 		vX = -vX;
+		if (ryuWidth != 34)
+			vY = ryuY;
+		else
+			vY = 0;
 		rad += 30;
 		count++;
 	}
@@ -33,8 +37,9 @@ void Boomerang::Update(int dt)
 
 void Boomerang::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 {
-	ryuX = ryuBox.vx;
+	ryuX = ryuBox.x;
 	ryuY = ryuBox.vy;
+	ryuWidth = ryuBox.w;
 
 	float moveX;
 	float moveY;
@@ -68,6 +73,7 @@ void Boomerang::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 			{
 			case EnumID::SwordMan_ID:
 			case EnumID::RocketMan_ID:
+			case EnumID::Banshee_ID:
 			case EnumID::YellowDog_ID:
 			{
 				if (other->active)

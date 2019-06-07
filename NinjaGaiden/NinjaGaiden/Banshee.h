@@ -22,7 +22,7 @@ public:
 	Banshee(void);
 	Banshee(float x, float y);
 	void Update(int dt);
-	void Draw(CCamera* camera);
+	//void Draw(CCamera* camera);
 	void Collision(list<GameObject*> obj, int dt);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	void SetActive(float x, float y);

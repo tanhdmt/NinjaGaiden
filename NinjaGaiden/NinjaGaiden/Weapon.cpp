@@ -1,6 +1,6 @@
 #include "Weapon.h"
 
-#define SPEED_X 0.8f
+#define SPEED_X 1.0f
 
 Weapon::Weapon(void)
 {

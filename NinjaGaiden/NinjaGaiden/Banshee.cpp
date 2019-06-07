@@ -120,24 +120,24 @@ ECollisionDirect Banshee::GetCollisionDirect(GameObject* other)
 
 	return ECollisionDirect::Colls_None;
 }
-void Banshee::Draw(CCamera* camera) {
-	if (sprite == NULL || !active || IsHurt()) {
-		return;
-	}
-	D3DXVECTOR2 center = camera->Transform(posX, posY);
-	if (vX < 0)
-		sprite->DrawFlipX(center.x, center.y);
-	else
-		sprite->Draw(center.x, center.y);
-	//if (active)
-	//{
-	//	for (list<Sword*>::iterator i = sword->begin(); i != sword->end(); i++)
-	//	{
-	//		if ((*i)->active)
-	//			(*i)->Draw(camera);
-	//	}
-	//}
-}
+//void Banshee::Draw(CCamera* camera) {
+//	if (sprite == NULL || !active || IsHurt()) {
+//		return;
+//	}
+//	D3DXVECTOR2 center = camera->Transform(posX, posY);
+//	if (vX < 0)
+//		sprite->DrawFlipX(center.x, center.y);
+//	else
+//		sprite->Draw(center.x, center.y);
+//	//if (active)
+//	//{
+//	//	for (list<Sword*>::iterator i = sword->begin(); i != sword->end(); i++)
+//	//	{
+//	//		if ((*i)->active)
+//	//			(*i)->Draw(camera);
+//	//	}
+//	//}
+//}
 
 Banshee::~Banshee(void)
 {
