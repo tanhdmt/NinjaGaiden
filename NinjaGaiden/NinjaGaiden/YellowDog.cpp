@@ -90,7 +90,7 @@ void YellowDog::Collision(list<GameObject*> obj, int dt)
 void YellowDog::SetActive(float x, float y)
 {
 
-	if (abs(posX - x) <= 200 && !active)
+	if (abs(posX - x) <= 400 && !active)
 	{
 		active = true;
 		vX = SPEED_X;

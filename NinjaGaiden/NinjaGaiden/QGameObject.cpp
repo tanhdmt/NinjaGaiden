@@ -60,12 +60,12 @@ QGameObject::QGameObject(string fileName)
 			case 220:
 				_dynamicObject->push_back(new Bat(posX, posY));
 				break; 
-			case 217:
+			/*case 217:
 				_dynamicObject->push_back(new BrownBird(posX, posY));
-					break;
-			/*case 218:
+					break;*/
+			case 218:
 				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
-				break;*/
+				break;
 			case 26:
 				
 				G_MinSize = posX;

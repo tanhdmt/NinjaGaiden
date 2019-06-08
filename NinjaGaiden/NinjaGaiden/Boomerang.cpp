@@ -21,7 +21,7 @@ void Boomerang::Update(int dt)
 	//posY += vY * dt;
 	rad+=30;
 
-	if (abs(ryuX - posX) >= MAX_WIDTH && count < 5)
+	if (abs(ryuX - posX) >= MAX_WIDTH)
 	{
 		vX = -vX;
 		if (ryuWidth != 34)
