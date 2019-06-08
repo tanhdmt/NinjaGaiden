@@ -134,6 +134,7 @@
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bird.cpp" />
+    <ClCompile Include="BrownBird.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Butterfly.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bird.h" />
+    <ClInclude Include="BrownBird.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Butterfly.h" />
     <ClInclude Include="Camera.h" />
