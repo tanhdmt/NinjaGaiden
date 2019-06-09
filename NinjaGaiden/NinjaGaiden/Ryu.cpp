@@ -26,6 +26,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	_heightJump = 0.0f;
 	ryuLife = 3;
 	ryuScore = 0;
+	ryuHp = 16;
 	isHurt = false;
 	onLand = false;
 	_weapon = new list<Weapon*>();
@@ -187,6 +188,11 @@ void Ryu::Update(int dt) {
 	}
 	if (explosion->active)
 		explosion->Update(dt);
+	if (ryuLife == 0)
+	{
+		ryuLife = 3;
+		ryuHp = 16;
+	}
 }
 
 Box Ryu::GetBox()
@@ -364,6 +370,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 				case EnumID::RocketMan_ID:
 				case EnumID::Banshee_ID:
 				case EnumID::YellowDog_ID:
+				case EnumID::BrownBird_ID:
 				//case EnumID::Fire_ID:
 				{
 					if (_hasAttack || _hasAttack2)
@@ -403,11 +410,35 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 								}
 								vY = 0.4f;
 
+								if (ryuHp > 0)
+									ryuHp--;
+								else {
+									ryuHp = 16;
+									ryuLife--;
+								}
+								
 								//vY = 1.5f;
 							}
 					}
 					break;
 				}
+				case EnumID::Butterfly_ID:
+				{
+					if (_hasAttack || _hasAttack2)
+					{
+						if ((_vLast > 0 && (other->vX < 0 || (other->vX > 0 && posX < other->getX()))) || (_vLast < 0 && (other->vX > 0 || (other->vX < 0 && posX > other->getX()))))
+						{
+							int enemyPosX = other->getX();
+							int enemyPosY = other->getY();
+							other->active = false;
+							explosion->setX(enemyPosX);
+							explosion->setY(enemyPosY);
+							explosion->active = true;
+							ryuScore += 100;
+						}
+					}
+				}
+				break;
 				default:
 					break;
 				}
@@ -746,6 +777,30 @@ int Ryu::getHeight()
 	if (_hasJump)
 		return ryuJump->_texture->FrameWidth;
 	return sprite->_texture->FrameHeight;
+}
+void Ryu::Reset()
+{
+	_action = Action::Idle;
+	_vLast = 0.2f;
+	_allowPress = true;
+	_lastCollidedGround = nullptr;
+	_hasJump = false;
+	_hasAttack = false;
+	_hasAttack2 = false;
+	_hasClimb = false;
+	_hasSit = false;
+	_isFall = false;
+	_heightJump = 0.0f;
+	//ryuLife = 3;
+	ryuScore = 0;
+	ryuHp = 16;
+	isHurt = false;
+	onLand = false;
+	_weapon = new list<Weapon*>();
+	_weaponID = EnumID::None_ID;
+	Initialize();
+	this->setX(100);
+	this->setY(400);
 }
 
 Ryu::~Ryu(void)

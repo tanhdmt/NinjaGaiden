@@ -76,6 +76,7 @@ enum EnumID
 	Runner_ID,
 	//Items
 	Hp_ID,
+	Hp2_ID,
 	GameScore_ID,
 	//Weapon
 	Bullet_ID,

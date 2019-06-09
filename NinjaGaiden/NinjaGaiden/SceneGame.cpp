@@ -27,6 +27,7 @@ void SceneGame::LoadLevel(int level)
 		bg = new Background(level);
 		ryu = new Ryu(100, 400);
 		_gameScore->initTimer(150);
+		_lifes = ryu->ryuLife;
 	}
 	break;
 	case 2:
@@ -37,6 +38,7 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(2085, 300);
 		_gameScore->initTimer(150);
+		_lifes = ryu->ryuLife;
 	}
 	break;
 	case 3:
@@ -47,6 +49,7 @@ void SceneGame::LoadLevel(int level)
 		//ryu->_action = Action::Idle;
 		ryu = new Ryu(90, 300);
 		_gameScore->initTimer(150);
+		_lifes = ryu->ryuLife;
 	}
 	break;
 	default:
@@ -105,9 +108,11 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 			ryu->_action = Action::Idle;
 			isLoadStage = false;
 		}
-		if (ryu->ryuLife == 0)
+		if (ryu->ryuLife == 0 || ryu->ryuLife < _lifes)
 		{
-			LoadResources(G_Device);
+			_lifes = ryu->ryuLife;
+			//LoadResources(G_Device);
+			ryu->Reset();
 			ryu->sprite->SelectIndex(0);
 			ryu->_action = Action::Idle;
 			isLoadStage = false;
@@ -130,7 +135,7 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 		}
 		if (_score - backScore != ryu->ryuScore)
 			_score = ryu->ryuScore + backScore;
-		_gameScore->updateScore(_levelNow, _score, 30, 16, ryu->ryuLife, EnumID::None_ID, 0, 16);
+		_gameScore->updateScore(_levelNow, _score, 30, ryu->ryuHp, ryu->ryuLife, EnumID::None_ID, 0, 16);
 		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
 		

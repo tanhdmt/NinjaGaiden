@@ -19,6 +19,7 @@ private:
 	CTexture* ryuSitAttack;
 
 	CTexture* hp;
+	CTexture* hp2;
 	CTexture* gameScore;
 	CTexture* fire;
 	CTexture* explosion;

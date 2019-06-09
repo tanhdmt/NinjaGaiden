@@ -28,6 +28,7 @@ Singleton::Singleton()
 	ryuSitAttack = new CTexture("Resources/ryuSitAttack.png", 3, 1, 3);
 
 	hp = new CTexture("Resources/Items/HP.png", 1, 1, 1);
+	hp2 = new CTexture("Resources/Items/HP2.png", 1, 1, 1);
 	gameScore = new CTexture("Resources/Items/GameScore.png", 1, 1, 1);
 	fire = new CTexture("Resources/Enemy/Fire_x2.png", 1, 1, 1);
 	explosion = new CTexture("Resources/Enemy/explosion_x2.png", 1, 1, 1);
@@ -80,6 +81,8 @@ CTexture* Singleton::getTexture(EnumID id)
 			return ryuSitAttack;
 		case EnumID::Hp_ID:
 			return hp;
+		case EnumID::Hp2_ID:
+			return hp2;
 		case EnumID::GameScore_ID:
 			return gameScore;
 		case EnumID::Bullet_ID:
