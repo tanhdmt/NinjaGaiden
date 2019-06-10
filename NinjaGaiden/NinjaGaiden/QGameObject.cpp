@@ -48,8 +48,30 @@ QGameObject::QGameObject(string fileName)
 			case 219:
 				_dynamicObject->push_back(new Boss(posX, posY));
 				break;
+			
 			case 221:
-				_dynamicObject->push_back(new Butterfly(posX, posY));
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_BlueStrengthItem_ID));
+				break;
+			case 222:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RedStrengthItem_ID));
+				break;
+			case 223:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_TimeItem_ID));
+				break;
+			case 224:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_ThrowingItem_ID));
+				break;
+			case 225:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RedBonusItem_ID));
+				break;
+			case 226:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_FireWheelItem_ID));
+				break;
+			case 227:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RestoringItem_ID));
+				break;
+			case 228:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_BlueBonusItem_ID));
 				break;
 			case 212:
 				_dynamicObject->push_back(new YellowDog(posX, posY));
@@ -60,9 +82,9 @@ QGameObject::QGameObject(string fileName)
 			case 220:
 				_dynamicObject->push_back(new Bat(posX, posY));
 				break; 
-			/*case 217:
+			case 217:
 				_dynamicObject->push_back(new BrownBird(posX, posY));
-					break;*/
+					break;
 			case 218:
 				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
 				break;

@@ -5,7 +5,7 @@
 Butterfly::Butterfly(void) : DynamicObject()
 {
 }
-Butterfly::Butterfly(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Butterfly_ID)
+Butterfly::Butterfly(float x, float y, EnumID _id) : DynamicObject(x, y, 0, 0, _id)
 {
 	type = ObjectType::Enemy_Type;
 	active = false;

@@ -9,7 +9,7 @@ class Butterfly : public DynamicObject
 public:
 	bool active;
 	Butterfly(void);
-	Butterfly(float x, float y);
+	Butterfly(float x, float y, EnumID _id);
 	void Update(int dt);
 	void Collision(list<GameObject*> obj, int dt){}
 	void SetActive(float x, float y);
