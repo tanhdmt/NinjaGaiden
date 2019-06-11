@@ -23,6 +23,7 @@ protected:
 	int _currentWeapon;
 	vector<CSprite*> _vWeaponSprite;
 	CSprite* _hpSprite;
+	CSprite* _hp2Sprite;
 	void _initialize();
 
 

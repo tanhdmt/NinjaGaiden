@@ -38,6 +38,7 @@ public:
 	bool _isFall;
 	bool useWeapon;
 	int ryuLife;
+	int ryuHp;
 	int ryuScore;
 	bool _allowPress;
 	bool bActiveHurt;
@@ -70,6 +71,7 @@ public:
 	D3DXVECTOR2* getPos();
 	int getWidth();
 	int getHeight();
+	void Reset();
 	
 };
 #endif

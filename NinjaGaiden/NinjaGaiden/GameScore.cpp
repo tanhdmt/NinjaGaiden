@@ -13,6 +13,7 @@ void GameScore::_initialize()
 
 	// init hp sprite
 	_hpSprite = new CSprite(Singleton::getInstance()->getTexture(EnumID::Hp_ID), 1);
+	_hp2Sprite = new CSprite(Singleton::getInstance()->getTexture(EnumID::Hp2_ID), 1);
 
 	_gameTimer = 0;
 }
@@ -24,15 +25,19 @@ void GameScore::drawTable()
 
 	// draw hp
 	//ryu
+	for (int i = 0; i < 16; i++)
+	{
+		_hp2Sprite->DrawIndex(0, 345 + 10 * i, 40);
+	}
 	for (int i = 0; i < _ryuHP; i++)
 	{
 		_hpSprite->DrawIndex(0, 345 + 10 * i, 40);
 	}
-	//for (int i = _simonHP; i < MAX_HP; i++)
-	//{
-	//	_hpSprite->DrawIndex(1, 120 + 10 * i, 50);
-	//}
 	//// boss
+	for (int i = 0; i < 16; i++)
+	{
+		_hp2Sprite->DrawIndex(0, 345 + 10 * i, 66);
+	}
 	for (int i = 0; i < _enemyHP; i++)
 	{
 		_hpSprite->DrawIndex(0, 345 + 10 * i, 66);

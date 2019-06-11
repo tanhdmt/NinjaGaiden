@@ -89,6 +89,7 @@ enum EnumID
 	Bird_FireWheelItem_ID,
 	//Items
 	Hp_ID,
+	Hp2_ID,
 	GameScore_ID,
 
 	//Weapon

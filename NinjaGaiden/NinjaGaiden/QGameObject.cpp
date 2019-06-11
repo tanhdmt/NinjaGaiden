@@ -54,13 +54,12 @@ QGameObject::QGameObject(string fileName)
 				_dynamicObject->push_back(new Banshee(posX, posY));
 				break;
 			case 216: // running man
-				_dynamicObject->push_back(new RocketMan(posX, posY));
+				//_dynamicObject->push_back(new RocketMan(posX, posY));
 			case 217:
 				_dynamicObject->push_back(new BrownBird(posX, posY));
 				break;
 			case 218:
 				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
-				break;
 				break;
 			case 219:
 				_dynamicObject->push_back(new Boss(posX, posY));
@@ -109,6 +108,7 @@ QGameObject::QGameObject(string fileName)
 				break;
 			case 235:
 				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_FireWheelItem_ID));
+
 				break;
 			case 26:
 				
