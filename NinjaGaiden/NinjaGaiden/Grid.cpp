@@ -42,8 +42,8 @@ Grid::Grid(int level)
 		widthLevel = 512;
 		heightLevel = 352;
 		cellWidth = 128;
-		cellHeight = 44;
-		rowCells = 8;
+		cellHeight = 88;
+		rowCells = 4;
 		columnCells = 4;
 	}
 	break;
