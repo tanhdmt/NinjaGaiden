@@ -8,7 +8,7 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 	camera = new CCamera();
 	bg = NULL;
 	_gameScore = NULL;
-	_levelNow = 1;
+	_levelNow = 2;
 	_loadLevel = false;
 	_score = 0;
 	_lifes = 3;
@@ -36,7 +36,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(2085, 300);
+		ryu = new Ryu(100, 300);
 		_gameScore->initTimer(150);
 		_lifes = ryu->ryuLife;
 	}

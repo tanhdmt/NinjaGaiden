@@ -42,29 +42,73 @@ QGameObject::QGameObject(string fileName)
 			case 211:
 				_dynamicObject->push_back(new SwordMan(posX, posY));
 				break;
+			case 212:
+				_dynamicObject->push_back(new YellowDog(posX, posY));
+				break;
+			case 213:
+				_dynamicObject->push_back(new Boss(posX, posY));
+				break;
 			case 214:
 				_dynamicObject->push_back(new RocketMan(posX, posY));
+			case 215:
+				_dynamicObject->push_back(new Banshee(posX, posY));
+				break;
+			case 216: // running man
+				//_dynamicObject->push_back(new RocketMan(posX, posY));
+			case 217:
+				_dynamicObject->push_back(new BrownBird(posX, posY));
+				break;
+			case 218:
+				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
 				break;
 			case 219:
 				_dynamicObject->push_back(new Boss(posX, posY));
 				break;
-			case 221:
-				_dynamicObject->push_back(new Butterfly(posX, posY));
-				break;
-			case 212:
-				_dynamicObject->push_back(new YellowDog(posX, posY));
-				break;
-			case 215:
-				_dynamicObject->push_back(new Banshee(posX, posY));
-				break;
 			case 220:
 				_dynamicObject->push_back(new Bat(posX, posY));
-				break; 
-			case 217:
-				_dynamicObject->push_back(new BrownBird(posX, posY));
-					break;
-			case 218:
-				_dynamicObject->push_back(new MachineGunGuy(posX, posY));
+				break;
+			case 221:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_BlueStrengthItem_ID));
+				break;
+			case 222:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RedStrengthItem_ID));
+				break;
+			case 223:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_TimeItem_ID));
+				break;
+			case 224:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_ThrowingItem_ID));
+				break;
+			case 225:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RedBonusItem_ID));
+				break;
+			case 226:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_FireWheelItem_ID));
+				break;
+			case 227:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_RestoringItem_ID));
+				break;
+			case 228:
+				_dynamicObject->push_back(new Butterfly(posX, posY, EnumID::Butterfly_BlueBonusItem_ID));
+				break;
+			case 230:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_BlueStrengthItem_ID));
+				break;
+			case 231:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_RedStrengthItem_ID));
+				break;
+			case 232:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_BlueBonusItem_ID));
+				break;
+			case 233:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_ThrowingItem_ID));
+				break;
+			case 234:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_RedBonusItem_ID));
+				break;
+			case 235:
+				_dynamicObject->push_back(new Bird(posX, posY, EnumID::Bird_FireWheelItem_ID));
+
 				break;
 			case 26:
 				

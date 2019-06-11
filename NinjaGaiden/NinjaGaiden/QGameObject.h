@@ -11,6 +11,7 @@
 #include "Butterfly.h"
 #include "Banshee.h"
 #include "Bat.h"
+#include "Bird.h"
 #include "BrownBird.h"
 #include "MachineGunGuy.h"
 #include "YellowDog.h"

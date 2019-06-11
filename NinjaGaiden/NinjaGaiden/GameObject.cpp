@@ -95,10 +95,22 @@ void GameObject::CreateSprite()
 	case EnumID::Bat_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
-	case EnumID::Bird_ID:
+	case EnumID::Bird_BlueStrengthItem_ID:
+	case EnumID::Bird_RedStrengthItem_ID:
+	case EnumID::Bird_ThrowingItem_ID:
+	case EnumID::Bird_RedBonusItem_ID:
+	case EnumID::Bird_BlueBonusItem_ID:
+	case EnumID::Bird_FireWheelItem_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
 		break;
-	case EnumID::Butterfly_ID:
+	case EnumID::Butterfly_BlueStrengthItem_ID:
+	case EnumID::Butterfly_RedStrengthItem_ID:
+	case EnumID::Butterfly_TimeItem_ID:
+	case EnumID::Butterfly_ThrowingItem_ID:
+	case EnumID::Butterfly_RedBonusItem_ID:
+	case EnumID::Butterfly_BlueBonusItem_ID:
+	case EnumID::Butterfly_FireWheelItem_ID:
+	case EnumID::Butterfly_RestoringItem_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
 		break;
 	case EnumID::YellowDog_ID:

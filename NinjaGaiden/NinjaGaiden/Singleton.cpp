@@ -101,11 +101,23 @@ CTexture* Singleton::getTexture(EnumID id)
 			return banshee;
 		case EnumID::Boss_ID:
 			return boss;
-		case EnumID::Butterfly_ID:
+		case EnumID::Butterfly_BlueStrengthItem_ID:
+		case EnumID::Butterfly_RedStrengthItem_ID:
+		case EnumID::Butterfly_TimeItem_ID:
+		case EnumID::Butterfly_ThrowingItem_ID:
+		case EnumID::Butterfly_RedBonusItem_ID:
+		case EnumID::Butterfly_BlueBonusItem_ID:
+		case EnumID::Butterfly_FireWheelItem_ID:
+		case EnumID::Butterfly_RestoringItem_ID:
 			return butterfly;
 		case EnumID::Sword_ID:
 			return sword;
-		case EnumID::Bird_ID:
+		case EnumID::Bird_BlueStrengthItem_ID:
+		case EnumID::Bird_RedStrengthItem_ID:
+		case EnumID::Bird_ThrowingItem_ID:
+		case EnumID::Bird_RedBonusItem_ID:
+		case EnumID::Bird_BlueBonusItem_ID:
+		case EnumID::Bird_FireWheelItem_ID:
 			return bird;
 		case EnumID::BrownBird_ID:
 			return brownBrid;
