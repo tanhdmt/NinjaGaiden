@@ -422,7 +422,14 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					break;
 				}
-				case EnumID::Butterfly_ID:
+				case EnumID::Butterfly_BlueStrengthItem_ID:
+				case EnumID::Butterfly_RedStrengthItem_ID:
+				case EnumID::Butterfly_TimeItem_ID:
+				case EnumID::Butterfly_ThrowingItem_ID:
+				case EnumID::Butterfly_RedBonusItem_ID:
+				case EnumID::Butterfly_BlueBonusItem_ID:
+				case EnumID::Butterfly_FireWheelItem_ID:
+				case EnumID::Butterfly_RestoringItem_ID:
 				{
 					if (_hasAttack || _hasAttack2)
 					{
