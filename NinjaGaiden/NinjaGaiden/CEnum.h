@@ -67,7 +67,6 @@ enum EnumID
 	RocketMan_ID,
 	Banshee_ID,
 	Boss_ID,
-	Bird_ID,
 	BrownBird_ID,
 	MachineGunGuy_ID,
 	YellowDog_ID,
@@ -81,6 +80,13 @@ enum EnumID
 	Butterfly_BlueBonusItem_ID,
 	Butterfly_FireWheelItem_ID,
 	Butterfly_RestoringItem_ID,
+
+	Bird_BlueStrengthItem_ID,
+	Bird_RedStrengthItem_ID,
+	Bird_ThrowingItem_ID,
+	Bird_RedBonusItem_ID,
+	Bird_BlueBonusItem_ID,
+	Bird_FireWheelItem_ID,
 	//Items
 	Hp_ID,
 	GameScore_ID,

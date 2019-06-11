@@ -10,7 +10,7 @@ class Bird : public DynamicObject
 public:
 	bool active;
 	Bird(void);
-	Bird(float x, float y);
+	Bird(float x, float y, EnumID _id);
 	void Update(int dt);
 	void Collision(list<GameObject*> obj, int dt) {}
 	void SetActive(float x, float y);

@@ -109,7 +109,12 @@ CTexture* Singleton::getTexture(EnumID id)
 			return butterfly;
 		case EnumID::Sword_ID:
 			return sword;
-		case EnumID::Bird_ID:
+		case EnumID::Bird_BlueStrengthItem_ID:
+		case EnumID::Bird_RedStrengthItem_ID:
+		case EnumID::Bird_ThrowingItem_ID:
+		case EnumID::Bird_RedBonusItem_ID:
+		case EnumID::Bird_BlueBonusItem_ID:
+		case EnumID::Bird_FireWheelItem_ID:
 			return bird;
 		case EnumID::BrownBird_ID:
 			return brownBrid;
