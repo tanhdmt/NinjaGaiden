@@ -11,6 +11,7 @@ class GameScore
 {
 protected:
 	CSprite* _sprite;
+	CSprite* _weaponsprite;
 	CText* _arial;
 	CText* _arialSmall;
 	int _ryuScore;
@@ -18,6 +19,7 @@ protected:
 	int _gameStage;
 	int _weaponCount;
 	int _ryuHP;
+	int _ryuSpiri;
 	int _enemyHP;
 	int _liveCount;
 	int _currentWeapon;
@@ -25,6 +27,7 @@ protected:
 	CSprite* _hpSprite;
 	CSprite* _hp2Sprite;
 	void _initialize();
+	EnumID weaponId;
 
 
 public:
@@ -40,7 +43,7 @@ public:
 	void SetWeaponCount(int x);
 	void SetRyuScore(int x);
 	// deltaTime_ is in milisecond
-	void updateScore(int gameStage_, int simonScore_, int deltaTime_, int simonHP_, int liveCount_, EnumID weaponID_, int weaponCount_, int enemyHP_);
+	void updateScore(int gameStage_, int simonScore_, int deltaTime_, int simonHP_, int liveCount_, EnumID weaponID_, int weaponCount_, int enemyHP_, int ryuSpiri_);
 	~GameScore(void);
 };
 

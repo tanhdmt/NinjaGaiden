@@ -25,6 +25,8 @@ private:
 	CTexture* explosion;
 	CTexture* bullet;
 	CTexture* boomerang;
+	CTexture* boomerangs;
+	CTexture* fireWeapon;
 	CTexture* sword;
 	CTexture* bonusBlue;
 	CTexture* bonusRed;

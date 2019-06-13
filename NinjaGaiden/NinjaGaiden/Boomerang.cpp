@@ -6,7 +6,7 @@ Boomerang::Boomerang(void) : Weapon()
 {
 }
 
-Boomerang::Boomerang(float x, float y, float _huong) : Weapon(x, y, _huong, EnumID::Boomerang_ID)
+Boomerang::Boomerang(float x, float y, float _huong, EnumID id) : Weapon(x, y, _huong, id)
 {
 	_length = 0;
 	_timeSpawn = 0;

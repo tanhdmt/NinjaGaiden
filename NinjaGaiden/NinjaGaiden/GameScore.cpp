@@ -22,7 +22,26 @@ void GameScore::drawTable()
 {
 	// draw table
 	_sprite->Draw(256, 40);
-
+	if (weaponId != EnumID::None_ID)
+	{
+		switch (weaponId)
+		{
+		case EnumID::Boomerang_ID:
+			_weaponsprite = new CSprite(Singleton::getInstance()->getTexture(weaponId), 3, 4, 0);
+			break;
+		case EnumID::BoomerangS_ID:
+			_weaponsprite = new CSprite(Singleton::getInstance()->getTexture(weaponId), 2, 3, 0);
+			break;
+		case EnumID::FireWeapon_ID:
+			_weaponsprite = new CSprite(Singleton::getInstance()->getTexture(weaponId), 5, 6, 0);
+			break;
+		}
+		_weaponsprite->Draw(201, 50);
+	}
+	else
+	{
+		_weaponsprite = new CSprite();
+	}
 	// draw hp
 	//ryu
 	for (int i = 0; i < 16; i++)
@@ -69,6 +88,7 @@ void GameScore::drawScore()
 	//_arial->render((char*)"ENEMY", 5, 70);
 	//_arialSmall->render(_weaponCount, 440, 47);
 	_arial->render(_liveCount, 50, 54);
+	_arial->render(_ryuSpiri, 136, 54);
 }
 
 void GameScore::initTimer(int deltaTime_)
@@ -115,10 +135,12 @@ GameScore::GameScore(LPDIRECT3DDEVICE9 d3ddev_, int size_, int screenWidth_, int
 }
 
 
-void GameScore::updateScore(int gameStage_, int ryuScore_, int deltaTime_, int ryuHP_, int liveCount_, EnumID weaponID_, int weaponCount_, int enemyHP_)
+void GameScore::updateScore(int gameStage_, int ryuScore_, int deltaTime_, int ryuHP_, int liveCount_, EnumID weaponID_, int weaponCount_, int enemyHP_, int ryuSpiri_)
 {
 	_gameStage = gameStage_;
 	_ryuScore = ryuScore_;
+	_ryuSpiri = ryuSpiri_;
+	weaponId = weaponID_;
 	if (_gameTimer <= 0)
 	{
 	}
