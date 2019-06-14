@@ -10,10 +10,11 @@ public:
 	Fire* fire;
 	float startX;
 	float startY;
+	bool ryuHurt;
 	BossBullet(void);
 	BossBullet(float x, float y, float _huong, EnumID id);
 	void Update(int dt );
-	void Collision(GameObject* obj, int dt);
+	void Collision(GameObject* obj, GameObject* ryu, int dt);
 	void Draw(CCamera* camera);
 	void SetActive();
 	void Reset();

@@ -158,7 +158,7 @@ void QGameObject::Update(int deltaTime)
 	it = _dynamicObject->begin();
 	while (it != _dynamicObject->end())
 	{
-		if ((*it)->active && (*it)->id != EnumID::RocketMan_ID)
+		if ((*it)->active)
 		{
 			(*it)->Update(deltaTime);
 		}
@@ -171,7 +171,7 @@ void QGameObject::Update(int deltaTime, D3DXVECTOR2* ryuPos)
 	list<GameObject*>::iterator it = _dynamicObject->begin();
 	while (it != _dynamicObject->end())
 	{
-		if ((*it)->active && (*it)->id == EnumID::RocketMan_ID)
+		if ((*it)->active)
 		{
 			(*it)->Update(deltaTime, ryuPos);
 		}

@@ -69,24 +69,14 @@ void Boomerang::Collision(Box ryuBox, list<GameObject*> &obj, int dt)
 		if (AABB(box, boxOther, moveX, moveY) == true)
 		{
 			ECollisionDirect dir = this->GetCollisionDirect(other);
-			switch (other->id)
+			if (other->active && other->type == ObjectType::Enemy_Type)
 			{
-			case EnumID::SwordMan_ID:
-			case EnumID::RocketMan_ID:
-			case EnumID::Banshee_ID:
-			case EnumID::YellowDog_ID:
-			{
-				if (other->active)
-				{
-					int enemyPosX = other->getX();
-					int enemyPosY = other->getY();
-					other->active = false;
-					explosion->setX(enemyPosX);
-					explosion->setY(enemyPosY);
-					explosion->active = true;
-				}
-			}
-			break;
+				int enemyPosX = other->getX();
+				int enemyPosY = other->getY();
+				other->active = false;
+				explosion->setX(enemyPosX);
+				explosion->setY(enemyPosY);
+				explosion->active = true;
 			}
 		}
 	}

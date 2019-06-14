@@ -22,10 +22,6 @@ BrownBird::BrownBird(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Brown
 	aX = ACCELERATION_X;
 }
 
-void BrownBird::Update(int dt)
-{
-
-}
 void BrownBird::Update(int dt, D3DXVECTOR2 * ryupos) {
 	if (active)
 		sprite->Update(dt);

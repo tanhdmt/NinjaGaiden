@@ -8,7 +8,7 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 	camera = new CCamera();
 	bg = NULL;
 	_gameScore = NULL;
-	_levelNow = 2;
+	_levelNow = 3;
 	_loadLevel = false;
 	_score = 0;
 	_lifes = 3;
@@ -133,19 +133,33 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 		vector<GameObject*> allObjectsHaveToWork = grid->getObjectActive(camera);
 		std::copy(allObjectsHaveToWork.begin(), allObjectsHaveToWork.end(), std::back_inserter(lstObjectsHaveToWork));
 		//*(qGameObject->_dynamicObject) = allObjectsHaveToWork;
-		for (size_t i = 0; i < allObjectsHaveToWork.size(); i++)
+		for (list<GameObject*>::iterator _itBegin = lstObjectsHaveToWork.begin(); _itBegin != lstObjectsHaveToWork.end(); _itBegin++)
 		{
 			if (!ryu->isFreeze)
 			{
-				allObjectsHaveToWork[i]->Update(deltaTime);
-				allObjectsHaveToWork[i]->Update(deltaTime, ryu->getPos());
+				if ((*_itBegin)->id == EnumID::RocketMan_ID || (*_itBegin)->id == EnumID::BrownBird_ID)
+				{
+					(*_itBegin)->Update(deltaTime, ryu->getPos());
+				}
+				else
+				{
+					(*_itBegin)->Update(deltaTime);
+				}
 			}
-			ryu->Collision(lstObjectsHaveToWork, deltaTime, true);
-			allObjectsHaveToWork[i]->Collision(lstObjectsHaveToWork, deltaTime);
+			
+			if ((*_itBegin)->id == EnumID::Boss_ID)
+			{
+				(*_itBegin)->Collision(lstObjectsHaveToWork, ryu, deltaTime);
+			}
+			else
+			{
+				(*_itBegin)->Collision(lstObjectsHaveToWork, deltaTime);
+			}
 		}
+		ryu->Collision(lstObjectsHaveToWork, deltaTime, true);
 		if (_score - backScore != ryu->ryuScore)
 			_score = ryu->ryuScore + backScore;
-		_gameScore->updateScore(_levelNow, _score, 30, ryu->ryuHp, ryu->ryuLife, ryu->_weaponID, 0, 16, ryu->ryuSpiri);
+		_gameScore->updateScore(_levelNow, _score, 30, ryu->ryuHp, ryu->ryuLife, ryu->_weaponID, 0, ryu->bossHp, ryu->ryuSpiri);
 		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
 		

@@ -49,6 +49,7 @@ public:
 	bool bActiveHurt;
 	bool _bHurt;
 	bool isHurt;
+	int bossHp;
 
 	Ryu(void);
 	Ryu(int, int);

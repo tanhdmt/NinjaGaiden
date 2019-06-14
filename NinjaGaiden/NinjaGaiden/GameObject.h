@@ -27,6 +27,8 @@ public:
 	ObjectType type;
 	bool canMove;
 	int hp;
+	int bossHp;
+	bool ryuHurt;
 
 	virtual void Update(int dt);
 	virtual void Update(int dt, D3DXVECTOR2* ryuPos);
@@ -35,6 +37,7 @@ public:
 	virtual void OnKeyDown(int KeyCode);
 	virtual void CreateSprite();
 	virtual void Collision(list<GameObject*> obj, int dt);
+	virtual void Collision(list<GameObject*> obj, GameObject* ryu, int dt);
 	ECollisionDirect GetCollisionDirect(float normalx, float normaly);
 	virtual ECollisionDirect GetCollisionDirect(GameObject* other);
 	virtual Box GetBox();

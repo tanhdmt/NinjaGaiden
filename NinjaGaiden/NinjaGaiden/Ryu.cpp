@@ -6,6 +6,7 @@
 #define HURT_STATE 25
 bool isCol = false;
 bool isAtk = false;
+int timec = 0;
 
 Ryu::Ryu(void) : DynamicObject() {
 
@@ -35,6 +36,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	_weaponID = EnumID::None_ID;
 	isFreeze = false;
 	timeCounter = 0;
+	bossHp = 16;
 
 	ryuRun = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuRun_ID), 0, 2, 18);
 	ryuJump = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuJump1_ID), 0, 3, 18);
@@ -281,11 +283,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 	{
 		GameObject* other = (*_itBegin);
 		
-		if (other->id == EnumID::SwordMan_ID || other->id == EnumID::RocketMan_ID 
-			||other->id==EnumID::YellowDog_ID|| other->id == EnumID::MachineGunGuy_ID
-			||other->id==EnumID::Banshee_ID
-			|| other->id==EnumID::BrownBird_ID
-			||other->id==EnumID::Runner_ID)
+		if (other->type == ObjectType::Enemy_Type)
 		{
 			other->SetActive(this->posX, this->posY);
 		}
@@ -417,12 +415,64 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					break;
 				}
-				case EnumID::SwordMan_ID:
-				case EnumID::RocketMan_ID:
-				case EnumID::Banshee_ID:
-				case EnumID::YellowDog_ID:
-				case EnumID::BrownBird_ID:
-				//case EnumID::Fire_ID:
+				case EnumID::Boss_ID:
+				{
+					if (_hasAttack || (_hasAttack2 && _weaponID != EnumID::None_ID))
+					{
+						int enemyPosX = other->getX();
+						int enemyPosY = other->getY();
+						//other->active = false;
+						//explosion->setX(enemyPosX);
+						//explosion->setY(enemyPosY);
+						//explosion->active = true;
+						timec += dt;
+						if (timec > 100)
+						{
+							bossHp -=5;
+							other->bossHp = bossHp;
+							timec = 0;
+						}
+					}
+					else
+					{
+						//if ((!bActiveHurt && other->bossHp > 0))
+						//{
+						//	bActiveHurt = true;
+						//	_allowPress = false;
+						//	isHurt = true;
+						//	_localHurtTime = GetTickCount();
+						//	isCol = true;
+						//	_hasJump = true;
+						//	ryuJump->SelectIndex(0);
+						//	if (dir == ECollisionDirect::Colls_Left)
+						//	{
+						//		vX = -0.3f;
+						//		//isColRight = false;
+						//	}
+						//	else if (dir == ECollisionDirect::Colls_Right)
+						//	{
+						//		vX = 0.3f;
+						//		//_vLast = vX;
+						//		//isColRight = true;
+						//	}
+						//	vY = 0.4f;
+
+						//	if (ryuHp > 0)
+						//		ryuHp--;
+						//	else {
+						//		ryuHp = 16;
+						//		ryuLife--;
+						//	}
+						//	
+						//	//vY = 1.5f;
+						//}
+					}
+				}
+				break;
+				default:
+					break;
+				}
+				if ((other->type == ObjectType::Enemy_Type && other->id != EnumID::Boss_ID))
 				{
 					if (_hasAttack || (_hasAttack2 && _weaponID != EnumID::None_ID))
 					{
@@ -439,54 +489,40 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					else
 					{
-							//if (!bActiveHurt)
-							//{
-							//	bActiveHurt = true;
-							//	_allowPress = false;
-							//	isHurt = true;
-							//	_localHurtTime = GetTickCount();
-							//	isCol = true;
-							//	_hasJump = true;
-							//	ryuJump->SelectIndex(0);
-							//	if (dir == ECollisionDirect::Colls_Left)
-							//	{
-							//		vX = -0.3f;
-							//		//isColRight = false;
-							//	}
-							//	else if (dir == ECollisionDirect::Colls_Right)
-							//	{
-							//		vX = 0.3f;
-							//		//_vLast = vX;
-							//		//isColRight = true;
-							//	}
-							//	vY = 0.4f;
+						//if (!bActiveHurt)
+						//{
+						//	bActiveHurt = true;
+						//	_allowPress = false;
+						//	isHurt = true;
+						//	_localHurtTime = GetTickCount();
+						//	isCol = true;
+						//	_hasJump = true;
+						//	ryuJump->SelectIndex(0);
+						//	if (dir == ECollisionDirect::Colls_Left)
+						//	{
+						//		vX = -0.3f;
+						//		//isColRight = false;
+						//	}
+						//	else if (dir == ECollisionDirect::Colls_Right)
+						//	{
+						//		vX = 0.3f;
+						//		//_vLast = vX;
+						//		//isColRight = true;
+						//	}
+						//	vY = 0.4f;
 
-							//	if (ryuHp > 0)
-							//		ryuHp--;
-							//	else {
-							//		ryuHp = 16;
-							//		ryuLife--;
-							//	}
-							//	
-							//	//vY = 1.5f;
-							//}
+						//	if (ryuHp > 0)
+						//		ryuHp--;
+						//	else {
+						//		ryuHp = 16;
+						//		ryuLife--;
+						//	}
+						//	
+						//	//vY = 1.5f;
+						//}
 					}
-					break;
 				}
-				case EnumID::Butterfly_BlueStrengthItem_ID:
-				case EnumID::Butterfly_RedStrengthItem_ID:
-				case EnumID::Butterfly_TimeItem_ID:
-				case EnumID::Butterfly_ThrowingItem_ID:
-				case EnumID::Butterfly_RedBonusItem_ID:
-				case EnumID::Butterfly_BlueBonusItem_ID:
-				case EnumID::Butterfly_FireWheelItem_ID:
-				case EnumID::Butterfly_RestoringItem_ID:
-				case EnumID::Bird_BlueStrengthItem_ID:
-				case EnumID::Bird_RedStrengthItem_ID:
-				case EnumID::Bird_ThrowingItem_ID:
-				case EnumID::Bird_RedBonusItem_ID:
-				case EnumID::Bird_BlueBonusItem_ID:
-				case EnumID::Bird_FireWheelItem_ID:
+				else if (other->type == ObjectType::Item_Type)
 				{
 					if (_hasAttack || (_hasAttack2 && _weaponID != EnumID::None_ID))
 					{
@@ -498,67 +534,97 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 							explosion->setX(enemyPosX);
 							explosion->setY(enemyPosY);
 							explosion->active = true;
-							switch (other->id) 
+							switch (other->id)
 							{
-								case EnumID::Butterfly_BlueStrengthItem_ID:
-								case EnumID::Bird_BlueStrengthItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpititualBlue_ID));
-								}
-								break;
-								case EnumID::Butterfly_RedStrengthItem_ID:
-								case EnumID::Bird_RedStrengthItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpiritualRed_ID));
-								}
-								break;
-								case EnumID::Butterfly_TimeItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::TimeFreeze_ID));
-								}
-								break;
-								case EnumID::Butterfly_ThrowingItem_ID:
-								case EnumID::Bird_ThrowingItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::ThrowStar_ID));
-								}
-								break;
-								case EnumID::Butterfly_RedBonusItem_ID:
-								case EnumID::Bird_RedBonusItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusRed_ID));
-								}
-								break;
-								case EnumID::Butterfly_BlueBonusItem_ID:
-								case EnumID::Bird_BlueBonusItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusBlue_ID));
-								}
-								break;
-								case EnumID::Butterfly_FireWheelItem_ID:
-								case EnumID::Bird_FireWheelItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::FireWheel_ID));
-								}
-								break;
-								case EnumID::Butterfly_RestoringItem_ID:
-								{
-									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::RestoreStrength_ID));
-								}
-								break;
+							case EnumID::Butterfly_BlueStrengthItem_ID:
+							case EnumID::Bird_BlueStrengthItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpititualBlue_ID));
+							}
+							break;
+							case EnumID::Butterfly_RedStrengthItem_ID:
+							case EnumID::Bird_RedStrengthItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpiritualRed_ID));
+							}
+							break;
+							case EnumID::Butterfly_TimeItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::TimeFreeze_ID));
+							}
+							break;
+							case EnumID::Butterfly_ThrowingItem_ID:
+							case EnumID::Bird_ThrowingItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::ThrowStar_ID));
+							}
+							break;
+							case EnumID::Butterfly_RedBonusItem_ID:
+							case EnumID::Bird_RedBonusItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusRed_ID));
+							}
+							break;
+							case EnumID::Butterfly_BlueBonusItem_ID:
+							case EnumID::Bird_BlueBonusItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusBlue_ID));
+							}
+							break;
+							case EnumID::Butterfly_FireWheelItem_ID:
+							case EnumID::Bird_FireWheelItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::FireWheel_ID));
+							}
+							break;
+							case EnumID::Butterfly_RestoringItem_ID:
+							{
+								items->push_back(new Items(enemyPosX, enemyPosY, EnumID::RestoreStrength_ID));
+							}
+							break;
 							}
 							//ryuScore += 100;
-							
+
 						}
 					}
-				}
-				break;
-				default:
-					break;
 				}
 			}
 			else
 			{
+				if (other->id == EnumID::Boss_ID)
+				{
+					if (other->ryuHurt && !bActiveHurt)
+					{
+						ECollisionDirect dir = this->GetCollisionDirect(other);
+						bActiveHurt = true;
+						_allowPress = false;
+						isHurt = true;
+						_localHurtTime = GetTickCount();
+						isCol = true;
+						_hasJump = true;
+						ryuJump->SelectIndex(0);
+						if (dir == ECollisionDirect::Colls_Left)
+						{
+							vX = -0.3f;
+							//isColRight = false;
+						}
+						else if (dir == ECollisionDirect::Colls_Right)
+						{
+							vX = 0.3f;
+							//_vLast = vX;
+							//isColRight = true;
+						}
+						vY = 0.4f;
+
+						if (ryuHp > 0)
+							ryuHp--;
+						else {
+							ryuHp = 16;
+							ryuLife--;
+						}
+						other->ryuHurt = false;
+					}
+				}
 			}
 		}
 	}

@@ -141,6 +141,10 @@ void GameObject::Collision(list<GameObject*> obj, int dt)
 {
 }
 
+void GameObject::Collision(list<GameObject*> obj, GameObject* ryu, int dt)
+{
+}
+
 void GameObject::Update(int deltaTime)
 {
 	if (sprite != NULL && active==true)

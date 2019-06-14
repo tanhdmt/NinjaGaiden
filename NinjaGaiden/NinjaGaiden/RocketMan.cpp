@@ -21,9 +21,6 @@ RocketMan::RocketMan(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Rocke
 	posX = x;
 	posY = y;
 }
-void RocketMan::Update(int dt) {
-
-}
 
 void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
 {
@@ -65,37 +62,6 @@ void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
 
 void RocketMan::Collision(list<GameObject*> obj, int dt)
 {
-	/*int countCollis = 0;
-	list<GameObject*>::iterator _itBegin;
-	for (_itBegin = obj.begin(); _itBegin != obj.end(); _itBegin++)
-	{
-		float moveX;
-		float moveY;
-		float normalx;
-		float normaly;
-		GameObject* other = (*_itBegin);
-		Box box = this->GetBox();
-		Box boxOther = other->GetBox();
-
-		if (AABB(box, boxOther, moveX, moveY) == true)
-		{
-			ECollisionDirect dir = this->GetCollisionDirect(other);
-			switch (other->id)
-			{
-			case EnumID::Ground1_ID:
-				countCollis++;
-				if (dir == ECollisionDirect::Colls_Left || dir == ECollisionDirect::Colls_Right)
-				{
-					vX = -vX;
-				}
-				break;
-			}
-		}
-	}
-	if (countCollis == 0)
-	{
-		vX = -vX;
-	}*/
 }
 
 void RocketMan::Draw(CCamera* camera)
@@ -130,33 +96,6 @@ void RocketMan::SetActive(float x, float y)
 		active = true;
 		//vX = -SPEED_X;
 	}
-}
-
-ECollisionDirect RocketMan::GetCollisionDirect(GameObject* other)
-{
-	/*float x = (this->posX) - (other->posX);
-	float y = (this->posY) - (other->posY);*/
-	/*float x = 0;
-	if (vX < 0)
-		x = (this->posX - (this->getWidth() / 2) - 32) - (other->posX - (other->getWidth() / 2));
-	else
-		x = (this->posX - (this->getWidth() / 2) + 32) - (other->posX - (other->getWidth() / 2));
-	float y = (this->posY + (this->getHeight() / 2)) - (other->posY + (other->getHeight() / 2));
-	if (abs(x) > abs(y)) {
-		if (x < 0)
-			return ECollisionDirect::Colls_Left;
-		else if (x > 0)
-			return ECollisionDirect::Colls_Right;
-	}
-	else
-	{
-		if (y < 0)
-			return ECollisionDirect::Colls_Top;
-		else if (y > 0)
-			return ECollisionDirect::Colls_Bot;
-	}*/
-
-	return ECollisionDirect::Colls_None;
 }
 
 RocketMan::~RocketMan(void)

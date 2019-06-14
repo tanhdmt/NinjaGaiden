@@ -14,7 +14,6 @@ public:
 
 	BrownBird(void);
 	BrownBird(float x, float y);
-	void Update(int dt);
 	void Update(int dt, D3DXVECTOR2 * ryupos);
 	//void Draw(CCamera* camera);
 	void Collision(list<GameObject*> obj, int dt);

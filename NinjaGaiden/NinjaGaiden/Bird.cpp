@@ -7,7 +7,7 @@ Bird::Bird(void):DynamicObject()
 }
 Bird::Bird(float x, float y, EnumID _id) : DynamicObject(x, y, 0, 0, _id)
 {
-	type = ObjectType::Enemy_Type;
+	type = ObjectType::Item_Type;
 	active = false;
 	vX = 1;
 }

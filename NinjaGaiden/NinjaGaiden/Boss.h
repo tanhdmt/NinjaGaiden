@@ -14,6 +14,7 @@ public:
 	bool hasJump;
 	float _heightJump;
 	int timeDelay;
+
 	list<BossBullet*> *lbullet; //đạn bên trái
 	list<BossBullet*> *rbullet;// đạn bên phải
 	int fireCount = -1;
@@ -26,7 +27,7 @@ public:
 	Boss(float x, float y);
 	void Update(int dt);
 	//void Draw(CCamera* camera);
-	void Collision(list<GameObject*> obj, int dt);
+	void Collision(list<GameObject*> obj, GameObject* ryu, int dt);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	void SetActive(float x, float y);
 	void Draw(CCamera* camera);

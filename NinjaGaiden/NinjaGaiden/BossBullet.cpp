@@ -20,6 +20,7 @@ BossBullet::BossBullet(float x, float y, float _huong, EnumID id) : DynamicObjec
 	fire = new Fire(posX, posY, vX, EnumID::Fire_ID);
 	startX = x;
 	startY = y;
+	ryuHurt = false;
 }
 
 void BossBullet::Update(int dt)
@@ -46,13 +47,14 @@ void BossBullet::Draw(CCamera* camera)
 	}
 	fire->Draw(camera);
 }
-void BossBullet::Collision(GameObject* obj, int dt) {
+void BossBullet::Collision(GameObject* obj, GameObject* ryu, int dt) {
 		float moveX;
 		float moveY;
 		float normalx;
 		float normaly;
 		Box box = this->GetBox();
 		Box boxOther = obj->GetBox();
+		Box boxRyu = ryu->GetBox();
 
 		if (AABB(box, boxOther, moveX, moveY) == true)
 		{
@@ -62,7 +64,15 @@ void BossBullet::Collision(GameObject* obj, int dt) {
 				this->active = false;
 				this->Reset();
 				break;
+			break;
 			}
+		}
+		if (AABB(box, boxRyu, moveX, moveY) == true)
+		{
+			this->active = false;
+			this->Reset();
+			if (!ryuHurt)
+				ryuHurt = true;
 		}
 	
 }
