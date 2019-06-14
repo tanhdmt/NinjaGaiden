@@ -50,6 +50,7 @@ QGameObject::QGameObject(string fileName)
 				break;
 			case 214:
 				_dynamicObject->push_back(new RocketMan(posX, posY));
+				break;
 			case 215:
 				_dynamicObject->push_back(new Banshee(posX, posY));
 				break;

@@ -18,7 +18,8 @@ RocketMan::RocketMan(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Rocke
 	bullet = new list<Bullet*>();
 	vX = -1;
 	bullet->push_back(new Bullet(posX + (24 * vX), posY + 20, vX, EnumID::Bullet_ID));
-	//posX = x;
+	posX = x;
+	posY = y;
 }
 
 void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
@@ -62,7 +63,7 @@ Box RocketMan::GetBox()
 
 void RocketMan::Collision(list<GameObject*> obj, int dt)
 {
-	int countCollis = 0;
+	/*int countCollis = 0;
 	list<GameObject*>::iterator _itBegin;
 	for (_itBegin = obj.begin(); _itBegin != obj.end(); _itBegin++)
 	{
@@ -92,7 +93,7 @@ void RocketMan::Collision(list<GameObject*> obj, int dt)
 	if (countCollis == 0)
 	{
 		vX = -vX;
-	}
+	}*/
 }
 
 void RocketMan::Draw(CCamera* camera)

@@ -26,6 +26,7 @@ public:
 	void Collision(list<GameObject*> obj, int dt);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	void SetActive(float x, float y);
+	Box GetBox();
 
 	~Banshee(void);
 };

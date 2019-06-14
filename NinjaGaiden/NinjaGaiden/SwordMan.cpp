@@ -36,8 +36,8 @@ void SwordMan::Update(int dt)
 Box SwordMan::GetBox()
 {
 	if (vX < 0)
-		return Box(posX - sprite->_texture->FrameWidth / 2 - 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
-	return Box(posX - sprite->_texture->FrameWidth / 2 + 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+		return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+	return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 }
 
 void SwordMan::Collision(list<GameObject*> obj, int dt)
@@ -97,9 +97,9 @@ ECollisionDirect SwordMan::GetCollisionDirect(GameObject* other)
 	float y = (this->posY) - (other->posY);*/
 	float x = 0;
 	if (vX < 0)
-		x = (this->posX - (this->getWidth() / 2) - 32) - (other->posX - (other->getWidth() / 2));
+		x = (this->posX - (this->getWidth() / 2)) - (other->posX - (other->getWidth() / 2));
 	else
-		x = (this->posX - (this->getWidth() / 2) + 32) - (other->posX - (other->getWidth() / 2));
+		x = (this->posX - (this->getWidth() / 2)) - (other->posX - (other->getWidth() / 2));
 	float y = (this->posY + (this->getHeight() / 2)) - (other->posY + (other->getHeight() / 2));
 	if (abs(x) > abs(y)) {
 		if (x < 0)
