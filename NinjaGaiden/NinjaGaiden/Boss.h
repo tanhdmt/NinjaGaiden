@@ -1,17 +1,22 @@
-#ifndef _BOSS_H_
+﻿#ifndef _BOSS_H_
 #define _BOSS_H_
 
 #include "DynamicObject.h"
 #include "CEnum.h"
+#include "BossBullet.h"
 
 class Boss : public DynamicObject
 {
 public:
+
 	bool hasAttack;
 	bool active;
 	bool hasJump;
 	float _heightJump;
 	int timeDelay;
+	list<BossBullet*> *lbullet; //đạn bên trái
+	list<BossBullet*> *rbullet;// đạn bên phải
+	int fireCount = -1;
 
 	GameObject* _lastCollidedGround;
 	GameObject* _sideCollidedGround;
@@ -24,6 +29,7 @@ public:
 	void Collision(list<GameObject*> obj, int dt);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	void SetActive(float x, float y);
+	void Draw(CCamera* camera);
 	Box GetBox();
 
 	~Boss(void);

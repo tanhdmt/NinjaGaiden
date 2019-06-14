@@ -162,6 +162,11 @@
     <ClCompile Include="BrownBird.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+
+    <ClCompile Include="Runner.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
     <ClCompile Include="Items.cpp">
       <Filter>GameObject\Items</Filter>
     </ClCompile>
@@ -287,6 +292,10 @@
     <ClInclude Include="BrownBird.h">
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Runner.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet.h">
     <ClInclude Include="Items.h">
       <Filter>GameObject\Items</Filter>
     </ClInclude>

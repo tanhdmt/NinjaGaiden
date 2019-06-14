@@ -55,7 +55,8 @@ QGameObject::QGameObject(string fileName)
 				_dynamicObject->push_back(new Banshee(posX, posY));
 				break;
 			case 216: // running man
-				//_dynamicObject->push_back(new RocketMan(posX, posY));
+				_dynamicObject->push_back(new Runner(posX, posY));
+				break;
 			case 217:
 				_dynamicObject->push_back(new BrownBird(posX, posY));
 				break;

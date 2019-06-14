@@ -21,6 +21,9 @@ RocketMan::RocketMan(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Rocke
 	posX = x;
 	posY = y;
 }
+void RocketMan::Update(int dt) {
+
+}
 
 void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
 {
@@ -33,11 +36,10 @@ void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
 		vX = SPEED_X * 3;
 	if (samusPos->x < posX)
 		vX = -vX;*/
-	if (posX > ryuPos->x)
-		vX = -1;
-	else
-		vX = 1;
-	//posX = vX * dt;
+	//if (posX > ryuPos->x)
+	//	vX = -1;
+	//else
+	//	vX = 1;
 	list<Bullet*>::iterator i = bullet->begin();
 	while (i != bullet->end())
 	{
@@ -56,10 +58,10 @@ void RocketMan::Update(int dt, D3DXVECTOR2* ryuPos)
 	//bullet->Update(dt);
 }
 
-Box RocketMan::GetBox()
-{
-	return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
-}
+//Box RocketMan::GetBox()
+//{
+//	return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+//}
 
 void RocketMan::Collision(list<GameObject*> obj, int dt)
 {
@@ -98,7 +100,7 @@ void RocketMan::Collision(list<GameObject*> obj, int dt)
 
 void RocketMan::Draw(CCamera* camera)
 {
-	if (sprite == NULL || IsHurt()) {
+	if (sprite == NULL || IsHurt() || !active) {
 		return;
 	}
 	D3DXVECTOR2 center = camera->Transform(posX, posY);

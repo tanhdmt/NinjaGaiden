@@ -1,12 +1,10 @@
 #pragma once
-#ifndef _MACHINEGUNGUY_H_
-#define _MACHINEGUNGUY_H_
-
+#ifndef _RUNNER_H_
+#define _RUNNER_H_
 #include "DynamicObject.h"
 #include "CEnum.h"
-#include "Bullet.h"
 
-class MachineGunGuy:public DynamicObject
+class Runner :public DynamicObject
 {
 public:
 	bool hasAttack;
@@ -15,18 +13,18 @@ public:
 	GameObject* _lastCollidedGround;
 	GameObject* _sideCollidedGround;
 	ECollisionDirect _curCollideDir;
-	list<Bullet*> *bullet;
 
-	MachineGunGuy(void);
-	MachineGunGuy(float x, float y);
+	Runner(void);
+	Runner(float x, float y);
 	void Update(int dt);
-	void Draw(CCamera* camera);
+	//void Draw(CCamera* camera);
 	void Collision(list<GameObject*> obj, int dt);
 	ECollisionDirect GetCollisionDirect(GameObject* other);
 	void SetActive(float x, float y);
 	Box GetBox();
 
-	~MachineGunGuy(void);
+	~Runner(void);
 };
 
 #endif
+

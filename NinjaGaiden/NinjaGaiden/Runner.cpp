@@ -1,27 +1,23 @@
-#include "MachineGunGuy.h"
+#include "Runner.h"
 
 
-
-#define SPEED_X 0.2f
+#define SPEED_X 0.4f
 #define SPEED_Y 0.35f
 #define MAX_HEIGHT 250.0f
 
-MachineGunGuy::MachineGunGuy(void) : DynamicObject()
+Runner::Runner(void) : DynamicObject()
 {
 }
 
-MachineGunGuy::MachineGunGuy(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::MachineGunGuy_ID)
+Runner::Runner(float x, float y) : DynamicObject(x, y, 0, 0, EnumID::Runner_ID)
 {
 	type = ObjectType::Enemy_Type;
 	//point = 300;
 	active = false;
 	//hp = 3;
-	bullet = new list<Bullet*>();
-	vX = -1;
-	bullet->push_back(new Bullet(posX + (24 * vX), posY + 20, vX, EnumID::Bullet_ID));
 }
 
-void MachineGunGuy::Update(int dt)
+void Runner::Update(int dt)
 {
 	sprite->Update(dt);
 	if (sprite == NULL || !active)
@@ -33,32 +29,19 @@ void MachineGunGuy::Update(int dt)
 		vX = SPEED_X * 3;
 	if (samusPos->x < posX)
 		vX = -vX;*/
-	list<Bullet*>::iterator i = bullet->begin();
-	while (i != bullet->end())
-	{
-		if (!(*i)->active)
-		{
-			bullet->erase(i++);
-			bullet->push_back(new Bullet(posX + (24 * vX), posY + 20, vX, EnumID::Bullet_ID));
-		}
-		else
-		{
-			(*i)->Update(dt);
-			++i;
-		}
-	}
+
 	posX += vX * dt;
 	posY += vY * dt;
 }
 
-Box MachineGunGuy::GetBox()
+Box Runner::GetBox()
 {
 	if (vX < 0)
 		return Box(posX - sprite->_texture->FrameWidth / 2 - 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 	return Box(posX - sprite->_texture->FrameWidth / 2 + 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 }
 
-void MachineGunGuy::Collision(list<GameObject*> obj, int dt)
+void Runner::Collision(list<GameObject*> obj, int dt)
 {
 	int countCollis = 0;
 	list<GameObject*>::iterator _itBegin;
@@ -99,7 +82,7 @@ void MachineGunGuy::Collision(list<GameObject*> obj, int dt)
 //
 //}
 
-void MachineGunGuy::SetActive(float x, float y)
+void Runner::SetActive(float x, float y)
 {
 
 	if (abs(posX - x) <= 300 && !active)
@@ -109,7 +92,7 @@ void MachineGunGuy::SetActive(float x, float y)
 	}
 }
 
-ECollisionDirect MachineGunGuy::GetCollisionDirect(GameObject* other)
+ECollisionDirect Runner::GetCollisionDirect(GameObject* other)
 {
 	/*float x = (this->posX) - (other->posX);
 	float y = (this->posY) - (other->posY);*/
@@ -136,30 +119,6 @@ ECollisionDirect MachineGunGuy::GetCollisionDirect(GameObject* other)
 	return ECollisionDirect::Colls_None;
 }
 
-void MachineGunGuy::Draw(CCamera* camera)
-{
-	if (sprite == NULL || IsHurt()) {
-		return;
-	}
-	D3DXVECTOR2 center = camera->Transform(posX, posY);
-	if (vX < 0)
-	{
-		sprite->DrawFlipX(center.x, center.y);
-	}
-	else
-	{
-		sprite->Draw(center.x, center.y);
-	}
-	if (active)
-	{
-		for (list<Bullet*>::iterator i = bullet->begin(); i != bullet->end(); i++)
-		{
-			if ((*i)->active)
-				(*i)->Draw(camera);
-		}
-	}
-}
-
-MachineGunGuy::~MachineGunGuy(void)
+Runner::~Runner(void)
 {
 }

@@ -1,4 +1,4 @@
-#include "Boss.h"
+﻿#include "Boss.h"
 
 #define SPEED_X 0.6f
 #define SPEED_Y 0.8f
@@ -18,7 +18,16 @@ Boss::Boss(float x, float y) : DynamicObject(x, y, 0, -SPEED_Y, EnumID::Boss_ID)
 	sprite->SelectIndex(0);
 	vX = SPEED_X;
 	timeDelay = 0;
-	//hp = 3;
+	hp = 16;
+
+	lbullet = new list<BossBullet*>();
+	lbullet->push_back(new BossBullet(40, 64, 1, EnumID::Bullet_ID));
+	lbullet->push_back(new BossBullet(56, 96, 1, EnumID::Bullet_ID));
+	lbullet->push_back(new BossBullet(72, 128, 1, EnumID::Bullet_ID));
+	rbullet = new list<BossBullet*>();
+	rbullet->push_back(new BossBullet(440, 64, -1, EnumID::Bullet_ID));
+	rbullet->push_back(new BossBullet(424, 96, -1, EnumID::Bullet_ID));
+	rbullet->push_back(new BossBullet(408, 128, -1, EnumID::Bullet_ID));
 }
 
 void Boss::Update(int dt)
@@ -34,25 +43,56 @@ void Boss::Update(int dt)
 		if (_heightJump >= MAX_HEIGHT)
 		{
 			vY = -SPEED_Y;
+			fireCount++;
+			if (fireCount == 4)fireCount = 0;
+
 		}
 	}
 	else {
 		sprite->SelectIndex(0);
 	}
-	//sprite->Update(dt);
-	//if (abs(startPosX - samusPos->x) <= 70 && abs(posY - samusPos->y) >= 50 && abs(vX) <= SPEED_X
-	//else
-		//vX = SPEED_X;
-	/*if (abs(vX) > SPEED_X)
-		vX = SPEED_X * 3;
-	if (samusPos->x < posX)
-		vX = -vX;*/
+	list<BossBullet*>::iterator i = lbullet->begin();
+	if (fireCount == 1) {
+		//active lại đạn bên trái
+		while (i != lbullet->end())
+		{
+			(*i)->SetActive();
+			++i;
+		}
+	}
+	i = rbullet->begin();
+	if (fireCount == 3) {
+		//active lại đạn bên phải
+		while (i != rbullet->end())
+		{
+			(*i)->SetActive();
+			++i;
+		}
+	}
+	// cập nhật đạn bên trái
+	i = lbullet->begin();
+	while (i != lbullet->end())
+	{
+		if ((*i)->active)
+		{
+			(*i)->Update(dt);
+		}
+		++i;
+	}
+	// cập nhật đạn bên phải
+	i = rbullet->begin();
+	while (i != rbullet->end())
+	{
+		if ((*i)->active)
+		{
+			(*i)->Update(dt);
+		}
+		++i;
+	}
 }
 
 Box Boss::GetBox()
 {
-	/*if (vX < 0)
-		return Box(posX - sprite->_texture->FrameWidth / 2 - 32, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);*/
 	return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 }
 
@@ -70,6 +110,28 @@ void Boss::Collision(list<GameObject*> obj, int dt)
 		GameObject* other = (*_itBegin);
 		Box box = this->GetBox();
 		Box boxOther = other->GetBox();
+		// kiểm tra đạn đã đi hết đường bay chưa
+		if (other->id == EnumID::Ground1_ID) {
+			list<BossBullet*>::iterator i = lbullet->begin();
+			while (i != lbullet->end())
+			{
+				if ((*i)->active)
+				{
+					(*i)->Collision(other,dt);
+					
+				}
+				++i;
+			}
+			 i = rbullet->begin();
+			while (i != rbullet->end())
+			{
+				if ((*i)->active)
+				{
+					(*i)->Collision(other, dt);
+				}
+				++i;
+			}
+		}
 
 		if (AABB(box, boxOther, moveX, moveY) == true)
 		{
@@ -139,6 +201,44 @@ ECollisionDirect Boss::GetCollisionDirect(GameObject* other)
 	}
 
 	return ECollisionDirect::Colls_None;
+}
+void Boss::Draw(CCamera* camera) {
+	if (sprite == NULL || IsHurt() || !active) {
+		return;
+	}
+	D3DXVECTOR2 center = camera->Transform(posX, posY);
+	if (vX < 0)
+	{
+		sprite->DrawFlipX(center.x, center.y);
+	}
+	else
+	{
+		sprite->Draw(center.x, center.y);
+	}
+	if (active)
+	{
+		list<BossBullet*>::iterator i = lbullet->begin();
+		// cập nhật đạn bên trái
+		i = lbullet->begin();
+		while (i != lbullet->end())
+		{
+			if ((*i)->active)
+			{
+				(*i)->Draw(camera);
+			}
+			++i;
+		}
+		// cập nhật đạn bên phải
+		i = rbullet->begin();
+		while (i != rbullet->end())
+		{
+			if ((*i)->active)
+			{
+				(*i)->Draw(camera);
+			}
+			++i;
+		}
+	}
 }
 
 Boss::~Boss(void)

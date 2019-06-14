@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "Butterfly.h"
 #include "Banshee.h"
+#include "Runner.h"
 #include "Bat.h"
 #include "Bird.h"
 #include "BrownBird.h"

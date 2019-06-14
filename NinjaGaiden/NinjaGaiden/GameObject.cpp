@@ -57,7 +57,7 @@ void GameObject::CreateSprite()
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
 		break;
 	case EnumID::RocketMan_ID:
-		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 0);
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 0, 150);
 		break;
 	case EnumID::Banshee_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 80);
@@ -126,6 +126,9 @@ void GameObject::CreateSprite()
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	case EnumID::BrownBird_ID:
+		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
+		break;
+	case EnumID::Runner_ID:
 		sprite = new CSprite(Singleton::getInstance()->getTexture(id), 0, 1, 150);
 		break;
 	default:
