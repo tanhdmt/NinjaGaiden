@@ -98,6 +98,8 @@ enum EnumID
 	Fire_ID,
 	Explosion_ID,
 	Boomerang_ID,
+	BoomerangS_ID,
+	FireWeapon_ID,
 	//Items
 	BonusBlue_ID,
 	BonusRed_ID,

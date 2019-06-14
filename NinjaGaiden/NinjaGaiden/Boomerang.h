@@ -13,7 +13,7 @@ class Boomerang : public Weapon
 	int ryuWidth;
 public:
 	Boomerang(void);
-	Boomerang(float x, float y, float _huong);
+	Boomerang(float x, float y, float _huong, EnumID id);
 	void Update(int dt);
 	void Collision(Box ryuBox, list<GameObject*> &obj, int dt);
 	void Draw(CCamera*);

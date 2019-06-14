@@ -5,13 +5,17 @@
 #define CAMERA CCamera::getInstance()
 
 Grid * Grid::instance = NULL;
+int Grid::prevLevel = 1;
+
 Grid * Grid::getInstance(int level)
 {
-	if (instance == NULL) instance = new Grid(level);
+	if (instance == NULL || level != prevLevel)
+	{
+		instance = new Grid(level);
+		prevLevel = level;
+	}
 	return instance;
 }
-
-
 
 Grid::Grid(int level)
 {
@@ -31,10 +35,10 @@ Grid::Grid(int level)
 	{
 		widthLevel = 6144;
 		heightLevel = 416;
-		cellWidth = 128;
+		cellWidth = 96;
 		cellHeight = 52;
 		rowCells = 8;
-		columnCells = 48;
+		columnCells = 64;
 	}
 	break;
 	case 3:

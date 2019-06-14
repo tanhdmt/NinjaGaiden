@@ -43,6 +43,9 @@
     <Filter Include="GameObject\Weapons">
       <UniqueIdentifier>{8ce3fbf1-02b7-4562-9b3d-712bfb5f0be0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Items">
+      <UniqueIdentifier>{0bbfc4a3-3533-413c-af9a-77e982e841dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -159,10 +162,15 @@
     <ClCompile Include="BrownBird.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+
     <ClCompile Include="Runner.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BossBullet.cpp">
+    <ClCompile Include="Items.cpp">
+      <Filter>GameObject\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="FireWeapon.cpp">
       <Filter>GameObject\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
@@ -288,6 +296,10 @@
       <Filter>GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="BossBullet.h">
+    <ClInclude Include="Items.h">
+      <Filter>GameObject\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FireWeapon.h">
       <Filter>GameObject\Weapons</Filter>
     </ClInclude>
   </ItemGroup>

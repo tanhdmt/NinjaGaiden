@@ -12,6 +12,7 @@ class Grid
 	vector<GameObject*> objectActive;
 	static Grid* instance;
 	CCamera* camera;
+	static int prevLevel;
 
 public:
 	static Grid* getInstance(int level);

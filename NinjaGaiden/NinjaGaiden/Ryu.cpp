@@ -26,11 +26,15 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	_heightJump = 0.0f;
 	ryuLife = 3;
 	ryuScore = 0;
+	ryuSpiri = 0;
 	ryuHp = 16;
 	isHurt = false;
 	onLand = false;
 	_weapon = new list<Weapon*>();
+	items = new list<Items*>();
 	_weaponID = EnumID::None_ID;
+	isFreeze = false;
+	timeCounter = 0;
 
 	ryuRun = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuRun_ID), 0, 2, 18);
 	ryuJump = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuJump1_ID), 0, 3, 18);
@@ -55,6 +59,17 @@ void Ryu::Update(int dt) {
 			++it;
 		}
 	}
+	list<Items*>::iterator it2 = items->begin();
+	while (it2 != items->end())
+	{
+		if (!(*it2)->active)
+			items->erase(it2++);
+		else
+		{
+			(*it2)->Update(dt);
+			++it2;
+		}
+	}
 	switch (_action)
 	{
 		case Action::Run_Left:
@@ -71,6 +86,17 @@ void Ryu::Update(int dt) {
 			ryuAttack2->Update(dt);
 			break;
 	}
+	//freeze
+	if (isFreeze) 
+	{
+		timeCounter += dt;
+		if (timeCounter >= 1000)
+		{
+			isFreeze = false;
+			timeCounter = 0;
+		}
+	}
+
 	if (!_hasClimb)
 	{
 		posX += vX * dt;
@@ -143,7 +169,9 @@ void Ryu::Update(int dt) {
 			vY = -SPEED_Y;
 		}
 	}
-	if (_hasAttack2)
+	if (ryuSpiri <= 0)
+		_hasAttack2 = false;
+	if (_hasAttack2 && _weaponID != EnumID::None_ID)
 	{
 		ryuAttack2->Update(dt);
 		if (ryuAttack2->GetIndex() == 0 && isAtk) {
@@ -220,9 +248,30 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 	{
 		if ((*i)->active)
 		{
-			if ((*i)->id == EnumID::Boomerang_ID)
+			if ((*i)->id == EnumID::Boomerang_ID || (*i)->id == EnumID::BoomerangS_ID)
 				(*i)->Collision(this->GetBox(), obj, dt);
 			(*i)->Collision(obj, dt);
+			/*point += (*i)->point;
+			(*i)->point = 0;*/
+		}
+	}
+	for (list<Items*>::iterator i = items->begin(); i != items->end(); i++)
+	{
+		if ((*i)->active)
+		{
+			(*i)->Collision(this->GetBox(), obj, dt);
+			ryuScore += (*i)->ryuScore;
+			ryuSpiri += (*i)->ryuSpiri;
+			ryuHp += (*i)->ryuHp;
+			if ((*i)->weaponID != EnumID::None_ID)
+				_weaponID = (*i)->weaponID;
+			if (ryuHp > 16)
+			{
+				ryuHp = 16;
+			}
+			if ((*i)->ryuFreeze)
+				isFreeze = true;
+			//ryuHp = 
 			/*point += (*i)->point;
 			(*i)->point = 0;*/
 		}
@@ -375,7 +424,7 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 				case EnumID::BrownBird_ID:
 				//case EnumID::Fire_ID:
 				{
-					if (_hasAttack || _hasAttack2)
+					if (_hasAttack || (_hasAttack2 && _weaponID != EnumID::None_ID))
 					{
 						if ((_vLast > 0 && (other->vX < 0 || (other->vX > 0 && posX < other->getX()))) || (_vLast < 0 && (other->vX > 0 || (other->vX < 0 && posX > other->getX()))))
 						{
@@ -390,37 +439,37 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 					}
 					else
 					{
-							if (!bActiveHurt)
-							{
-								bActiveHurt = true;
-								_allowPress = false;
-								isHurt = true;
-								_localHurtTime = GetTickCount();
-								isCol = true;
-								_hasJump = true;
-								ryuJump->SelectIndex(0);
-								if (dir == ECollisionDirect::Colls_Left)
-								{
-									vX = -0.3f;
-									//isColRight = false;
-								}
-								else if (dir == ECollisionDirect::Colls_Right)
-								{
-									vX = 0.3f;
-									//_vLast = vX;
-									//isColRight = true;
-								}
-								vY = 0.4f;
+							//if (!bActiveHurt)
+							//{
+							//	bActiveHurt = true;
+							//	_allowPress = false;
+							//	isHurt = true;
+							//	_localHurtTime = GetTickCount();
+							//	isCol = true;
+							//	_hasJump = true;
+							//	ryuJump->SelectIndex(0);
+							//	if (dir == ECollisionDirect::Colls_Left)
+							//	{
+							//		vX = -0.3f;
+							//		//isColRight = false;
+							//	}
+							//	else if (dir == ECollisionDirect::Colls_Right)
+							//	{
+							//		vX = 0.3f;
+							//		//_vLast = vX;
+							//		//isColRight = true;
+							//	}
+							//	vY = 0.4f;
 
-								if (ryuHp > 0)
-									ryuHp--;
-								else {
-									ryuHp = 16;
-									ryuLife--;
-								}
-								
-								//vY = 1.5f;
-							}
+							//	if (ryuHp > 0)
+							//		ryuHp--;
+							//	else {
+							//		ryuHp = 16;
+							//		ryuLife--;
+							//	}
+							//	
+							//	//vY = 1.5f;
+							//}
 					}
 					break;
 				}
@@ -432,8 +481,14 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 				case EnumID::Butterfly_BlueBonusItem_ID:
 				case EnumID::Butterfly_FireWheelItem_ID:
 				case EnumID::Butterfly_RestoringItem_ID:
+				case EnumID::Bird_BlueStrengthItem_ID:
+				case EnumID::Bird_RedStrengthItem_ID:
+				case EnumID::Bird_ThrowingItem_ID:
+				case EnumID::Bird_RedBonusItem_ID:
+				case EnumID::Bird_BlueBonusItem_ID:
+				case EnumID::Bird_FireWheelItem_ID:
 				{
-					if (_hasAttack || _hasAttack2)
+					if (_hasAttack || (_hasAttack2 && _weaponID != EnumID::None_ID))
 					{
 						if ((_vLast > 0 && (other->vX < 0 || (other->vX > 0 && posX < other->getX()))) || (_vLast < 0 && (other->vX > 0 || (other->vX < 0 && posX > other->getX()))))
 						{
@@ -443,7 +498,57 @@ void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)
 							explosion->setX(enemyPosX);
 							explosion->setY(enemyPosY);
 							explosion->active = true;
-							ryuScore += 100;
+							switch (other->id) 
+							{
+								case EnumID::Butterfly_BlueStrengthItem_ID:
+								case EnumID::Bird_BlueStrengthItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpititualBlue_ID));
+								}
+								break;
+								case EnumID::Butterfly_RedStrengthItem_ID:
+								case EnumID::Bird_RedStrengthItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::SpiritualRed_ID));
+								}
+								break;
+								case EnumID::Butterfly_TimeItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::TimeFreeze_ID));
+								}
+								break;
+								case EnumID::Butterfly_ThrowingItem_ID:
+								case EnumID::Bird_ThrowingItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::ThrowStar_ID));
+								}
+								break;
+								case EnumID::Butterfly_RedBonusItem_ID:
+								case EnumID::Bird_RedBonusItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusRed_ID));
+								}
+								break;
+								case EnumID::Butterfly_BlueBonusItem_ID:
+								case EnumID::Bird_BlueBonusItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::BonusBlue_ID));
+								}
+								break;
+								case EnumID::Butterfly_FireWheelItem_ID:
+								case EnumID::Bird_FireWheelItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::FireWheel_ID));
+								}
+								break;
+								case EnumID::Butterfly_RestoringItem_ID:
+								{
+									items->push_back(new Items(enemyPosX, enemyPosY, EnumID::RestoreStrength_ID));
+								}
+								break;
+							}
+							//ryuScore += 100;
+							
 						}
 					}
 				}
@@ -470,6 +575,11 @@ void Ryu::Draw(CCamera* camera) {
 	if (!IsHurt())
 	{
 		for (list<Weapon*>::iterator i = _weapon->begin(); i != _weapon->end(); i++)
+		{
+			if ((*i)->active)
+				(*i)->Draw(camera);
+		}
+		for (list<Items*>::iterator i = items->begin(); i != items->end(); i++)
 		{
 			if ((*i)->active)
 				(*i)->Draw(camera);
@@ -530,7 +640,7 @@ void Ryu::Draw(CCamera* camera) {
 
 					return;
 				}
-				if (_hasAttack2)
+				if (_hasAttack2 && _weaponID != EnumID::None_ID)
 				{
 					ryuAttack2->Draw(center.x + 23, center.y);
 
@@ -544,7 +654,7 @@ void Ryu::Draw(CCamera* camera) {
 					ryuAttack->DrawFlipX(center.x - 23, center.y);
 					return;
 				}
-				if (_hasAttack2)
+				if (_hasAttack2 && _weaponID != EnumID::None_ID)
 				{
 					ryuAttack2->DrawFlipX(center.x + 23, center.y);
 
@@ -647,14 +757,14 @@ void Ryu::Attack(bool isUseWeapon)
 		}
 		else
 		{
-			if (!_hasAttack2)
+			if (!_hasAttack2 && ryuSpiri > 0 && _weapon->size() == 0)
 			{
 				useWeapon = true;
 				_hasJump = false;
 				ryuAttack2->SelectIndex(0);
 				_action = Action::Attack2;
 				_hasAttack2 = true;
-				_weaponID = EnumID::Boomerang_ID;
+				//_weaponID = EnumID::BoomerangS_ID;
 				this->SetWeapon();
 			}
 		}
@@ -676,9 +786,24 @@ void Ryu::SetWeapon()
 	switch (_weaponID)
 	{
 	case EnumID::Boomerang_ID:
-		_weapon->push_back(new Boomerang(posX, posY, _vLast));
-		break;
+	{
+		_weapon->push_back(new Boomerang(posX, posY, _vLast, EnumID::Boomerang_ID));
+		ryuSpiri -= 5;
 	}
+		break;
+	case EnumID::BoomerangS_ID:
+	{
+		_weapon->push_back(new Boomerang(posX, posY, _vLast, EnumID::BoomerangS_ID));
+		ryuSpiri -= 3;
+	}
+		break;
+		/*case EnumID::FireWeapon_ID:
+			_weapon->push_back(new Boomerang(posX, posY, _vLast));
+			break;
+		}*/
+	}
+	if (ryuSpiri < 0)
+		ryuSpiri = 0;
 	//_hasWeapon = false;
 }
 
@@ -806,6 +931,7 @@ void Ryu::Reset()
 	isHurt = false;
 	onLand = false;
 	_weapon = new list<Weapon*>();
+	items = new list<Items*>();
 	_weaponID = EnumID::None_ID;
 	Initialize();
 	this->setX(100);

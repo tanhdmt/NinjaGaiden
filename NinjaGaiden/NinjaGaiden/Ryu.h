@@ -3,6 +3,7 @@
 #include "DynamicObject.h"
 #include "Explosion.h"
 #include "Boomerang.h"
+#include "Items.h"
 
 using namespace std;
 
@@ -24,10 +25,12 @@ public:
 	ECollisionDirect _curCollideDir;
 	GameObject* _sideCollidedGround;
 	Explosion* explosion;
+	list<Items*> *items;
 	list<Weapon*> *_weapon;
 	EnumID _weaponID;
 	//dem so object va cham
 	int _demVaCham;
+	int timeCounter;
 	bool onLand;
 	bool _hasJump;
 	float _heightJump;
@@ -37,8 +40,10 @@ public:
 	bool _hasSit;
 	bool _isFall;
 	bool useWeapon;
+	bool isFreeze;
 	int ryuLife;
 	int ryuHp;
+	int ryuSpiri;
 	int ryuScore;
 	bool _allowPress;
 	bool bActiveHurt;
