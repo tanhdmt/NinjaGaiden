@@ -43,8 +43,6 @@ void Boss::Update(int dt)
 		if (_heightJump >= MAX_HEIGHT)
 		{
 			vY = -SPEED_Y;
-			fireCount++;
-			if (fireCount == 4)fireCount = 0;
 
 		}
 	}
@@ -52,7 +50,7 @@ void Boss::Update(int dt)
 		sprite->SelectIndex(0);
 	}
 	list<BossBullet*>::iterator i = lbullet->begin();
-	if (fireCount == 1) {
+	if (fireLeft == 2) {
 		//active lại đạn bên trái
 		while (i != lbullet->end())
 		{
@@ -61,7 +59,7 @@ void Boss::Update(int dt)
 		}
 	}
 	i = rbullet->begin();
-	if (fireCount == 3) {
+	if (fireLeft == 5) {
 		//active lại đạn bên phải
 		while (i != rbullet->end())
 		{
@@ -152,6 +150,13 @@ void Boss::Collision(list<GameObject*> obj, int dt)
 						vX = -vX;
 						hasJump = true;
 						vY = SPEED_Y;
+						fireLeft++; if (fireLeft == 6) fireLeft = 0;
+						//if (vX > 0) {
+						//	
+						//}
+						//else {
+						//	 fireRight++; if (fireRight == 3) fireRight = 0;
+						//}
 					//_isFall = false;
 				}
 				break;

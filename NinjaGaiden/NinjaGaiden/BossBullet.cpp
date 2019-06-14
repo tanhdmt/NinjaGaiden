@@ -16,7 +16,7 @@ BossBullet::BossBullet(float x, float y, float _huong, EnumID id) : DynamicObjec
 	{
 		vX = -SPEED_X;
 	}
-	active = true;
+	active = false;
 	fire = new Fire(posX, posY, vX, EnumID::Fire_ID);
 	startX = x;
 	startY = y;

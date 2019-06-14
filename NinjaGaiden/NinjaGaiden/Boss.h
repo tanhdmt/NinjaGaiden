@@ -16,7 +16,7 @@ public:
 	int timeDelay;
 	list<BossBullet*> *lbullet; //đạn bên trái
 	list<BossBullet*> *rbullet;// đạn bên phải
-	int fireCount = -1;
+	int fireLeft = 0;
 
 	GameObject* _lastCollidedGround;
 	GameObject* _sideCollidedGround;
