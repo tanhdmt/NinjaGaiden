@@ -237,20 +237,37 @@ void Ryu::Update(int dt) {
 Box Ryu::GetBox()
 {
 	if (_hasSit)
-		return Box(posX - ryuSit->_texture->FrameWidth / 2, (posY + ryuSit->_texture->FrameHeight / 2), ryuSit->_texture->FrameWidth, ryuSit->_texture->FrameHeight, vX, vY);
+		return Box(posX - ryuSit->_texture->FrameWidth / 2, 
+			(posY + ryuSit->_texture->FrameHeight / 2), 
+			ryuSit->_texture->FrameWidth, 
+			ryuSit->_texture->FrameHeight, vX, vY);
 	else if (_hasClimb)
-		return Box(posX - ryuClimb->_texture->FrameWidth / 2, (posY + ryuClimb->_texture->FrameHeight / 2), ryuClimb->_texture->FrameWidth, ryuClimb->_texture->FrameHeight, vX, vY);
+		return Box(posX - ryuClimb->_texture->FrameWidth / 2, 
+			(posY + ryuClimb->_texture->FrameHeight / 2), 
+			ryuClimb->_texture->FrameWidth, 
+			ryuClimb->_texture->FrameHeight, vX, vY);
 	if ((vX != 0 || (vY != 0 && _hasJump)) && !_hasClimb)
 	{
 		if (_hasJump)
-			return Box(posX - ryuJump->_texture->FrameWidth / 2, (posY + ryuJump->_texture->FrameHeight / 2), ryuJump->_texture->FrameWidth, ryuJump->_texture->FrameHeight, vX, vY);
-		return Box(posX - ryuRun->_texture->FrameWidth / 2, (posY + ryuRun->_texture->FrameHeight / 2), ryuRun->_texture->FrameWidth, ryuRun->_texture->FrameHeight, vX, vY);
+			return Box(posX - ryuJump->_texture->FrameWidth / 2, 
+				(posY + ryuJump->_texture->FrameHeight / 2), 
+				ryuJump->_texture->FrameWidth, 
+				ryuJump->_texture->FrameHeight, vX, vY);
+		return Box(posX - ryuRun->_texture->FrameWidth / 2, 
+				(posY + ryuRun->_texture->FrameHeight / 2), 
+				ryuRun->_texture->FrameWidth, ryuRun->_texture->FrameHeight, vX, vY);
 	}
 	if (_hasAttack)
 	{
-		return Box(posX - ryuAttack->_texture->FrameWidth / 2, (posY + ryuAttack->_texture->FrameHeight / 2), ryuAttack->_texture->FrameWidth, ryuAttack->_texture->FrameHeight, vX, vY);
+		return Box(posX - ryuAttack->_texture->FrameWidth / 2, 
+				(posY + ryuAttack->_texture->FrameHeight / 2), 
+				ryuAttack->_texture->FrameWidth, 
+				ryuAttack->_texture->FrameHeight, vX, vY);
 	}
-	return Box(posX - sprite->_texture->FrameWidth / 2 , (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight, vX, vY);
+	return Box(posX - sprite->_texture->FrameWidth / 2 , 
+			(posY + sprite->_texture->FrameHeight / 2), 
+			sprite->_texture->FrameWidth, 
+			sprite->_texture->FrameHeight, vX, vY);
 }
 
 void Ryu::Collision(list<GameObject*> &obj, float dt, bool isDynamic)

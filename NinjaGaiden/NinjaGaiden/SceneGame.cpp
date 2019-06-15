@@ -8,7 +8,7 @@ SceneGame::SceneGame(void) : Scene(ESceneState::Game_Scene)
 	camera = new CCamera();
 	bg = NULL;
 	_gameScore = NULL;
-	_levelNow = 3;
+	_levelNow = 2;
 	_loadLevel = false;
 	_score = 0;
 	_lifes = 3;

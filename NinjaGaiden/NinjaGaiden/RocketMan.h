@@ -9,7 +9,6 @@ class RocketMan : public DynamicObject
 {
 public:
 	//bool hasAttack;
-	bool active;
 
 	list<Bullet*> *bullet;
 
