@@ -16,6 +16,7 @@ void GameScore::_initialize()
 	_hp2Sprite = new CSprite(Singleton::getInstance()->getTexture(EnumID::Hp2_ID), 1);
 
 	_gameTimer = 0;
+	finalScore = 0;
 }
 
 void GameScore::drawTable()
@@ -138,7 +139,11 @@ GameScore::GameScore(LPDIRECT3DDEVICE9 d3ddev_, int size_, int screenWidth_, int
 void GameScore::updateScore(int gameStage_, int ryuScore_, int deltaTime_, int ryuHP_, int liveCount_, EnumID weaponID_, int weaponCount_, int enemyHP_, int ryuSpiri_)
 {
 	_gameStage = gameStage_;
-	_ryuScore = ryuScore_;
+	if (enemyHP_ <= 0 && _gameTimer > 0)
+	{
+		finalScore += 200;
+	}
+	_ryuScore = ryuScore_ +  finalScore;
 	_ryuSpiri = ryuSpiri_;
 	weaponId = weaponID_;
 	if (_gameTimer <= 0)

@@ -28,7 +28,7 @@ protected:
 	CSprite* _hp2Sprite;
 	void _initialize();
 	EnumID weaponId;
-
+	int finalScore;
 
 public:
 	GameScore(void);

@@ -37,7 +37,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(100, 300);
+		ryu = new Ryu(500, 300);
 		_gameScore->initTimer(150);
 		_lifes = ryu->ryuLife;
 		grid = Grid::getInstance(level);
@@ -49,7 +49,7 @@ void SceneGame::LoadLevel(int level)
 		//camera->viewport.x = 1023;
 		bg = new Background(level);
 		//ryu->_action = Action::Idle;
-		ryu = new Ryu(90, 300);
+		ryu = new Ryu(30, 300);
 		_gameScore->initTimer(150);
 		_lifes = ryu->ryuLife;
 		grid = Grid::getInstance(level);
@@ -159,7 +159,11 @@ void SceneGame::RenderFrame(LPDIRECT3DDEVICE9 d3ddv, int deltaTime)
 		ryu->Collision(lstObjectsHaveToWork, deltaTime, true);
 		if (_score - backScore != ryu->ryuScore)
 			_score = ryu->ryuScore + backScore;
-		_gameScore->updateScore(_levelNow, _score, 30, ryu->ryuHp, ryu->ryuLife, ryu->_weaponID, 0, ryu->bossHp, ryu->ryuSpiri);
+		if (ryu->bossHp <= 0)
+			_gameScore->updateScore(_levelNow, _score, 500, ryu->ryuHp, ryu->ryuLife, ryu->_weaponID, 0, ryu->bossHp, ryu->ryuSpiri);
+		else
+			_gameScore->updateScore(_levelNow, _score, 30, ryu->ryuHp, ryu->ryuLife, ryu->_weaponID, 0, ryu->bossHp, ryu->ryuSpiri);
+		ryu->leftTimer = _gameScore->getTimer();
 		/*qGameObject->Update(deltaTime);
 		qGameObject->Update(deltaTime, ryu->getPos());
 		

@@ -34,7 +34,6 @@ public:
 	bool onLand;
 	bool _hasJump;
 	float _heightJump;
-	bool _hasAttack;
 	bool _hasAttack2;
 	bool _hasClimb;
 	bool _hasSit;
@@ -50,6 +49,7 @@ public:
 	bool _bHurt;
 	bool isHurt;
 	int bossHp;
+	int leftTimer;
 
 	Ryu(void);
 	Ryu(int, int);

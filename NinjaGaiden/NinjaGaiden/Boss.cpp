@@ -4,6 +4,8 @@
 #define SPEED_Y 0.8f
 #define MAX_HEIGHT 180.0f
 int times = 0;
+int ti = 0;
+
 Boss::Boss(void) : DynamicObject()
 {
 }
@@ -22,13 +24,13 @@ Boss::Boss(float x, float y) : DynamicObject(x, y, 0, -SPEED_Y, EnumID::Boss_ID)
 	ryuHurt = false;
 
 	lbullet = new list<BossBullet*>();
-	lbullet->push_back(new BossBullet(40, 64, 1, EnumID::Bullet_ID));
-	lbullet->push_back(new BossBullet(56, 96, 1, EnumID::Bullet_ID));
-	lbullet->push_back(new BossBullet(72, 128, 1, EnumID::Bullet_ID));
+	lbullet->push_back(new BossBullet(40, 96, 1, EnumID::Bullet_ID));
+	lbullet->push_back(new BossBullet(56, 128, 1, EnumID::Bullet_ID));
+	lbullet->push_back(new BossBullet(72, 160, 1, EnumID::Bullet_ID));
 	rbullet = new list<BossBullet*>();
-	rbullet->push_back(new BossBullet(440, 64, -1, EnumID::Bullet_ID));
-	rbullet->push_back(new BossBullet(424, 96, -1, EnumID::Bullet_ID));
-	rbullet->push_back(new BossBullet(408, 128, -1, EnumID::Bullet_ID));
+	rbullet->push_back(new BossBullet(440, 96, -1, EnumID::Bullet_ID));
+	rbullet->push_back(new BossBullet(424, 128, -1, EnumID::Bullet_ID));
+	rbullet->push_back(new BossBullet(408, 160, -1, EnumID::Bullet_ID));
 }
 
 void Boss::Update(int dt)
@@ -52,53 +54,70 @@ void Boss::Update(int dt)
 			if (_heightJump >= MAX_HEIGHT)
 			{
 				vY = -SPEED_Y;
-				fireCount++;
-				if (fireCount == 4)fireCount = 0;
 
 			}
 		}
 		else {
 			sprite->SelectIndex(0);
 		}
-		list<BossBullet*>::iterator i = lbullet->begin();
-		if (fireCount == 1) {
-			//active lại đạn bên trái
+	}
+	
+	list<BossBullet*>::iterator i = lbullet->begin();
+	if (fireLeft == 2) {
+		int countinactive = 0;
+		list<BossBullet*>::iterator a = lbullet->begin();
+		while (a != lbullet->end())
+		{
+			if (!(*a)->active)
+				countinactive++;
+			++a;
+		}
+		//active lại đạn bên trái
+		if (countinactive == 3 || countinactive == 0)
+		{
 			while (i != lbullet->end())
 			{
 				(*i)->SetActive();
 				++i;
 			}
 		}
-		i = rbullet->begin();
-		if (fireCount == 3) {
-			//active lại đạn bên phải
+	}
+	i = rbullet->begin();
+	if (fireLeft == 5) {
+		int countinactive = 0;
+		list<BossBullet*>::iterator b = rbullet->begin();
+		while (b != rbullet->end())
+		{
+			if (!(*b)->active)
+				countinactive++;
+			++b;
+		}
+		//active lại đạn bên phải
+		if (countinactive == 3 || countinactive == 0)
+		{
 			while (i != rbullet->end())
 			{
 				(*i)->SetActive();
 				++i;
 			}
 		}
-		// cập nhật đạn bên trái
-		i = lbullet->begin();
-		while (i != lbullet->end())
-		{
-			if ((*i)->active)
-			{
-				(*i)->Update(dt);
-			}
-			++i;
-		}
-		// cập nhật đạn bên phải
-		i = rbullet->begin();
-		while (i != rbullet->end())
-		{
-			if ((*i)->active)
-			{
-				(*i)->Update(dt);
-			}
-			++i;
-		}
 	}
+	// cập nhật đạn bên trái
+	i = lbullet->begin();
+	while (i != lbullet->end())
+	{
+
+		(*i)->Update(dt);
+		++i;
+	}
+	// cập nhật đạn bên phải
+	i = rbullet->begin();
+	while (i != rbullet->end())
+	{
+		(*i)->Update(dt);
+		++i;
+	}
+
 }
 
 Box Boss::GetBox()
@@ -124,32 +143,26 @@ void Boss::Collision(list<GameObject*> obj, GameObject* ryu, int dt)
 			Box boxOther = other->GetBox();
 			// kiểm tra đạn đã đi hết đường bay chưa
 			//if (other->id == EnumID::Ground1_ID) {
-				list<BossBullet*>::iterator i = lbullet->begin();
-				while (i != lbullet->end())
+			list<BossBullet*>::iterator i = lbullet->begin();
+			while (i != lbullet->end())
+			{
+				(*i)->Collision(other, ryu, dt);
+				if (!ryuHurt && (*i)->ryuHurt)
 				{
-					if ((*i)->active)
-					{
-						(*i)->Collision(other, ryu, dt);
-						if (!ryuHurt && (*i)->ryuHurt)
-						{
-							ryuHurt = (*i)->ryuHurt;
-						}
-					}
-					++i;
+					ryuHurt = (*i)->ryuHurt;
 				}
-				i = rbullet->begin();
-				while (i != rbullet->end())
+				++i;
+			}
+			i = rbullet->begin();
+			while (i != rbullet->end())
+			{
+				(*i)->Collision(other, ryu, dt);
+				if (!ryuHurt && (*i)->ryuHurt)
 				{
-					if ((*i)->active)
-					{
-						(*i)->Collision(other, ryu, dt);
-						if (!ryuHurt && (*i)->ryuHurt)
-						{
-							ryuHurt = (*i)->ryuHurt;
-						}
-					}
-					++i;
+					ryuHurt = (*i)->ryuHurt;
 				}
+				++i;
+			}
 			//}
 
 			if (AABB(box, boxOther, moveX, moveY) == true)
@@ -171,18 +184,24 @@ void Boss::Collision(list<GameObject*> obj, GameObject* ryu, int dt)
 						vX = -vX;
 						hasJump = true;
 						vY = SPEED_Y;
-						//_isFall = false;
+						fireLeft++; if (fireLeft == 6) fireLeft = 0;
+						//if (vX > 0) {
+						//	
+						//}
+						//else {
+						//	 fireRight++; if (fireRight == 3) fireRight = 0;
+						//}
+					//_isFall = false;
 					}
-					break;
 				}
 			}
 		}
+
+		/*if (countCollis == 0)
+		{
+			vX = -vX;
+		}*/
 	}
-	
-	/*if (countCollis == 0)
-	{
-		vX = -vX;
-	}*/
 }
 
 //void Skree::Draw(CCamera* camera)
@@ -243,20 +262,14 @@ void Boss::Draw(CCamera* camera) {
 		i = lbullet->begin();
 		while (i != lbullet->end())
 		{
-			if ((*i)->active)
-			{
-				(*i)->Draw(camera);
-			}
+			(*i)->Draw(camera);
 			++i;
 		}
 		// cập nhật đạn bên phải
 		i = rbullet->begin();
 		while (i != rbullet->end())
 		{
-			if ((*i)->active)
-			{
-				(*i)->Draw(camera);
-			}
+			(*i)->Draw(camera);
 			++i;
 		}
 	}

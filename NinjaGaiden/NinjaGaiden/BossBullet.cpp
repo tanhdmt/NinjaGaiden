@@ -3,6 +3,7 @@
 
 
 #define SPEED_X 0.4f
+int t = 0;
 
 BossBullet::BossBullet(void) : DynamicObject()
 {
@@ -16,23 +17,29 @@ BossBullet::BossBullet(float x, float y, float _huong, EnumID id) : DynamicObjec
 	{
 		vX = -SPEED_X;
 	}
-	active = true;
+	active = false;
 	fire = new Fire(posX, posY, vX, EnumID::Fire_ID);
 	startX = x;
 	startY = y;
 	ryuHurt = false;
+	explosion = new Explosion(posX, posY, EnumID::Explosion_ID);
+
 }
 
 void BossBullet::Update(int dt)
 {
-	posX += vX * dt;
+	if (explosion->active)
+		explosion->Update(dt);
 	if (sprite == NULL || !active)
 		return;
-	 fire->Update(dt);
+	posX += vX * dt;
+	fire->Update(dt);
 }
 
 void BossBullet::Draw(CCamera* camera)
 {
+	if (explosion->active)
+		explosion->Draw(camera);
 	if (sprite == NULL || IsHurt() || !active) {
 		return;
 	}
@@ -52,36 +59,64 @@ void BossBullet::Collision(GameObject* obj, GameObject* ryu, int dt) {
 		float moveY;
 		float normalx;
 		float normaly;
-		Box box = this->GetBox();
-		Box boxOther = obj->GetBox();
-		Box boxRyu = ryu->GetBox();
-
-		if (AABB(box, boxOther, moveX, moveY) == true)
+		if (this->active)
 		{
-			switch (obj->id)
+			Box box = this->GetBox();
+			Box boxOther = obj->GetBox();
+			Box boxRyu = ryu->GetBox();
+
+			if (AABB(box, boxOther, moveX, moveY) == true)
 			{
-			case EnumID::Ground1_ID:
+				switch (obj->id)
+				{
+				case EnumID::Ground1_ID:
+					this->active = false;
+					this->Reset(dt);
+					break;
+					break;
+				}
+			}
+			if (AABB(box, boxRyu, moveX, moveY) == true)
+			{
+				if (ryu->_hasAttack)
+				{
+					explosion->setX(this->posX);
+					explosion->setY(this->posY);
+					explosion->active = true;
+
+				}
+				else
+				{
+					if (!ryuHurt)
+						ryuHurt = true;
+				}
 				this->active = false;
-				this->Reset();
-				break;
-			break;
+				this->Reset(dt);
 			}
 		}
-		if (AABB(box, boxRyu, moveX, moveY) == true)
-		{
-			this->active = false;
-			this->Reset();
-			if (!ryuHurt)
-				ryuHurt = true;
-		}
-	
 }
 void BossBullet::SetActive() {
-	this->active = true;
+	if (!this->active)
+		this->active = true;
 }
-void BossBullet::Reset() {
+void BossBullet::Reset(int dt) {
 	posX = startX;
 	posY = startY;
+
+	//t += dt;
+	//if (t > 50)
+	//{
+	//	ryuHurt = false;
+	//	t = 0;
+	//}
+	//ryuHurt = false;
+	//active = false;
+}
+Box BossBullet::GetBox()
+{
+	if (vX < 0)
+		return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
+	return Box(posX - sprite->_texture->FrameWidth / 2, (posY + sprite->_texture->FrameHeight / 2), sprite->_texture->FrameWidth, sprite->_texture->FrameHeight);
 }
 
 BossBullet::~BossBullet(void)

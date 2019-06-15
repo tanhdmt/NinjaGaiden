@@ -28,6 +28,7 @@ public:
 	bool canMove;
 	int hp;
 	int bossHp;
+	bool _hasAttack;
 	bool ryuHurt;
 
 	virtual void Update(int dt);

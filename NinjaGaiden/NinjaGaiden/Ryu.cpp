@@ -37,6 +37,7 @@ Ryu::Ryu(int _posX, int _posY) : DynamicObject(_posX, _posY, 0, -SPEED_Y, EnumID
 	isFreeze = false;
 	timeCounter = 0;
 	bossHp = 16;
+	leftTimer = 150;
 
 	ryuRun = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuRun_ID), 0, 2, 18);
 	ryuJump = new CSprite(Singleton::getInstance()->getTexture(EnumID::RyuJump1_ID), 0, 3, 18);
@@ -222,6 +223,14 @@ void Ryu::Update(int dt) {
 	{
 		ryuLife = 3;
 		ryuHp = 16;
+	}
+	if (bossHp < 0)
+	{
+		while (leftTimer > 0)
+		{
+			//ryuScore += 200;
+			leftTimer--;
+		}
 	}
 }
 
